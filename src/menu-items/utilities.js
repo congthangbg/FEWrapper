@@ -22,7 +22,7 @@ const icons = {
 
 const utilities = {
     id: 'utilities',
-    title: 'Utilities',
+    title: 'Utilities-Component',
     type: 'group',
     children: [
         {
@@ -51,6 +51,14 @@ const utilities = {
             title: 'Ant Icons',
             type: 'item',
             url: '/icons/ant',
+            icon: icons.AntDesignOutlined,
+            breadcrumbs: false
+        },
+        {
+            id: 'ant-icons2',
+            title: '404 not found',
+            type: 'item',
+            url: '/icons/ant2',
             icon: icons.AntDesignOutlined,
             breadcrumbs: false
         }

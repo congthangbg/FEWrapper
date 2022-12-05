@@ -2,7 +2,7 @@
     "name": "mantis-free-react-admin-template",
     "version": "1.1.0",
     "private": true,
-    "homepage": "https://mantisdashboard.io/free",
+    "homepage": "https://mantisdashboard.io/login",
     "dependencies": {
         "@ant-design/colors": "^6.0.0",
         "@ant-design/icons": "^4.7.0",
@@ -45,16 +45,20 @@
         "yup": "^0.32.11"
     },
     "scripts": {
-        "start": "react-scripts start",
+        "start": "react-scripts start ",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "eslint:disable": "REACT_APP_DEV_DISABLE_ESLINT=true"
     },
     "eslintConfig": {
         "extends": [
             "react-app",
             "react-app/jest"
-        ]
+        ],
+        "rules": {
+            "jsx-a11y/anchor-is-valid": "off"
+          }
     },
     "babel": {
         "presets": [
@@ -76,7 +80,6 @@
     "devDependencies": {
         "@babel/core": "^7.19.1",
         "@babel/eslint-parser": "^7.19.1",
-        "eslint": "^8.23.1",
         "eslint-config-airbnb-typescript": "^17.0.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-config-react-app": "7.0.1",
