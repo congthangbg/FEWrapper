@@ -58,7 +58,7 @@ const utilities = {
             id: 'ant-icons2',
             title: '404 not found',
             type: 'item',
-            url: '/icons/ant2',
+            url: '/404',
             icon: icons.AntDesignOutlined,
             breadcrumbs: false
         }

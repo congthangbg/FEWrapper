@@ -28,11 +28,13 @@ import AnimateButton from 'components/@extended/AnimateButton';
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const AuthLogin = () => {
     const [checked, setChecked] = React.useState(false);
+    let navigate = useNavigate();
 
     const [showPassword, setShowPassword] = React.useState(false);
     const handleClickShowPassword = () => {
@@ -64,7 +66,8 @@ const AuthLogin = () => {
                         setErrors({ submit: err.message });
                         setSubmitting(false);
                     }
-                    window.location.href = `/dashboard/default`;
+                    // window.location.href = `/dashboard/default`;
+                    navigate('/dashboard/default')
                 }}
             >
                 {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
