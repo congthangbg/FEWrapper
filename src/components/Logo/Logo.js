@@ -55,7 +55,7 @@ const Logo = () => {
                     </linearGradient>
                 </defs> */}
             </svg>
-            WRAPPER
+            <b>WRAPPER</b>
         </>
     );
 };
