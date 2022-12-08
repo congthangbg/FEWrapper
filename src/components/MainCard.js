@@ -98,9 +98,9 @@ MainCard.propTypes = {
     divider: PropTypes.bool,
     elevation: PropTypes.number,
     secondary: PropTypes.node,
-    shadow: PropTypes.string,
+    shadow: PropTypes.any,
     sx: PropTypes.object,
-    title: PropTypes.string,
+    title: PropTypes.any,
     codeHighlight: PropTypes.bool,
     content: PropTypes.bool,
     children: PropTypes.node

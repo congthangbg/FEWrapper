@@ -1,0 +1,16 @@
+.MuiDataGrid-root .MuiDataGrid-cell:focus-within {
+	outline: none !important;
+	/* border: 0; */
+}
+.MuiDataGrid-root .MuiDataGrid-column:focus-within {
+	outline: none !important;
+	/* border: 'none', */
+}
+.MuiPaper-root-MuiDrawer-paper, 
+.MuiDataGrid-footerContainer, 
+.MuiDataGrid-root, 
+.MuiDataGrid-row, 
+.MuiDataGrid-column, 
+.MuiDataGrid {
+    border: 0 !important;
+}

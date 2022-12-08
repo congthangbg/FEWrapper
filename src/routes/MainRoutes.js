@@ -3,7 +3,7 @@ import { lazy } from 'react';
 // project import
 import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
-
+import Demo from 'pages/demo'
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 
@@ -16,6 +16,7 @@ const Color = Loadable(lazy(() => import('pages/components-overview/Color')));
 const Shadow = Loadable(lazy(() => import('pages/components-overview/Shadow')));
 const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons')));
 const NotFound = Loadable(lazy(() => import('pages/404')));
+// const Demo = Loadable(lazy(() => import('pages/demo/demo.js')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -57,8 +58,12 @@ const MainRoutes = {
             element: <AntIcons />
         },
         {
-            path: 'icons/ant2',
+            path: '*',
             element: <NotFound />
+        },
+        {
+            path: '/demo',
+            element: <Demo />
         }
     ]
 };

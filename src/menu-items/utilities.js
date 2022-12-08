@@ -55,10 +55,10 @@ const utilities = {
             breadcrumbs: false
         },
         {
-            id: 'ant-icons2',
-            title: '404 not found',
+            id: 'demo',
+            title: 'Demo',
             type: 'item',
-            url: '/404',
+            url: '/demo',
             icon: icons.AntDesignOutlined,
             breadcrumbs: false
         }
