@@ -5,37 +5,51 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography, useMediaQuery } from '@mui/material';
 
-// project import
-import { activeItem } from 'store/reducers/menu';
+// project imports
 
-// ==============================|| NAVIGATION - LIST ITEM ||============================== //
+// assets
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import { MENU_OPEN, SET_MENU } from 'store/reducers/actions';
+
+// ==============================|| SIDEBAR MENU LIST ITEMS ||============================== //
 
 const NavItem = ({ item, level }) => {
     const theme = useTheme();
     const dispatch = useDispatch();
-    const menu = useSelector((state) => state.menu);
-    const { drawerOpen, openItem } = menu;
+    const customization = useSelector((state) => state.customization);
+    const matchesSM = useMediaQuery(theme.breakpoints.down('lg'));
+
+    const Icon = item.icon;
+    const itemIcon = item?.icon ? (
+        <Icon stroke={1.5} size="1.3rem" />
+    ) : (
+        <FiberManualRecordIcon
+            sx={{
+                width: customization.isOpen.findIndex((id) => id === item?.id) > -1 ? 8 : 6,
+                height: customization.isOpen.findIndex((id) => id === item?.id) > -1 ? 8 : 6
+            }}
+            fontSize={level > 0 ? 'inherit' : 'medium'}
+        />
+    );
 
     let itemTarget = '_self';
     if (item.target) {
         itemTarget = '_blank';
     }
 
-    let listItemProps = { component: forwardRef((props, ref) => <Link ref={ref} {...props} to={item.url} target={itemTarget} />) };
+    let listItemProps = {
+        component: forwardRef((props, ref) => <Link ref={ref} {...props} to={item.url} target={itemTarget} />)
+    };
     if (item?.external) {
         listItemProps = { component: 'a', href: item.url, target: itemTarget };
     }
 
     const itemHandler = (id) => {
-        dispatch(activeItem({ openItem: [id] }));
+        dispatch({ type: MENU_OPEN, id });
+        if (matchesSM) dispatch({ type: SET_MENU, opened: false });
     };
-
-    const Icon = item.icon;
-    const itemIcon = item.icon ? <Icon style={{ fontSize: drawerOpen ? '1rem' : '1.25rem' }} /> : false;
-
-    const isSelected = openItem.findIndex((id) => id === item.id) > -1;
 
     // active menu item on page load
     useEffect(() => {
@@ -44,88 +58,42 @@ const NavItem = ({ item, level }) => {
             .split('/')
             .findIndex((id) => id === item.id);
         if (currentIndex > -1) {
-            dispatch(activeItem({ openItem: [item.id] }));
+            dispatch({ type: MENU_OPEN, id: item.id });
         }
         // eslint-disable-next-line
     }, []);
-
-    const textColor = 'text.primary';
-    const iconSelectedColor = 'primary.main';
 
     return (
         <ListItemButton
             {...listItemProps}
             disabled={item.disabled}
-            onClick={() => itemHandler(item.id)}
-            selected={isSelected}
             sx={{
-                zIndex: 1201,
-                pl: drawerOpen ? `${level * 28}px` : 1.5,
-                py: !drawerOpen && level === 1 ? 1.25 : 1,
-                ...(drawerOpen && {
-                    '&:hover': {
-                        bgcolor: 'primary.lighter'
-                    },
-                    '&.Mui-selected': {
-                        bgcolor: 'primary.lighter',
-                        borderRight: `2px solid ${theme.palette.primary.main}`,
-                        color: iconSelectedColor,
-                        '&:hover': {
-                            color: iconSelectedColor,
-                            bgcolor: 'primary.lighter'
-                        }
-                    }
-                }),
-                ...(!drawerOpen && {
-                    '&:hover': {
-                        bgcolor: 'transparent'
-                    },
-                    '&.Mui-selected': {
-                        '&:hover': {
-                            bgcolor: 'transparent'
-                        },
-                        bgcolor: 'transparent'
-                    }
-                })
+                borderRadius: `${customization.borderRadius}px`,
+                mb: 0.5,
+                alignItems: 'flex-start',
+                backgroundColor: level > 1 ? 'transparent !important' : 'inherit',
+                py: level > 1 ? 1 : 1.25,
+                pl: `${level * 24}px`
             }}
+            selected={customization.isOpen.findIndex((id) => id === item.id) > -1}
+            onClick={() => itemHandler(item.id)}
         >
-            {itemIcon && (
-                <ListItemIcon
-                    sx={{
-                        minWidth: 28,
-                        color: isSelected ? iconSelectedColor : textColor,
-                        ...(!drawerOpen && {
-                            borderRadius: 1.5,
-                            width: 36,
-                            height: 36,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            '&:hover': {
-                                bgcolor: 'secondary.lighter'
-                            }
-                        }),
-                        ...(!drawerOpen &&
-                            isSelected && {
-                                bgcolor: 'primary.lighter',
-                                '&:hover': {
-                                    bgcolor: 'primary.lighter'
-                                }
-                            })
-                    }}
-                >
-                    {itemIcon}
-                </ListItemIcon>
-            )}
-            {(drawerOpen || (!drawerOpen && level !== 1)) && (
-                <ListItemText
-                    primary={
-                        <Typography variant="h6" sx={{ color: isSelected ? iconSelectedColor : textColor }}>
-                            {item.title}
+            <ListItemIcon sx={{ my: 'auto', minWidth: !item?.icon ? 18 : 36 }}>{itemIcon}</ListItemIcon>
+            <ListItemText
+                primary={
+                    <Typography variant={customization.isOpen.findIndex((id) => id === item.id) > -1 ? 'h5' : 'body1'} color="inherit">
+                        {item.title}
+                    </Typography>
+                }
+                secondary={
+                    item.caption && (
+                        <Typography variant="caption" sx={{ ...theme.typography.subMenuCaption }} display="block" gutterBottom>
+                            {item.caption}
                         </Typography>
-                    }
-                />
-            )}
-            {(drawerOpen || (!drawerOpen && level !== 1)) && item.chip && (
+                    )
+                }
+            />
+            {item.chip && (
                 <Chip
                     color={item.chip.color}
                     variant={item.chip.variant}

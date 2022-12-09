@@ -6,6 +6,7 @@ import * as React from "react";
 import {Box, Button, IconButton, Stack, Tooltip} from "../../../node_modules/@mui/material/index";
 import "./DataTable.css";
 import useStyles from "../../utils/styles";
+import { useState } from "react";
 
 const columns = [
   {field: "id", headerName: "ID", width: 70},
@@ -48,6 +49,9 @@ export default function DataTable({
   onDelete,
 }) {
   const styles = useStyles();
+
+	const [pageSize,setPageSize] =useState(5);
+
   const onEditData = (row) => {
     onEdit(row);
   };
@@ -112,13 +116,16 @@ export default function DataTable({
         <DataGrid
           rows={rows}
           columns={columnsAction}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          rowsPerPageOptions={[5,15,25]}
           checkboxSelection={checkBoxTable ? checkBoxTable : false}
           className={styles.dataGrid}
           disableSelectionOnClick
           showCellRightBorder={true}
           showColumnRightBorder={true}
+					// getRowId={row => console.log(row)}
+					pageSize= {pageSize}
+					onPageSizeChange={(newPage) => setPageSize(newPage)}
+					onPageChange= {(newPage) => console.log(newPage)}
           // autoHeight
           // onRowClick={e=> console.log(e)}
           // disableColumnSelector={false}
