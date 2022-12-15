@@ -17,23 +17,19 @@ const support = {
         {
             id: 'sample-page',
             title: 'Sample Page',
-            type: 'collapse',
-            // url: '/sample-page',
-            icon: icons.ChromeOutlined,
-            children: [
-                {
-                    id: 'test',
-                    title: 'test',
-                    type: 'item',
-                    url: '/demo',
-                    icon: icons.QuestionOutlined,
-                    // external: true, // load lại form
-                    // target: true, //next tab
-                    breadcrumbs: false
-                }
-            ]
+            type: 'item',
+            url: '/sample-page',
+            icon: icons.ChromeOutlined
         },
-        
+        {
+            id: 'documentation',
+            title: 'Documentation',
+            type: 'item',
+            url: 'https://codedthemes.gitbook.io/mantis-react/',
+            icon: icons.QuestionOutlined,
+            external: true,
+            target: true
+        }
     ]
 };
 

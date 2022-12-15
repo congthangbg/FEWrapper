@@ -30,7 +30,7 @@ const utilities = {
             title: 'Typography',
             type: 'item',
             url: '/typography',
-            icon: icons.FontSizeOutlined,
+            icon: icons.FontSizeOutlined
         },
         {
             id: 'util-color',
@@ -61,8 +61,7 @@ const utilities = {
             url: '/demo',
             icon: icons.AntDesignOutlined,
             breadcrumbs: false
-        },
-        
+        }
     ]
 };
 

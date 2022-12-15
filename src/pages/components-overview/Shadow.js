@@ -43,7 +43,7 @@ CustomShadowBox.propTypes = {
     shadow: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    // bgcolor: PropTypes.any.isRequired
+    bgcolor: PropTypes.string.isRequired
 };
 
 // ============================|| COMPONENT - SHADOW ||============================ //
