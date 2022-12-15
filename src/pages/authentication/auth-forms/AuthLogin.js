@@ -29,10 +29,15 @@ import AnimateButton from 'components/@extended/AnimateButton';
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+// import { CallLogin } from './reducer/login';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const AuthLogin = () => {
+    // const dispatch = useDispatch();
+    const login = useSelector((state) => state.login);
+    console.log({login});
     const [checked, setChecked] = React.useState(false);
     let navigate = useNavigate();
 
@@ -44,6 +49,13 @@ const AuthLogin = () => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
+    const dataRequest = {
+        "client_id":"023",
+        "client_secret":"client_secret",
+        "profile_id":"adss:ras:profile:001",
+        "user_id":"CMT_0123456789"
+    }
 
     return (
         <>
@@ -59,6 +71,7 @@ const AuthLogin = () => {
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
+                        // dispatch(CallLogin(dataRequest))
                         setStatus({ success: false });
                         setSubmitting(false);
                     } catch (err) {
