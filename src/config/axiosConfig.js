@@ -3,7 +3,7 @@ import config from "./config.json";
 
 const localUrl = config.localhost;
 const axiosInstance = axios.create({
-  baseURL: `${localUrl}/api/`,
+  baseURL: `${localUrl}/`,
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",

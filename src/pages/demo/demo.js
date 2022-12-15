@@ -4,17 +4,18 @@ import MainCard from "components/MainCard";
 import toastifyAlert from "components/SnackBar/toastifyAlert";
 import DataTable from "components/TableCustome";
 import ComponentSkeleton from "pages/components-overview/ComponentSkeleton";
-import { useState } from "react";
-import { Box, Grid } from "../../../node_modules/@mui/material/index";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import {memo, useState} from "react";
+import {Box, Grid} from "../../../node_modules/@mui/material/index";
+import {ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AutocompleteCustomer from "components/AutocompleteCustomer/index";
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
 
 function demo(props) {
-    const a = 3;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-  let [open, setOpen ] = useState(false);
+  const a = 3;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  let [open, setOpen] = useState(false);
 
   const columns = [
     {field: "id", headerName: "ID", width: 70, color: "green"},
@@ -25,7 +26,7 @@ function demo(props) {
       headerName: "Age",
       type: "number",
       //   width: 90,
-    //   headerClassName: 'super-app-theme--header',
+      //   headerClassName: 'super-app-theme--header',
     },
     {
       field: "fullName",
@@ -52,13 +53,12 @@ function demo(props) {
   ];
   const first = (second) => {
     console.log({second});
-    setOpen(true)
-    toastifyAlert.success("Success")
+    setOpen(true);
+    toastifyAlert.success("Success");
   };
 
   return (
     <>
-   
       {a == 2 ? (
         <Box sx={{display: "flex"}}>
           <Loading />
@@ -76,26 +76,35 @@ function demo(props) {
                   columns={columns}
                   checkBoxTable={false}
                   onEdit={first}
-                //   onDelete={first}
+                  //   onDelete={first}
                 />
               </MainCard>
             </Grid>
+            <Grid item xs={12}>
+              <AutocompleteCustomer
+                data={rows}
+                label="Test"
+                error={false}
+                helperText=""
+                nameData="lastName"
+              />
+            </Grid>
           </MainCard>
-          <ToastContainer/>
+          <ToastContainer />
         </ComponentSkeleton>
       )}
-       {/* <ConfirmDialog isOpen={open} setIsOpen={setOpen} /> */}
-       <CustomDialog open={open}
-       title="Confirm"
-        onClose={()=>setOpen(false)}
-        onSave={()=>setOpen(false)}
-        />
-         {/* <CustomizedSnackbars /> */}
+      {/* <ConfirmDialog isOpen={open} setIsOpen={setOpen} /> */}
+      <CustomDialog
+        open={open}
+        title="Confirm"
+        onClose={() => setOpen(false)}
+        onSave={() => setOpen(false)}
+      />
+      {/* <CustomizedSnackbars /> */}
     </>
-    
   );
 }
 
 demo.propTypes = {};
 
-export default demo;
+export default memo(demo);
