@@ -9,13 +9,16 @@ import {Box, Grid} from "../../../node_modules/@mui/material/index";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AutocompleteCustomer from "components/AutocompleteCustomer/index";
+import { useSelector } from "react-redux";
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
 
 function demo(props) {
-  const a = 3;
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const dataLogin = useSelector((state) => state);
+  console.log({dataLogin});
   let [open, setOpen] = useState(false);
+  const a = 3;
+
 
   const columns = [
     {field: "id", headerName: "ID", width: 70, color: "green"},

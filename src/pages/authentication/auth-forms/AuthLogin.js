@@ -5,39 +5,37 @@ import { Link as RouterLink } from 'react-router-dom';
 import {
     Button,
     Checkbox,
-    Divider,
     FormControlLabel,
     FormHelperText,
     Grid,
-    Link,
     IconButton,
     InputAdornment,
     InputLabel,
+    Link,
     OutlinedInput,
     Stack,
     Typography
 } from '@mui/material';
 
 // third party
-import * as Yup from 'yup';
 import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 // project import
-import FirebaseSocial from './FirebaseSocial';
 import AnimateButton from 'components/@extended/AnimateButton';
 
 // assets
-import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-// import { CallLogin } from './reducer/login';
+import { useNavigate } from 'react-router-dom';
+import { CallLogin } from './reducer/loginReducer';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const AuthLogin = () => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const login = useSelector((state) => state.login);
-    console.log({login});
+    console.log(login);
     const [checked, setChecked] = React.useState(false);
     let navigate = useNavigate();
 
@@ -71,7 +69,7 @@ const AuthLogin = () => {
                 })}
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
-                        // dispatch(CallLogin(dataRequest))
+                        dispatch(CallLogin(dataRequest))
                         setStatus({ success: false });
                         setSubmitting(false);
                     } catch (err) {
