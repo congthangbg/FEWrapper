@@ -19,7 +19,15 @@ export  const useStyles = makeStyles(theme => ({
   },
   fabControl:{
     // backgroundColor:theme.palette.grey[200],
+  },
+  clearIndicator: {
+    // color: "red",
+    marginTop: -5
+  },
+  popupIndicator:{
+    marginTop: -5
   }
+  
 
 }));
 export default useStyles;

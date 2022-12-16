@@ -5,11 +5,10 @@ import toastifyAlert from "components/SnackBar/toastifyAlert";
 import DataTable from "components/TableCustome";
 import ComponentSkeleton from "pages/components-overview/ComponentSkeleton";
 import {memo, useState} from "react";
-import {Box, Grid} from "../../../node_modules/@mui/material/index";
-import {ToastContainer, toast} from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import AutocompleteCustomer from "components/AutocompleteCustomer/index";
 import { useSelector } from "react-redux";
+import { Grid ,Box,Stack} from '@mui/material';
+import { Autocomplete, TextField } from "../../../node_modules/@mui/material/index";
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
 
@@ -70,7 +69,10 @@ function demo(props) {
         <ComponentSkeleton>
           <MainCard title="Demo1223">
             <Grid item xs={12} md={7} lg={8}>
-              {a == 1 ? <div>sssss1113332</div> : "ssss"}
+              {a == 1 ? <div>sssss1113332</div> : 
+           "sssss1113332"
+              
+              }
 
               <MainCard sx={{mt: 2}} content={false}>
                 {/* <OrderTable /> */}
@@ -83,17 +85,18 @@ function demo(props) {
                 />
               </MainCard>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={4}>
               <AutocompleteCustomer
-                data={rows}
-                label="Test"
+                options={rows}
+                textLabel="Test"
                 error={false}
                 helperText=""
-                nameData="lastName"
+                optionLabel="firstName"
+                onChange={(e) => console.log(e)}
               />
             </Grid>
           </MainCard>
-          <ToastContainer />
+       
         </ComponentSkeleton>
       )}
       {/* <ConfirmDialog isOpen={open} setIsOpen={setOpen} /> */}
