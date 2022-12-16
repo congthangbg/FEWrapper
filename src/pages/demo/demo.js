@@ -9,7 +9,7 @@ import AutocompleteCustomer from "components/AutocompleteCustomer/index";
 import { useSelector } from "react-redux";
 import { Grid ,Box,Stack} from '@mui/material';
 import { Autocomplete, TextField } from "../../../node_modules/@mui/material/index";
-import CustomTextFieldNew from "components/CustomTextFieldNew/index";
+import CustomTextField from "components/CustomTextField/index";
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
 
@@ -97,7 +97,7 @@ function demo(props) {
               />
             </Grid>
             <Grid item xs={4}>
-              <CustomTextFieldNew   onChange={(e) => console.log(e)}/>
+              <CustomTextField   onChange={(e) => console.log(e)}/>
             </Grid>
           </MainCard>
        
