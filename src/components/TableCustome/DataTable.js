@@ -3,9 +3,17 @@ import EditIcon from "@mui/icons-material/Edit";
 import {DataGrid} from "@mui/x-data-grid";
 import PropTypes from "prop-types";
 import * as React from "react";
-import {Box, Button, IconButton, Stack, Tooltip} from "../../../node_modules/@mui/material/index";
+import {
+  Box,
+  Button,
+  Fab,
+  IconButton,
+  Stack,
+  Tooltip,
+} from "../../../node_modules/@mui/material/index";
 import "./DataTable.css";
 import useStyles from "../../utils/styles";
+import AddIcon from "@mui/icons-material/Add";
 
 const columns = [
   {field: "id", headerName: "ID", width: 70},
@@ -78,7 +86,7 @@ export default function DataTable({
                   <EditIcon size="small" />
                 </Button>
               )}
-              
+
               {onDelete && (
                 <Button
                   style={{minWidth: 30}}
@@ -108,6 +116,16 @@ export default function DataTable({
   );
   return (
     <>
+    {/* <Box sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+        }}>
+    <Tooltip size="small" title="Add" aria-label="add">
+              <Fab color="primary" sx={{m: 0}}>
+                <AddIcon />
+              </Fab>
+            </Tooltip>
+    </Box> */}
       <Box style={{height: 500, width: "100%"}}>
         <DataGrid
           rows={rows}

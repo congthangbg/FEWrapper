@@ -7,9 +7,10 @@ import ComponentSkeleton from "pages/components-overview/ComponentSkeleton";
 import {memo, useState} from "react";
 import AutocompleteCustomer from "components/AutocompleteCustomer/index";
 import { useSelector } from "react-redux";
-import { Grid ,Box,Stack} from '@mui/material';
-import { Autocomplete, TextField } from "../../../node_modules/@mui/material/index";
+import { Grid, Box, Stack, Tooltip } from '@mui/material';
+import { Autocomplete, Fab, TextField } from "../../../node_modules/@mui/material/index";
 import CustomTextField from "components/CustomTextField/index";
+import AddIcon from '@mui/icons-material/Add';
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
 
@@ -71,12 +72,12 @@ function demo(props) {
         <ComponentSkeleton>
           <MainCard title="Demo1223">
             <Grid item xs={12} md={7} lg={8}>
-              {a == 1 ? <div>sssss1113332</div> : 
+              {/* {a == 1 ? <div>sssss1113332</div> : 
            "sssss1113332"
               
-              }
+              } */}
 
-              <MainCard sx={{mt: 2}} content={false}>
+              {/* <MainCard sx={{mt: 2}} content={false}> */}
                 {/* <OrderTable /> */}
                 <DataTable
                   rows={rows}
@@ -85,7 +86,7 @@ function demo(props) {
                   onEdit={first}
                   //   onDelete={first}
                 />
-              </MainCard>
+              {/* </MainCard> */}
             </Grid>
             <Grid item xs={4}>
               <AutocompleteCustomer

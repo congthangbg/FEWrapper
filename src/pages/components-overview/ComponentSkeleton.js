@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 
 // material-ui
-import { Grid, Skeleton, Stack } from '@mui/material';
+import { Grid, Skeleton, Stack, Tooltip } from '@mui/material';
 
 // project import
 import MainCard from 'components/MainCard';
+import { Fab } from '../../../node_modules/@mui/material/index';
 
 // ===============================|| COMPONENT - SKELETON ||=============================== //
 
@@ -26,6 +27,7 @@ const ComponentSkeleton = ({ children }) => {
                 <Skeleton />
                 <Skeleton />
             </Stack>
+           
         </MainCard>
     );
 
