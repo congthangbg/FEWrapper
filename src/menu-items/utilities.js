@@ -52,7 +52,7 @@ const utilities = {
             type: 'item',
             url: '/icons/ant',
             icon: icons.AntDesignOutlined,
-            breadcrumbs: false
+            breadcrumbs: true
         },
         {
             id: 'demo',
@@ -60,7 +60,7 @@ const utilities = {
             type: 'item',
             url: '/demo',
             icon: icons.AntDesignOutlined,
-            breadcrumbs: false
+            breadcrumbs: true
         }
     ]
 };

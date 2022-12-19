@@ -14,8 +14,9 @@ import CustomTextField from "components/CustomTextField/index";
 // 2: checkBoxTable = checkBoxTable
 
 function demo(props) {
-  const dataLogin = useSelector((state) => state);
+  const dataLogin = useSelector((state) => state.loginReducer);
   console.log({dataLogin});
+
   let [open, setOpen] = useState(false);
   const a = 3;
 
@@ -97,7 +98,7 @@ function demo(props) {
               />
             </Grid>
             <Grid item xs={4}>
-              <CustomTextField   onChange={(e) => console.log(e)}/>
+              <CustomTextField clearText  onChange={(e) => console.log(e)}/>
             </Grid>
           </MainCard>
        

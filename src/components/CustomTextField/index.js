@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {TextField, InputAdornment,IconButton} from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import {useState} from "react";
-import { Search } from "../../../node_modules/@mui/icons-material/index";
 
 function CustomTextField(props) {
   const {

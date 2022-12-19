@@ -73,22 +73,22 @@ const Breadcrumbs = ({ navigation, title, ...others }) => {
         // main
         if (item.breadcrumbs !== false) {
             breadcrumbContent = (
-                <MainCard border={false} sx={{ mb: 3, bgcolor: 'transparent' }} {...others} content={false}>
+                <MainCard border={false} sx={{ mb: 1, bgcolor: 'transparent' }} {...others} content={false}>
                     <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start" spacing={1}>
                         <Grid item>
                             <MuiBreadcrumbs aria-label="breadcrumb">
-                                <Typography component={Link} to="/" color="textSecondary" variant="h6" sx={{ textDecoration: 'none' }}>
+                                <Typography component={Link} to="/dashboard/default" color="textSecondary" variant="h6" sx={{ textDecoration: 'none' }}>
                                     Home
                                 </Typography>
                                 {mainContent}
                                 {itemContent}
                             </MuiBreadcrumbs>
                         </Grid>
-                        {title && (
+                        {/* {title && (
                             <Grid item sx={{ mt: 2 }}>
                                 <Typography variant="h5">{item.title}</Typography>
                             </Grid>
-                        )}
+                        )} */}
                     </Grid>
                 </MainCard>
             );
