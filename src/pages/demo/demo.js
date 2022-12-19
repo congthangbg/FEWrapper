@@ -4,13 +4,17 @@ import MainCard from "components/MainCard";
 import toastifyAlert from "components/SnackBar/toastifyAlert";
 import DataTable from "components/TableCustome";
 import ComponentSkeleton from "pages/components-overview/ComponentSkeleton";
-import {memo, useState} from "react";
+import {memo, useCallback, useState} from "react";
 import AutocompleteCustomer from "components/AutocompleteCustomer/index";
-import { useSelector } from "react-redux";
-import { Grid, Box, Stack, Tooltip } from '@mui/material';
-import { Autocomplete, Fab, TextField } from "../../../node_modules/@mui/material/index";
+import {useSelector} from "react-redux";
+import {Grid, Box, Stack, Tooltip} from "@mui/material";
+import {
+  Autocomplete,
+  Fab,
+  TextField,
+} from "../../../node_modules/@mui/material/index";
 import CustomTextField from "components/CustomTextField/index";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
 
@@ -20,7 +24,6 @@ function demo(props) {
 
   let [open, setOpen] = useState(false);
   const a = 3;
-
 
   const columns = [
     {field: "id", headerName: "ID", width: 70, color: "green"},
@@ -62,6 +65,12 @@ function demo(props) {
     toastifyAlert.success("Success");
   };
 
+  const onClickAdd = useCallback((isClick) => {
+    console.log(isClick);
+  },[]);
+
+  
+
   return (
     <>
       {a == 2 ? (
@@ -69,8 +78,14 @@ function demo(props) {
           <Loading />
         </Box>
       ) : (
-        <ComponentSkeleton>
-          <MainCard title="Demo1223">
+        <ComponentSkeleton >
+          <MainCard
+            title="Demo1223"
+            onAdd={true}
+            // addDisabled={true}
+            onClickAdd={onClickAdd}
+            titleAdd="Thêm mới"
+          >
             <Grid item xs={12} md={7} lg={8}>
               {/* {a == 1 ? <div>sssss1113332</div> : 
            "sssss1113332"
@@ -78,14 +93,14 @@ function demo(props) {
               } */}
 
               {/* <MainCard sx={{mt: 2}} content={false}> */}
-                {/* <OrderTable /> */}
-                <DataTable
-                  rows={rows}
-                  columns={columns}
-                  checkBoxTable={false}
-                  onEdit={first}
-                  //   onDelete={first}
-                />
+              {/* <OrderTable /> */}
+              <DataTable
+                rows={rows}
+                columns={columns}
+                checkBoxTable={false}
+                onEdit={first}
+                //   onDelete={first}
+              />
               {/* </MainCard> */}
             </Grid>
             <Grid item xs={4}>
@@ -99,10 +114,9 @@ function demo(props) {
               />
             </Grid>
             <Grid item xs={4}>
-              <CustomTextField clearText  onChange={(e) => console.log(e)}/>
+              <CustomTextField clearText onChange={(e) => console.log(e)} />
             </Grid>
           </MainCard>
-       
         </ComponentSkeleton>
       )}
       {/* <ConfirmDialog isOpen={open} setIsOpen={setOpen} /> */}

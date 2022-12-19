@@ -29,7 +29,7 @@ const support = {
                     icon: icons.QuestionOutlined,
                     // external: true, // load lại form
                     // target: true, //next tab
-                    breadcrumbs: false
+                    breadcrumbs: true
                 }
             ]
         },

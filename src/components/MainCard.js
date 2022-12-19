@@ -14,12 +14,12 @@ import {
 
 // project import
 import Highlighter from "./third-party/Highlighter";
-import {Fab, Grid} from "../../node_modules/@mui/material/index";
+import {Box, Fab, Grid} from "../../node_modules/@mui/material/index";
 import AddIcon from "@mui/icons-material/Add";
-
+import {memo} from "react";
 // header style
 const headerSX = {
-  p: 2.5,
+  p:1,
   "& .MuiCardHeader-action": {m: "0px auto", alignSelf: "center"},
 };
 
@@ -41,12 +41,21 @@ const MainCard = forwardRef(
       sx = {},
       title,
       codeHighlight,
+      titleAdd,
+      onClickAdd,
+      onAdd,
+      addDisabled,
       ...others
     },
     ref
   ) => {
     const theme = useTheme();
     boxShadow = theme.palette.mode === "dark" ? boxShadow || true : boxShadow;
+
+    const handleClickAdd = (params) => {
+        onClickAdd && onClickAdd(true);
+    }
+
 
     return (
       <Card
@@ -79,14 +88,33 @@ const MainCard = forwardRef(
         {/* card header and action */}
         {!darkTitle && title && (
           <>
-            <CardHeader
-              sx={headerSX}
-              titleTypographyProps={{variant: "subtitle1"}}
-              title={title}
-              action={secondary}
-              style={{width:300}}
-            />
-            
+            <div style={{width: "100%"}}>
+              <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    bgcolor: 'background.paper',
+                    borderRadius: 1,
+                  }}
+              >
+                <CardHeader
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                  }}
+                  titleTypographyProps={{variant: "subtitle1"}}
+                  title={title}
+                  action={secondary}
+                />
+                {onAdd &&
+                <Tooltip disabled = {addDisabled ? true:false} size="small" title={titleAdd ? titleAdd : "Add"} onClick={handleClickAdd} aria-label="add">
+                  <Fab color="primary"  sx={{mr:5,mt:1}}>
+                    <AddIcon />
+                  </Fab>
+                </Tooltip>
+                }
+              </Box>
+            </div>
           </>
         )}
         {darkTitle && title && (
@@ -117,7 +145,8 @@ const MainCard = forwardRef(
     );
   }
 );
-
+MainCard.defaultProps={
+}
 MainCard.propTypes = {
   border: PropTypes.bool,
   boxShadow: PropTypes.bool,
@@ -132,6 +161,11 @@ MainCard.propTypes = {
   codeHighlight: PropTypes.bool,
   content: PropTypes.bool,
   children: PropTypes.node,
+  //onClick Add
+  onClickAdd : PropTypes.func,
+  titleAdd:PropTypes.string,
+  onAdd:PropTypes.bool,
+  addDisabled:PropTypes.bool
 };
 
-export default MainCard;
+export default memo(MainCard) ;
