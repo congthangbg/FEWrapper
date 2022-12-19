@@ -67,6 +67,7 @@ function demo(props) {
 
   const onClickAdd = useCallback((isClick) => {
     console.log(isClick);
+    setOpen(true);
   },[]);
 
   
