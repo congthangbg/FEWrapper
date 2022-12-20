@@ -22,7 +22,7 @@ export const CallLogin = createAsyncThunk(
       }
     }
   );
-
+ 
 // ==============================|| SLICE - MENU ||============================== //
 
 const loginReducer = createSlice({
@@ -52,4 +52,4 @@ const loginReducer = createSlice({
 
 export default loginReducer.reducer;
 
-// export const {  } = loginReducer.actions;
+export const {login  } = loginReducer.actions;

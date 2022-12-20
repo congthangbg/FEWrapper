@@ -1,20 +1,15 @@
+import { Box, Grid } from "@mui/material";
+import AutocompleteCustomer from "components/AutocompleteCustomer/index";
 import CustomDialog from "components/ConfirmDialog/CustomDialog";
+import CustomTextField from "components/CustomTextField/index";
 import Loading from "components/Loading/index";
 import MainCard from "components/MainCard";
 import toastifyAlert from "components/SnackBar/toastifyAlert";
-import DataTable from "components/TableCustome";
+import DataTable from "components/TableCustom";
 import ComponentSkeleton from "pages/components-overview/ComponentSkeleton";
-import {memo, useCallback, useState} from "react";
-import AutocompleteCustomer from "components/AutocompleteCustomer/index";
-import {useSelector} from "react-redux";
-import {Grid, Box, Stack, Tooltip} from "@mui/material";
-import {
-  Autocomplete,
-  Fab,
-  TextField,
-} from "../../../node_modules/@mui/material/index";
-import CustomTextField from "components/CustomTextField/index";
-import AddIcon from "@mui/icons-material/Add";
+import { memo, useCallback, useState } from "react";
+import { useSelector } from "react-redux";
+import CustomDatePicker from './../../components/CustomDatePicker/CustomDatePicker';
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
 
@@ -70,8 +65,6 @@ function demo(props) {
     setOpen(true);
   },[]);
 
-  
-
   return (
     <>
       {a == 2 ? (
@@ -88,13 +81,6 @@ function demo(props) {
             titleAdd="Thêm mới"
           >
             <Grid item xs={12} md={7} lg={8}>
-              {/* {a == 1 ? <div>sssss1113332</div> : 
-           "sssss1113332"
-              
-              } */}
-
-              {/* <MainCard sx={{mt: 2}} content={false}> */}
-              {/* <OrderTable /> */}
               <DataTable
                 rows={rows}
                 columns={columns}
@@ -116,6 +102,9 @@ function demo(props) {
             </Grid>
             <Grid item xs={4}>
               <CustomTextField clearText onChange={(e) => console.log(e)} />
+            </Grid>
+            <Grid item xs={4}>
+              <CustomDatePicker  />
             </Grid>
           </MainCard>
         </ComponentSkeleton>

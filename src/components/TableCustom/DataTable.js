@@ -137,7 +137,7 @@ export default function DataTable({
           disableSelectionOnClick
           showCellRightBorder={true}
           showColumnRightBorder={true}
-          // autoHeight
+          autoHeight
           // onRowClick={e=> console.log(e)}
           // disableColumnSelector={false}
           // disableSelectionOnClick={true}
