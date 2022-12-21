@@ -10,6 +10,7 @@ import {
   IconButton,
   InputAdornment,
 } from "../../../node_modules/@mui/material/index";
+import { DatePicker } from "antd";
 function CustomDatePicker(props) {
   const {date, onChangeDate, width, helperText, error, title,disabled, ...rest} = props;
 
@@ -23,6 +24,7 @@ function CustomDatePicker(props) {
   function handleClearDate() {
     setValue(null);
   }
+	const dateFormat = "YYYY-MM-DD";
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -55,6 +57,13 @@ function CustomDatePicker(props) {
               />
             )}
           />
+					{/* <DatePicker
+      defaultValue={[
+        moment("2015-01-01", dateFormat),
+        moment("2015-01-01", dateFormat)
+      ]}
+      format={dateFormat}
+    /> */}
         </Stack>
       </LocalizationProvider>
     </>

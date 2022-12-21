@@ -10,10 +10,12 @@ import ComponentSkeleton from "pages/components-overview/ComponentSkeleton";
 import { memo, useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import CustomDatePicker from './../../components/CustomDatePicker/CustomDatePicker';
+import BasicDateRangePicker from "components/BasicDateRangePicker/BasicDateRangePicker";
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
 
 function demo(props) {
+  
   const dataLogin = useSelector((state) => state.loginReducer);
   console.log({dataLogin});
 
@@ -80,6 +82,7 @@ function demo(props) {
             onClickAdd={onClickAdd}
             titleAdd="Thêm mới"
           >
+           
             <Grid item xs={12} md={7} lg={8}>
               <DataTable
                 rows={rows}
@@ -90,6 +93,7 @@ function demo(props) {
               />
               {/* </MainCard> */}
             </Grid>
+            <Grid container>
             <Grid item xs={4}>
               <AutocompleteCustomer
                 options={rows}
@@ -105,6 +109,10 @@ function demo(props) {
             </Grid>
             <Grid item xs={4}>
               <CustomDatePicker  />
+            </Grid>
+            <Grid item xs={4}>
+              <BasicDateRangePicker  />
+            </Grid>
             </Grid>
           </MainCard>
         </ComponentSkeleton>
