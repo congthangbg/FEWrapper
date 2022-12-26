@@ -1,16 +1,9 @@
-import React, {memo, useState} from "react";
+import { Stack, TextField } from "@mui/material";
+import { DesktopDatePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import PropTypes from "prop-types";
-import {TextField, Stack} from "@mui/material";
-import {DesktopDatePicker} from "@mui/x-date-pickers";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
-import moment from "../../../node_modules/moment/moment";
-import {Close, Event} from "../../../node_modules/@mui/icons-material/index";
-import {
-  IconButton,
-  InputAdornment,
-} from "../../../node_modules/@mui/material/index";
-import { DatePicker } from "antd";
+import { memo, useState } from "react";
 function CustomDatePicker(props) {
   const {date, onChangeDate, width, helperText, error, title,disabled, ...rest} = props;
 

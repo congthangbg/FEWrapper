@@ -3,7 +3,9 @@ import TextField from "@mui/material/TextField";
 import {makeStyles} from "@mui/styles";
 import {PropTypes} from "prop-types";
 import {memo, useEffect, useState} from "react";
-import {useStyles} from "./../../utils/styles";
+import {useStyles, useStylesComboBox} from "./../../utils/styles";
+import { Grid } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 function AutocompleteCustomer({
   textLabel,
@@ -20,7 +22,9 @@ function AutocompleteCustomer({
   value,
   ...rest
 }) {
-  const classes = useStyles();
+
+
+  const classes = useStylesComboBox();
 
   const [data, setData] = useState(value);
 
@@ -32,7 +36,7 @@ function AutocompleteCustomer({
   }, [data]);
 
   return (
-    <div>
+    <Grid container spacing={1} alignItems="center">
       <Autocomplete
         value={data}
         disablePortal
@@ -48,6 +52,7 @@ function AutocompleteCustomer({
             fullWidth
             error={Boolean(error)}
             helperText={helperText}
+            size={size}
           />
         )}
         size={size}
@@ -55,10 +60,10 @@ function AutocompleteCustomer({
         required={required}
         multiple={multiple}
         fullWidth
-        sx={{width: width}}
         classes={classes}
-      />
-    </div>
+        sx={{width: width}}
+        />
+    </Grid>
   );
 }
 AutocompleteCustomer.defaultProps = {

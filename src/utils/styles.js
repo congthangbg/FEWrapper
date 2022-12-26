@@ -1,4 +1,5 @@
 import { makeStyles } from "../../node_modules/@mui/styles/index";
+import { styled } from '@mui/material/styles';
 
 export  const useStyles = makeStyles(theme => ({
   dataGrid: {
@@ -8,7 +9,7 @@ export  const useStyles = makeStyles(theme => ({
     // // font: 'center',
     // boxShadow: 2,
     // border: 2,
-    // borderColor: 'primary.light',
+    borderColor: 'primary.light',
     // '& .MuiDataGrid-cell:hover': {
     //   color: 'primary.main',
     // },
@@ -16,7 +17,6 @@ export  const useStyles = makeStyles(theme => ({
     // //   backgroundColor: 'gray',
     // // }
     fontSize: 14,
-    border: 0,
     color: 'rgba(0,0,0,.85)' ,
     fontFamily: [
       '-apple-system',
@@ -32,48 +32,36 @@ export  const useStyles = makeStyles(theme => ({
     ].join(','),
     WebkitFontSmoothing: 'auto',
     letterSpacing: 'normal',
-    '& .MuiDataGrid-columnsContainer': {
-      backgroundColor:  '#1d1d1d' ,
-    },
-    '& .MuiDataGrid-iconSeparator': {
-      display: 'none',
-    },
+
     '& .MuiDataGrid-columnHeader, .MuiDataGrid-cell': {
-      // borderRight: `1px solid ${
-      //   '#f0f0f0' 
-      // }`,
-      borderBottom: `1px solid ${
+      borderRight: `0px solid ${
         '#f0f0f0' 
       }`,
-      // borderLeft: `1px solid ${
-      //   '#f0f0f0' 
-      // }`
+      border: `1px solid  ${'#f0f0f0'} `,
     },
-    '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
-      borderBottom: `1px solid ${
-        '#f0f0f0' 
-      }`
+    '& .MuiDataGrid-columnHeaders': {
+      color: `${'#1f1f1f'} `,
+      backgroundColor: '#bae7ff'
     },
-    '& .MuiDataGrid-cell': {
-      color:
-        'rgba(0,0,0,.85)' ,
-    },
-    '& .MuiPaginationItem-root': {
-      borderRadius: 1,
-    },
-
+    borderBottom: `1px solid ${'#f0f0f0'}`
   },
   fabControl:{
-    // backgroundColor:theme.palette.grey[200],
+    
   },
+}));
+
+
+export const useStylesComboBox = makeStyles(theme => ({
   clearIndicator: {
-    // color: "red",
-    marginTop: -5
+    marginTop: -4
   },
   popupIndicator:{
-    marginTop: -5
-  }
-  
-
-}));
+    marginTop: -4,
+    marginRight:-8,
+  },
+  inputRoot: {
+    height: `2.2rem`
+  },
+ 
+}))
 export default useStyles;

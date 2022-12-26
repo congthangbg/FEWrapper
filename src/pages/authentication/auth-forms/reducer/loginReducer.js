@@ -6,7 +6,7 @@ import axiosInstance from 'utils/config/axiosConfig';
 const initialState = {
     data: [],
     loading: false,
-    isSuccess: false,
+    isSuccess: null,
     message: "",
 };
 
@@ -30,26 +30,41 @@ const loginReducer = createSlice({
     initialState,
     reducers: {
         login(state, action) {
-            state.data = action.payload;
-        }
-    },
-    extraReducers: {
-        [CallLogin.pending]: (state, action) => {
           state.loading = true;
         },
-        [CallLogin.fulfilled]: (state, { payload }) => {
+        loginSuccess(state, action) {
           state.loading = false;
-          state.data = payload;
+          state.data = action.payload;
           state.isSuccess = true;
         },
-        [CallLogin.rejected]: (state, { payload }) => {
+        loginFailed(state, action) {
           state.loading = false;
           state.isSuccess = false;
-          state.message = "failed";
+          state.message = action.payload;
         },
-      },
+        cleanMessage(state) {
+          state.loading= false;
+          state.isSuccess= null;
+          state.message= "";
+        }
+    },
+    // extraReducers: {
+    //     [CallLogin.pending]: (state, action) => {
+    //       state.loading = true;
+    //     },
+    //     [CallLogin.fulfilled]: (state, { payload }) => {
+    //       state.loading = false;
+    //       state.data = payload;
+    //       state.isSuccess = true;
+    //     },
+    //     [CallLogin.rejected]: (state, { payload }) => {
+    //       state.loading = false;
+    //       state.isSuccess = false;
+    //       state.message = "failed";
+    //     },
+    //   },
 });
 
 export default loginReducer.reducer;
 
-export const {login  } = loginReducer.actions;
+export const {login,loginSuccess,loginFailed,cleanMessage  } = loginReducer.actions;

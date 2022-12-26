@@ -10,7 +10,6 @@ import ComponentSkeleton from "pages/components-overview/ComponentSkeleton";
 import { memo, useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import CustomDatePicker from './../../components/CustomDatePicker/CustomDatePicker';
-import BasicDateRangePicker from "components/BasicDateRangePicker/BasicDateRangePicker";
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
 
@@ -23,15 +22,17 @@ function demo(props) {
   const a = 3;
 
   const columns = [
-    {field: "id", headerName: "ID", width: 70, color: "green"},
+    {field: "id", headerName: "ID", width: 70, alignCenter:"center"},
     {field: "firstName", headerName: "First name", width: 130},
     {field: "lastName", headerName: "Last name", width: 130},
     {
       field: "age",
       headerName: "Age",
-      type: "number",
+      type: "string",
+      headerAlign:"center",//left-right
+      align:"center",//left-right
       //   width: 90,
-      //   headerClassName: 'super-app-theme--header',
+      // showColumnRightBorder:true
     },
     {
       field: "fullName",
@@ -109,9 +110,6 @@ function demo(props) {
             </Grid>
             <Grid item xs={4}>
               <CustomDatePicker  />
-            </Grid>
-            <Grid item xs={4}>
-              <BasicDateRangePicker  />
             </Grid>
             </Grid>
           </MainCard>

@@ -12,5 +12,5 @@
 .MuiDataGrid-row, 
 .MuiDataGrid-column, 
 .MuiDataGrid {
-    border: 0 !important;
+    border: 1 !important;
 }

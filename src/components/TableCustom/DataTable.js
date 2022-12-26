@@ -56,9 +56,20 @@ export default function DataTable({
   onDelete,
 }) {
   const styles = useStyles();
-  const onEditData = (row) => {
-    onEdit(row);
-  };
+
+  const onEditData = React.useCallback(
+    (id) => () => {
+      onEdit && onEdit(id);
+    },
+    [],
+  );
+
+  const onDeleteData = React.useCallback(
+    (id) => () => {
+      onDelete && onDelete(id);
+    },
+    [],
+  );
 
   const columnsAction = React.useMemo(
     () => [
@@ -93,20 +104,11 @@ export default function DataTable({
                   variant="outlined"
                   color="error"
                   size="small"
-                  onClick={onDelete(params.row)}
+                  onClick={onDeleteData(params.row)}
                 >
                   <DeleteIcon />
                 </Button>
               )}
-
-              {/* <Paper
-            // className={classes.paper}
-            onClick={() => {
-              alert("✔️ This works on every component!");
-            }}
-          >
-            Click me!
-          </Paper> */}
             </>
           );
         },
@@ -116,16 +118,6 @@ export default function DataTable({
   );
   return (
     <>
-    {/* <Box sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-        }}>
-    <Tooltip size="small" title="Add" aria-label="add">
-              <Fab color="primary" sx={{m: 0}}>
-                <AddIcon />
-              </Fab>
-            </Tooltip>
-    </Box> */}
       <Box style={{height: 500, width: "100%"}}>
         <DataGrid
           rows={rows}
