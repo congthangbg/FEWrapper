@@ -10,6 +10,7 @@ import ComponentSkeleton from "pages/components-overview/ComponentSkeleton";
 import { memo, useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import CustomDatePicker from './../../components/CustomDatePicker/CustomDatePicker';
+import BoxFieldSearch from './../../components/CustomBoxSearch/BoxFieldSearch';
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
 
@@ -83,6 +84,9 @@ function demo(props) {
             onClickAdd={onClickAdd}
             titleAdd="Thêm mới"
           >
+            <Grid >
+              <BoxFieldSearch/>
+            </Grid>
            
             <Grid item xs={12} md={7} lg={8}>
               <DataTable

@@ -15,10 +15,11 @@ function parseJSON(response) {
   //   window.location.origin.reload();
   //   return;
   // }
-  // console.log(response.json());
   // response.json().then(result => {
   //   // if(result.data.error_cod)
   // });
+  // const data = {data :response.json(), status : response.status}
+  // debugger
   return response.json();
 }
 
@@ -29,16 +30,16 @@ function parseJSON(response) {
  *
  * @return {object|undefined} Returns either the response, or throws an error
  */
-// function checkStatus(response) {
-//   if (response.status >= 200 && response.status < 300) {
-//     // console.log(response);
-//     return response;
-//   }
+function checkStatus(response) {
+  if (response.status >= 200 && response.status < 300) {
+    console.log(response);
+    return response;
+  }
 
-//   const error = new Error(response.statusText);
-//   error.response = response;
-//   throw error;
-// }
+  const error = new Error(response.statusText);
+  error.response = response;
+  throw error;
+}
 
 
 /**
@@ -84,9 +85,29 @@ export default function request(url, options) {
   //   },
   //   options.headers,
   // );
+  // options.credentials = 'include';
+  options.headers = newHeaders;
+  return fetch(url, options)
+  // .then(checkStatus)
+  .then(parseJSON)
+}
+
+export async function requestFile(url, options) {
+
+
+  const newHeaders = Object.assign(
+    {
+      // Authorization: localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN),
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Access-Control-Allow-Origin': '*'
+    },
+    options.headers,
+  );
   options.headers = newHeaders;
   // options.credentials = 'include';
-  return fetch(url, options)
-  .then(parseJSON);
-    // .then(checkStatus)
+  const response = await fetch(url, options);
+  const response2= parseJSON(response);
+  console.log(response2);
+  debugger
+  return checkStatus(response);
 }

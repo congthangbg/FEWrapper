@@ -31,12 +31,14 @@ import {useNavigate} from "react-router-dom";
 import {CallLogin, cleanMessage, login} from "./reducer/loginReducer";
 import toastifyAlert from './../../../components/SnackBar/toastifyAlert';
 import { compose } from "../../../../node_modules/@reduxjs/toolkit/dist/index";
+import { MESSAGE } from "utils/constants";
+import Loading from "components/Loading/index";
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const AuthLogin = (props) => {
     const {onCleanup,onLogin} = props;
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const loginStore = useSelector((state) => state.loginReducer);
   const [checked, setChecked] = React.useState(false);
   let navigate = useNavigate();
@@ -53,12 +55,12 @@ const AuthLogin = (props) => {
       console.log(loginStore);
   useEffect(() => {
     if(loginStore.isSuccess){
-        toastifyAlert.success("Login successfully")
+        toastifyAlert.success(MESSAGE.SUCCES)
         onCleanup();
          navigate("/dashboard/default");
-    }else{
-        const errMess = loginStore.message.error_description
-        toastifyAlert.error(errMess)
+    }else if(loginStore.isSuccess == false){
+        // const errMess = loginStore.message.error_description
+        toastifyAlert.error(MESSAGE.ERROR)
         onCleanup();
     }
   },[loginStore.isSuccess])
@@ -68,7 +70,7 @@ const AuthLogin = (props) => {
       <Formik
         initialValues={{
           username: "CMT_0123456789",
-          password: "123456",
+          password: "client_secret",
           client_secret: "client_secret",
           client_id: "023",
           profile_id: "adss:ras:profile:001",
@@ -217,7 +219,7 @@ const AuthLogin = (props) => {
                 <AnimateButton>
                   <Button
                     disableElevation
-                    disabled={isSubmitting}
+                    disabled={loginStore.loading}
                     fullWidth
                     size="large"
                     type="submit"

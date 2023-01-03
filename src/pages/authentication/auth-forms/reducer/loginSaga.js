@@ -1,7 +1,8 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { login, loginFailed, loginSuccess } from './loginReducer';
-import request from 'utils/request';
+import request, { requestFile } from 'utils/request';
 import { MessageCode, REQUEST_METHOD } from 'utils/constants';
+import { delay } from 'lodash';
 
 
 // eslint-disable-next-line require-yield
@@ -13,7 +14,7 @@ export function* callLogin(action) {
 					method: REQUEST_METHOD.POST,
 					body: JSON.stringify(action.payload),
 				});
-				if (response.status == MessageCode.OK) {
+				if (response?.access_token) {
 					yield put(loginSuccess(response));
 				}else{
 					yield put(loginFailed(response));
