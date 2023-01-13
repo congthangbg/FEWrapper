@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import {Link as RouterLink} from "react-router-dom";
+import React, { useEffect } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
 // material-ui
 import {
@@ -15,29 +15,29 @@ import {
   OutlinedInput,
   Stack,
   Typography,
-} from "@mui/material";
+} from '@mui/material';
 
 // third party
-import {Formik} from "formik";
-import * as Yup from "yup";
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 // project import
-import AnimateButton from "components/@extended/AnimateButton";
+import AnimateButton from 'components/@extended/AnimateButton';
 
 // assets
-import {EyeInvisibleOutlined, EyeOutlined} from "@ant-design/icons";
-import {connect, useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
-import {CallLogin, cleanMessage, login} from "./reducer/loginReducer";
+import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { CallLogin, cleanMessage, login } from './reducer/loginReducer';
 import toastifyAlert from './../../../components/SnackBar/toastifyAlert';
-import { compose } from "../../../../node_modules/@reduxjs/toolkit/dist/index";
-import { MESSAGE } from "utils/constants";
-import Loading from "components/Loading/index";
+import { compose } from '../../../../node_modules/@reduxjs/toolkit/dist/index';
+import { MESSAGE } from 'utils/constants';
+import Loading from 'components/Loading/index';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const AuthLogin = (props) => {
-    const {onCleanup,onLogin} = props;
+  const { onCleanup, onLogin } = props;
   // const dispatch = useDispatch();
   const loginStore = useSelector((state) => state.loginReducer);
   const [checked, setChecked] = React.useState(false);
@@ -52,35 +52,35 @@ const AuthLogin = (props) => {
     event.preventDefault();
   };
 
-      console.log(loginStore);
+  console.log(loginStore);
   useEffect(() => {
-    if(loginStore.isSuccess){
-        toastifyAlert.success(MESSAGE.SUCCES)
-        onCleanup();
-         navigate("/dashboard/default");
-    }else if(loginStore.isSuccess == false){
-        // const errMess = loginStore.message.error_description
-        toastifyAlert.error(MESSAGE.ERROR)
-        onCleanup();
+    if (loginStore.isSuccess) {
+      toastifyAlert.success(MESSAGE.SUCCES);
+      onCleanup();
+      navigate('/dashboard/default');
+    } else if (loginStore.isSuccess == false) {
+      // const errMess = loginStore.message.error_description
+      toastifyAlert.error(MESSAGE.ERROR);
+      onCleanup();
     }
-  },[loginStore.isSuccess])
+  }, [loginStore.isSuccess]);
 
   return (
     <>
       <Formik
         initialValues={{
-          username: "CMT_0123456789",
-          password: "client_secret",
-          client_secret: "client_secret",
-          client_id: "023",
-          profile_id: "adss:ras:profile:001",
+          username: 'CMT_0123456789',
+          password: 'client_secret',
+          client_secret: 'client_secret',
+          client_id: '023',
+          profile_id: 'adss:ras:profile:001',
           // submit: null
         }}
         validationSchema={Yup.object().shape({
-          username: Yup.string().max(255).required("Username is required"),
-          password: Yup.string().max(255).required("Password is required"),
+          username: Yup.string().max(255).required('Username is required'),
+          password: Yup.string().max(255).required('Password is required'),
         })}
-        onSubmit={async (values, {setErrors, setStatus, setSubmitting}) => {
+        onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
             const valuesSub = {
               user_id: values.username,
@@ -88,17 +88,17 @@ const AuthLogin = (props) => {
               client_id: values.client_id,
               profile_id: values.profile_id,
             };
-            onLogin(valuesSub);
-           
+            // onLogin(valuesSub);
+            navigate('/dashboard/default');
             // setStatus({success: true});
             // setSubmitting(true);
-        } catch (err) {
-            console.log("err",err);
+          } catch (err) {
+            console.log('err', err);
             // setStatus({success: false});
             // setErrors({submit: err.message});
             // setSubmitting(false);
-        }
-       
+          }
+
           // window.location.href = `/dashboard/default`;
         }}
       >
@@ -144,7 +144,7 @@ const AuthLogin = (props) => {
                     fullWidth
                     error={Boolean(touched.password && errors.password)}
                     id="-password-login"
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     value={values.password}
                     name="password"
                     onBlur={handleBlur}
@@ -179,7 +179,7 @@ const AuthLogin = (props) => {
                 </Stack>
               </Grid>
 
-              <Grid item xs={12} sx={{mt: -1}}>
+              <Grid item xs={12} sx={{ mt: -1 }}>
                 <Stack
                   direction="row"
                   justifyContent="space-between"
@@ -246,18 +246,14 @@ const AuthLogin = (props) => {
   );
 };
 
-
 function mapDispatchToProps(dispatch) {
-    return {
-      dispatch,
-      onCleanup: () => dispatch(cleanMessage()),
-      onLogin: (data) => dispatch(login(data))
-    };
-  }
+  return {
+    dispatch,
+    onCleanup: () => dispatch(cleanMessage()),
+    onLogin: (data) => dispatch(login(data)),
+  };
+}
 
-const withConnect = connect(
-    null,
-    mapDispatchToProps,
-  );
+const withConnect = connect(null, mapDispatchToProps);
 
 export default compose(withConnect)(AuthLogin);

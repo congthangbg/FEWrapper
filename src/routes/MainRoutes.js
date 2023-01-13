@@ -4,6 +4,8 @@ import { lazy } from 'react';
 import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
 import Demo from 'pages/demo'
+import Thong_tin_app_ky from 'pages/Thong_tin_app_ky/thong_tin_app_ky';
+import Thong_tin_nguoi_dung from 'pages/Thong_tin_nguoi_dung/thong_tin_nguoi_dung';
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 
@@ -64,6 +66,16 @@ const MainRoutes = {
         {
             path: '/demo',
             element: <Demo />
+        },
+        {
+            path: '/thong_tin_app_ky',
+            // eslint-disable-next-line react/jsx-pascal-case
+            element: <Thong_tin_app_ky />
+        },
+        {
+            path: '/thong_tin_nguoi_dung',
+            // eslint-disable-next-line react/jsx-pascal-case
+            element: <Thong_tin_nguoi_dung />
         }
     ]
 };
