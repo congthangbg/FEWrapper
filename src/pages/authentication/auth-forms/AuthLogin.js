@@ -48,6 +48,8 @@ const AuthLogin = (props) => {
     setShowPassword(!showPassword);
   };
 
+  console.log('sssss');
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
