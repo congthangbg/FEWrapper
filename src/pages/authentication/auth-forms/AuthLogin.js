@@ -52,7 +52,6 @@ const AuthLogin = (props) => {
     event.preventDefault();
   };
 
-  console.log(loginStore);
   useEffect(() => {
     if (loginStore.isSuccess) {
       toastifyAlert.success(MESSAGE.SUCCES);
