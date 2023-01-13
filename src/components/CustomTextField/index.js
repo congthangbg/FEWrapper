@@ -1,8 +1,8 @@
-import React, {memo, useEffect} from "react";
-import PropTypes from "prop-types";
-import {TextField, InputAdornment,IconButton} from "@mui/material";
-import ClearIcon from "@mui/icons-material/Clear";
-import {useState} from "react";
+import React, { memo, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { TextField, InputAdornment, IconButton } from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear';
+import { useState } from 'react';
 
 function CustomTextField(props) {
   const {
@@ -24,21 +24,26 @@ function CustomTextField(props) {
   const [text, setText] = useState(value);
 
   const onClear = () => {
-    setText("")
-  }
+    setText('');
+  };
   useEffect(() => {
-    onChange && onChange(text)
-  }, [text])
-  
+    onChange && onChange(text);
+  }, [text]);
+
   return (
     <TextField
       label={label}
       size={size}
       onChange={(e) => setText(e.target.value)}
       InputProps={{
-        endAdornment:clearText && text && (
+        endAdornment: clearText && text && (
           <InputAdornment position="start">
-            <IconButton onClick={onClear} type="reset" sx={{ p: '10px' }} aria-label="search">
+            <IconButton
+              onClick={onClear}
+              type="reset"
+              sx={{ p: '10px' }}
+              aria-label="search"
+            >
               <ClearIcon />
             </IconButton>
           </InputAdornment>
@@ -52,7 +57,7 @@ function CustomTextField(props) {
       helperText={helperText}
       error={Boolean(errors)}
       value={text}
-      sx={{width: width}}
+      sx={{ width: width }}
       {...rest}
     />
   );
@@ -60,13 +65,13 @@ function CustomTextField(props) {
 export default memo(CustomTextField);
 
 CustomTextField.defaultProps = {
-  variant: "outlined",
-  margin: "dense",
-  size: "small",
+  variant: 'outlined',
+  margin: 'dense',
+  size: 'small',
   fullWidth: true,
-  value: "",
-  label:"Vui lòng nhập...",
-  width:300
+  value: '',
+  label: 'Vui lòng nhập...',
+  width: 300,
 };
 
 CustomTextField.propTypes = {
