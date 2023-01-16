@@ -5,11 +5,13 @@ import {
   Save,
 } from '../../../node_modules/@mui/icons-material/index';
 import {
+  Autocomplete,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  Grid,
   IconButton,
   Slide,
   Tooltip,
@@ -17,7 +19,11 @@ import {
 import makeStyles from '@mui/styles/makeStyles';
 import PropTypes from 'prop-types';
 import { createTheme } from '@mui/material/styles';
-
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { AutoComplete } from '../../../node_modules/antd/es/index';
+import AutocompleteCustomer from 'components/AutocompleteCustomer/index';
+import CustomTextField from 'components/CustomTextField/index';
 const theme = createTheme();
 
 const useStyles = makeStyles((theme) => ({
@@ -64,7 +70,7 @@ const Transition = React.forwardRef((props, ref) => (
   <Slide direction="up" ref={ref} {...props} />
 ));
 
-export function FormDialog(props) {
+export function FormView(props) {
   const {
     title,
     children,
@@ -128,11 +134,82 @@ export function FormDialog(props) {
           !disabledFlex ? { display: 'flex', flexDirection: 'column' } : {}
         }
       >
-        {children}
+        <Grid
+          container
+          sx={{
+            '& > :not(style)': { m: 1, width: '35ch' },
+          }}
+        >
+          <Grid item sx={6}>
+            <CustomTextField label="Tài khoản" />
+          </Grid>
+          <Grid item sx={6}>
+            <CustomTextField label="Tên người dùng" />
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          sx={{
+            '& > :not(style)': { m: 1, width: '35ch' },
+          }}
+        >
+          <Grid item sx={6}>
+            <CustomTextField label="Mã số  thuế" />
+          </Grid>
+          <Grid item sx={6}>
+            <CustomTextField label="CMND" />
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          sx={{
+            '& > :not(style)': { m: 1, width: '35ch' },
+          }}
+        >
+          <Grid item sx={6}>
+            <CustomTextField label="Loại khách hàng" />
+          </Grid>
+          <Grid item sx={6}>
+            <CustomTextField label="Trạng thái" />
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          sx={{
+            '& > :not(style)': { m: 1, width: '35ch' },
+          }}
+        >
+          <Grid item sx={6}>
+            <CustomTextField label="Số điện thoại" />
+          </Grid>
+          <Grid item sx={6}>
+            <CustomTextField label="Email" />
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          sx={{
+            '& > :not(style)': { m: 1, width: '35ch' },
+          }}
+        >
+          <Grid item sx={6}>
+            <CustomTextField label="Địa chỉ" />
+          </Grid>
+          <Grid item sx={6}>
+            <AutocompleteCustomer
+              textLabel="Trạng thái thay đổi mật khẩu đăng nhập lần đầu"
+              vd="outlined-basic"
+              error={false}
+              helperText=""
+              // optionLabel="firstName"
+              onChange={(e) => console.log(e)}
+            />
+          </Grid>
+        </Grid>
       </DialogContent>
       {dialogAction && (
         <DialogActions>
-          {onSave && (
+          {/* {onSave && (
             // checkHasPermission(currentUser, savePermission) &&
             <Button
               startIcon={<Save />}
@@ -144,7 +221,7 @@ export function FormDialog(props) {
             >
               {saveText}
             </Button>
-          )}
+          )} */}
           {/* {checkHasPermission(currentUser, closePermission) && ( */}
           <Button
             startIcon={<Cancel />}
@@ -163,7 +240,7 @@ export function FormDialog(props) {
   );
 }
 
-FormDialog.propTypes = {
+FormView.propTypes = {
   title: PropTypes.string,
   children: PropTypes.any,
   onClose: PropTypes.func,
@@ -182,7 +259,7 @@ FormDialog.propTypes = {
   closePermission: PropTypes.string,
 };
 
-FormDialog.defaultProps = {
+FormView.defaultProps = {
   maxWidth: 'md',
   saveText: 'Lưu lại',
   cancelText: 'Hủy',
@@ -190,4 +267,4 @@ FormDialog.defaultProps = {
   canSave: true,
 };
 
-export default FormDialog;
+export default FormView;

@@ -1,9 +1,9 @@
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
-import {makeStyles} from "@mui/styles";
-import {PropTypes} from "prop-types";
-import {memo, useEffect, useState} from "react";
-import {useStyles, useStylesComboBox} from "./../../utils/styles";
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import { makeStyles } from '@mui/styles';
+import { PropTypes } from 'prop-types';
+import { memo, useEffect, useState } from 'react';
+import { useStyles, useStylesComboBox } from './../../utils/styles';
 import { Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -22,8 +22,6 @@ function AutocompleteCustomer({
   value,
   ...rest
 }) {
-
-
   const classes = useStylesComboBox();
 
   const [data, setData] = useState(value);
@@ -43,12 +41,12 @@ function AutocompleteCustomer({
         id="size-small-outlined"
         options={options}
         onChange={(event, value) => onChangeValue(value)}
-        getOptionLabel={(option) => option[optionLabel] || ""}
+        getOptionLabel={(option) => option[optionLabel] || ''}
         renderInput={(params) => (
           <TextField
             {...params}
             margin="normal"
-            label={textLabel ? textLabel : "Label"}
+            label={textLabel ? textLabel : 'Label'}
             fullWidth
             error={Boolean(error)}
             helperText={helperText}
@@ -61,21 +59,21 @@ function AutocompleteCustomer({
         multiple={multiple}
         fullWidth
         classes={classes}
-        sx={{width: width}}
-        />
+        sx={{ width: width }}
+      />
     </Grid>
   );
 }
 AutocompleteCustomer.defaultProps = {
-  size: "small",
-  optionLabel: "name",
+  size: 'small',
+  optionLabel: 'name',
   required: false,
-  optionValue: "code",
-  textLabel: "Mời nhập thông tin",
+  optionValue: 'code',
+  textLabel: 'Mời nhập thông tin',
   multiple: false,
   options: [],
   value: null,
-  disabledLabel: "",
+  disabledLabel: '',
   disabled: false,
   endableSelectAll: false,
   disableClearable: false,

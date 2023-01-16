@@ -6,59 +6,34 @@ import MainCard from 'components/MainCard';
 import toastifyAlert from 'components/SnackBar/toastifyAlert';
 import DataTable from 'components/TableCustom/DataTable';
 import ComponentSkeleton from 'pages/components-overview/ComponentSkeleton';
-import FormDialog from 'pages/Thong_tin_nguoi_dung/FormDialog';
+// import FormDialog from 'pages/Thong_tin_nguoi_dung/FormDialog';
 import { memo, useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
 import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
-import FormView from './FormView';
 // import { Component} form '../'
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
 
-function thong_tin_nguoi_dung(props) {
-  const dataLogin = useSelector((state) => state.loginReducer);
-
+function quan_ly_thiet_bi(props) {
   let [open, setOpen] = useState(false);
-  let [view, setView] = useState(false);
-
   const a = 3;
 
   const columns = [
     { field: 'stt', headerName: 'STT', width: 100, alignCenter: 'center' },
     {
-      field: 'serID',
-      headerName: 'Tài Khoản',
+      field: 'device',
+      headerName: 'Mã thiết bị',
       width: 150,
       alignCenter: 'center',
     },
-    { field: 'userName', headerName: 'Tên Người Dùng', width: 200 },
-    { field: 'iDNo', headerName: 'CMND/Mã Số Thuế', width: 200 },
-    { field: 'status', headerName: 'Trạng Thái', width: 200 },
-    { field: 'phone', headerName: 'Số Điện Thoại', width: 200 },
-    {
-      field: 'email',
-      headerName: 'Email',
-      sortable: false,
-      flex: 1,
-      width: 0,
-    },
+    { field: 'platform', headerName: 'Loại thiết bị', width: 200 },
+    { field: 'userName', headerName: 'Tên người dùng', width: 200 },
   ];
 
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
+  const rows = [{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 }];
   const first = (second) => {
     console.log({ second });
     setOpen(true);
-    // toastifyAlert.success('Success');
+    toastifyAlert.success('Success');
   };
 
   const onEdit = useCallback((isClick) => {
@@ -66,20 +41,15 @@ function thong_tin_nguoi_dung(props) {
     setOpen(true);
   }, []);
 
-  const onView = useCallback((isClick) => {
-    console.log(isClick);
-    setView(true);
-  }, []);
-
   return (
     <>
       <ComponentSkeleton>
-        <MainCard title="Thông tin người dùng">
+        <MainCard title="Quản Lý Thiết Bị">
           <MainCard title="Thông tin tìm kiếm">
             <Grid container>
               <Grid item xs={3}>
                 <CustomTextField
-                  label="Tài khoản"
+                  label="Mã thiết bị"
                   clearText
                   onChange={(e) => console.log(e)}
                 />
@@ -87,7 +57,7 @@ function thong_tin_nguoi_dung(props) {
 
               <Grid item xs={3}>
                 <CustomTextField
-                  label="CMND/MST"
+                  label="Tên người dùng"
                   clearText
                   onChange={(e) => console.log(e)}
                 />
@@ -96,10 +66,10 @@ function thong_tin_nguoi_dung(props) {
               <Grid item xs={3}>
                 <AutocompleteCustomer
                   options={rows}
-                  textLabel="Trạng Thái"
+                  textLabel="Loại thiết bị"
                   error={false}
                   helperText=""
-                  // optionLabel="firstName"
+                  optionLabel="firstName"
                   onChange={(e) => console.log(e)}
                 />
               </Grid>
@@ -120,7 +90,7 @@ function thong_tin_nguoi_dung(props) {
         //Tách riêng từng cụm trắng
         <ComponentSkeleton>
           <MainCard
-            title="Danh sách người dùng"
+            title="Danh sách đấu nối"
             // onAdd={true}
             // addDisabled={true}
             // onClickAdd={onClickAdd}
@@ -130,35 +100,29 @@ function thong_tin_nguoi_dung(props) {
               <DataTable
                 rows={rows}
                 columns={columns}
-                checkBoxTable={false}
+                // checkBoxTable={false}
                 // onDelete={first}
-                onView={onView}
-                isAction={false}
-                onEdit={onEdit}
-                textAction="action"
+                // onEdit={onEdit}
+                // textAction="action"
+                // onView1={first}
+                // onDetail="ssssss"
               />
             </Grid>
           </MainCard>
         </ComponentSkeleton>
       )}
       {/* <ConfirmDialog isOpen={open} setIsOpen={setOpen} /> */}
-      <FormDialog
+      {/* <FormDialog
         open={open}
-        title="Cập nhật thông tin người dùng"
+        title="Chi Tiết Người Dùng"
         onClose={() => setOpen(false)}
         onSave={() => setOpen(false)}
-      />
-      <FormView
-        open={view}
-        title="Chi Tiết Người Dùng"
-        onClose={() => setView(false)}
-        onSave={() => setView(false)}
-      />
+      /> */}
       {/* <CustomizedSnackbars /> */}
     </>
   );
 }
 
-thong_tin_nguoi_dung.propTypes = {};
+quan_ly_thiet_bi.propTypes = {};
 
-export default memo(thong_tin_nguoi_dung);
+export default memo(quan_ly_thiet_bi);

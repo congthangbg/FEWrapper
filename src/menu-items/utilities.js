@@ -78,6 +78,14 @@ const utilities = {
       icon: icons.AntDesignOutlined,
       breadcrumbs: true,
     },
+    {
+      id: 'quan_ly_thiet_bi',
+      title: 'Quản Lý Thiết Bị',
+      type: 'item',
+      url: '/quan_ly_thiet_bi',
+      icon: icons.AntDesignOutlined,
+      breadcrumbs: true,
+    },
   ],
 };
 

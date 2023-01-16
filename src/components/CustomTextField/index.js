@@ -70,7 +70,7 @@ CustomTextField.defaultProps = {
   size: 'small',
   fullWidth: true,
   value: '',
-  label: 'Vui lòng nhập...',
+  // label: 'Vui lòng nhập...',
   width: 300,
 };
 
