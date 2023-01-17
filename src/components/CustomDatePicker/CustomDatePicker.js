@@ -1,11 +1,20 @@
-import { Stack, TextField } from "@mui/material";
-import { DesktopDatePicker } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import PropTypes from "prop-types";
-import { memo, useState } from "react";
+import { Stack, TextField } from '@mui/material';
+import { DesktopDatePicker } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import PropTypes from 'prop-types';
+import { memo, useState } from 'react';
 function CustomDatePicker(props) {
-  const {date, onChangeDate, width, helperText, error, title,disabled, ...rest} = props;
+  const {
+    date,
+    onChangeDate,
+    width,
+    helperText,
+    error,
+    title,
+    disabled,
+    ...rest
+  } = props;
 
   const [value, setValue] = useState(date);
 
@@ -17,19 +26,19 @@ function CustomDatePicker(props) {
   function handleClearDate() {
     setValue(null);
   }
-	const dateFormat = "YYYY-MM-DD";
+  const dateFormat = 'YYYY-MM-DD';
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Stack spacing={3} sx={{width: 300}} >
+        <Stack spacing={3} sx={{ width: 300 }}>
           <DesktopDatePicker
-            label={title ? title : "Chọn ngày"}
+            // label={title ? title : "Chọn ngày"}
             inputFormat="DD/MM/YYYY"
             value={value}
             onChange={handleChange}
             clearable
-						{...rest}
-						disabled={disabled}
+            {...rest}
+            disabled={disabled}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -50,7 +59,7 @@ function CustomDatePicker(props) {
               />
             )}
           />
-					{/* <DatePicker
+          {/* <DatePicker
       defaultValue={[
         moment("2015-01-01", dateFormat),
         moment("2015-01-01", dateFormat)
@@ -64,9 +73,9 @@ function CustomDatePicker(props) {
 }
 CustomDatePicker.defaultProps = {
   width: 300,
-  helperText: "",
+  helperText: '',
   error: false,
-	disabled:false
+  disabled: false,
 };
 CustomDatePicker.propTypes = {
   onChangeDate: PropTypes.func,

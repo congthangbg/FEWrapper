@@ -86,6 +86,30 @@ const utilities = {
       icon: icons.AntDesignOutlined,
       breadcrumbs: true,
     },
+    {
+      id: 'lich_su_nguoi_dung',
+      title: 'Lịch Sử Người Dùng',
+      type: 'item',
+      url: '/lich_su_nguoi_dung',
+      icon: icons.AntDesignOutlined,
+      breadcrumbs: true,
+    },
+    {
+      id: 'quan_ly_dau_noi',
+      title: 'Quản Lý Đầu Nối',
+      type: 'item',
+      url: '/quan_ly_dau_noi',
+      icon: icons.AntDesignOutlined,
+      breadcrumbs: true,
+    },
+    {
+      id: 'thong_so_cau_hinh',
+      title: 'Thông Số Cấu Hình',
+      type: 'item',
+      url: '/thong_so_cau_hinh',
+      icon: icons.AntDesignOutlined,
+      breadcrumbs: true,
+    },
   ],
 };
 
