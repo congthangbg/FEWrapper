@@ -10,6 +10,7 @@ import ComponentSkeleton from 'pages/components-overview/ComponentSkeleton';
 import { memo, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
+import { InfoApp } from './InfoApp';
 // import { Component} form '../'
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
@@ -114,11 +115,17 @@ function thong_tin_app_ky(props) {
         </ComponentSkeleton>
       )}
       {/* <ConfirmDialog isOpen={open} setIsOpen={setOpen} /> */}
-      <CustomDialog
+      {/* <CustomDialog
         open={open}
         title="Confirm"
         onClose={() => setOpen(false)}
         onSave={() => setOpen(false)}
+      /> */}
+      <InfoApp
+       open={open}
+       title="Confirm"
+       onClose={() => setOpen(false)}
+       onSave={() => setOpen(false)}
       />
       {/* <CustomizedSnackbars /> */}
     </>
