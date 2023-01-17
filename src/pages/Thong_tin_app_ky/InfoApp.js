@@ -1,21 +1,21 @@
-import {memo, useEffect, useState} from "react";
-import {connect} from "react-redux";
-import {compose} from "redux";
+import { memo, useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
-import PropTypes from "prop-types";
-import {styled} from "@mui/material/styles";
-import {Grid, FormControl, TextField} from "@mui/material";
-import {CustomDialog} from "./../../components/ConfirmDialog/CustomDialog";
-import CustomTextFieldNew from "components/CustomTextFieldNew/index";
-import CustomTextField from "components/CustomTextField/index";
-import AutocompleteCustomer from "components/AutocompleteCustomer/index";
-import { Autocomplete } from "../../../node_modules/@mui/material/index";
+import PropTypes from 'prop-types';
+import { styled } from '@mui/material/styles';
+import { Grid, FormControl, TextField } from '@mui/material';
+import { CustomDialog } from './../../components/ConfirmDialog/CustomDialog';
+import CustomTextFieldNew from 'components/CustomTextFieldNew/index';
+import CustomTextField from 'components/CustomTextField/index';
+import AutocompleteCustomer from 'components/AutocompleteCustomer/index';
+import { Autocomplete } from '../../../node_modules/@mui/material/index';
 
 const useStyles = styled((theme) => ({
   formControl: {
-    width: "100%",
-    "$MuiInputBase-input": {
-      textAlign: "center",
+    width: '100%',
+    '$MuiInputBase-input': {
+      textAlign: 'center',
     },
   },
 }));
@@ -44,11 +44,11 @@ export function InfoApp(props) {
   const enumStatus = [
     {
       id: 1,
-      name: "Kích hoạt",
+      name: 'Kích hoạt',
     },
     {
       id: 2,
-      name: "Chưa kích hoạt",
+      name: 'Chưa kích hoạt',
     },
   ];
   useEffect(() => {
@@ -80,7 +80,7 @@ export function InfoApp(props) {
   // }, [generalCategory])
 
   const handleChange = (e) => {
-    setData({...data, [e.target.name]: e.target.value});
+    setData({ ...data, [e.target.name]: e.target.value });
   };
   const handleSave = () => {
     onSave(data);
@@ -91,13 +91,13 @@ export function InfoApp(props) {
   }, [open]);
   const [items] = useState([
     {
-      id: "1",
-      label: "Hoạt động",
+      id: '1',
+      label: 'Hoạt động',
       //  value :'Hoạt động'
     },
     {
-      id: "2",
-      label: "Không hoạt động",
+      id: '2',
+      label: 'Không hoạt động',
       //  value: 'Không hoạt động'
     },
   ]);
@@ -110,7 +110,7 @@ export function InfoApp(props) {
     //   ...data,
     //   [name]: value
     // })
-    if (name == "status") {
+    if (name == 'status') {
       setData({
         ...data,
         [name]: value.id,
@@ -130,76 +130,99 @@ export function InfoApp(props) {
       onCancel={onClose}
       // className={classes.formControl}
     >
-      <Grid container spacing={2} ml={-0.7}>
+      <Grid container spacing={2} mt={2} ml={-0.7}>
         <Grid container xs={12} spacing={1}>
           <Grid item xs={6}>
             <CustomTextFieldNew
               id="outlined-basic"
-              label="Outlined"
+              label="Mã  App Ký"
               variant="outlined"
             />
           </Grid>
           <Grid item xs={6}>
             <CustomTextFieldNew
               id="outlined-basic"
-              label="Outlined"
-              variant="outlined"
-            />
-          </Grid>
-        </Grid>
-        <Grid container xs={12} spacing={1}>
-          <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
-              label="Outlined"
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
-              label="Outlined"
+              label="Danh Sách IP"
               variant="outlined"
             />
           </Grid>
         </Grid>
         <Grid container xs={12} spacing={1}>
-        <Grid  item xs={12}  >
-          <Autocomplete
-            className={classes.formControl}
-            id="size-small-outlined"
-            size="small"
-            options={enumStatus}
-            getOptionLabel={(option) => option.name}
-            defaultValue={enumStatus[1]}
-            renderInput={(params) => (
-              <TextField {...params} placeholder="Size Small" />
-            )}
-            // sx={{
-            //   "& .MuiOutlinedInput-root": {
-            //     p: 1,
-            //   },
-            //   "& .MuiAutocomplete-tag": {
-            //     bgcolor: "primary.lighter",
-            //     border: "1px solid",
-            //     borderColor: "primary.light",
-            //     "& .MuiSvgIcon-root": {
-            //       color: "primary.main",
-            //       "&:hover": {
-            //         color: "primary.dark",
-            //       },
-            //     },
-            //   },
-            // }}
-          />
+          <Grid item xs={6}>
+            <CustomTextFieldNew
+              id="outlined-basic"
+              label="Trạng Thái"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <CustomTextFieldNew
+              id="outlined-basic"
+              label="Mô Tả"
+              variant="outlined"
+            />
+          </Grid>
         </Grid>
+        <Grid container xs={12} spacing={1}>
+          <Grid item xs={6}>
+            <CustomTextFieldNew
+              id="outlined-basic"
+              label="Số Điện Thoại"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <CustomTextFieldNew
+              id="outlined-basic"
+              label="Email"
+              variant="outlined"
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+        <Grid container xs={12} spacing={1}>
+          <Grid item xs={6}>
+            <CustomTextFieldNew
+              id="outlined-basic"
+              label="Ngày Tạo"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <CustomTextFieldNew
+              id="outlined-basic"
+              label="Người Tạo"
+              variant="outlined"
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-        </Grid>
+        {/* <Grid container xs={12} spacing={1}>
+          <Grid item xs={6}>
+            <Autocomplete
+              className={classes.formControl}
+              id="size-small-outlined"
+              size="small"
+              options={enumStatus}
+              getOptionLabel={(option) => option.name}
+              defaultValue={enumStatus[1]}
+              renderInput={(params) => (
+                <TextField {...params} placeholder="Size Small" />
+              )}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Autocomplete
+              className={classes.formControl}
+              id="size-small-outlined"
+              size="small"
+              options={enumStatus}
+              getOptionLabel={(option) => option.name}
+              defaultValue={enumStatus[1]}
+              renderInput={(params) => (
+                <TextField {...params} placeholder="Size Small" />
+              )}
+            />
+          </Grid>
+        </Grid> */}
       </Grid>
     </CustomDialog>
   );

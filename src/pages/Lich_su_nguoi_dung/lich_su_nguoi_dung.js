@@ -70,7 +70,7 @@ function lich_su_nguoi_dung(props) {
       <ComponentSkeleton>
         <MainCard title="Lịch sử người dùng">
           <MainCard title="Thông tin tìm kiếm">
-            <Grid container spacing={2}>
+            <Grid container xs={12} spacing={1}>
               <Grid item xs={3}>
                 <CustomTextField
                   label="User"

@@ -1,274 +1,242 @@
-import React from 'react';
-import {
-  Cancel,
-  Close,
-  Save,
-} from '../../../node_modules/@mui/icons-material/index';
-import {
-  Autocomplete,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Grid,
-  IconButton,
-  Slide,
-  Tooltip,
-} from '../../../node_modules/@mui/material/index';
-import makeStyles from '@mui/styles/makeStyles';
+import { memo, useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+
 import PropTypes from 'prop-types';
-import { createTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { AutoComplete } from '../../../node_modules/antd/es/index';
-import AutocompleteCustomer from 'components/AutocompleteCustomer/index';
+import { styled } from '@mui/material/styles';
+import { Grid, FormControl, TextField } from '@mui/material';
+import { CustomDialog } from './../../components/ConfirmDialog/CustomDialog';
+import CustomTextFieldNew from 'components/CustomTextFieldNew/index';
 import CustomTextField from 'components/CustomTextField/index';
-const theme = createTheme();
+import AutocompleteCustomer from 'components/AutocompleteCustomer/index';
+import { Autocomplete } from '../../../node_modules/@mui/material/index';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: 6,
-  },
-  closeButton: {
-    position: 'absolute',
-    right: 3,
-    top: 3,
-    color: '#595959',
-  },
-  paperWidthLg: {
-    height: '852px',
-  },
-  paperWidthMd: {
-    height: '640px',
-  },
-  paperWidthSm: {
-    height: '296px',
+const useStyles = styled((theme) => ({
+  formControl: {
+    width: '100%',
+    '$MuiInputBase-input': {
+      textAlign: 'center',
+    },
   },
 }));
-
-const useStylesSm = makeStyles((theme) => ({
-  paperWidthSm: {
-    height: '400px',
-  },
-}));
-
-const useStylesMd = makeStyles((theme) => ({
-  paperWidthMd: {
-    height: '640px',
-  },
-}));
-
-const useStylesLg = makeStyles((theme) => ({
-  paperWidthLg: {
-    height: '852px',
-  },
-}));
-
-const Transition = React.forwardRef((props, ref) => (
-  <Slide direction="up" ref={ref} {...props} />
-));
 
 export function FormDialog(props) {
+  const classes = useStyles();
+
   const {
-    title,
-    children,
-    onClose,
+    assignPermission,
     open,
+    onClose,
     onSave,
-    canSave,
-    onCancel,
-    saveText,
-    cancelText,
-    maxWidth,
-    dialogAction,
-    extraAction,
-    disabledFlex,
+    title,
+    dataSample,
+    //onGetGeneralCategory
   } = props;
 
-  const classes = useStyles();
-  const smClasses = useStylesSm();
-  const mdClasses = useStylesMd();
-  const lgClasses = useStylesLg();
-  let dialogClasses = null;
-  if (maxWidth === 'sm') {
-    dialogClasses = smClasses;
-  } else if (maxWidth === 'md') {
-    dialogClasses = mdClasses;
-  } else if (maxWidth === 'lg') {
-    dialogClasses = lgClasses;
-  }
+  // const {
+  //   //generalCategory
+  // } = assignPermission;
+
+  const [data, setData] = useState({});
+  const [documentStatusCate, setDocumentStatusCate] = useState();
+
+  const [defaultStatus, setDefaultStatus] = useState();
+  const enumStatus = [
+    {
+      id: 1,
+      name: 'Kích hoạt',
+    },
+    {
+      id: 2,
+      name: 'Chưa kích hoạt',
+    },
+  ];
+  useEffect(() => {
+    if (dataSample) {
+      enumStatus.forEach((element) => {
+        if (element.id == dataSample.status) {
+          dataSample.status2 = element;
+        }
+      });
+
+      setData(dataSample);
+    } else {
+      setData();
+    }
+  }, [dataSample]);
+
+  // useEffect(() => {
+  //   onGetGeneralCategory();
+  // }, [])
+
+  // useEffect(() => {
+  //   if (generalCategory) {
+  //     setDocumentStatusCate(generalCategory.filter(x => x.code === 'DOC_BOOK_STATUS'));
+  //     setDefaultStatus(generalCategory.find(x => x.code === 'DOC_BOOK_STATUS').cCommons[0].id);
+  //     setData({
+  //       ...data, cateStatus: generalCategory.find(x => x.code === 'DOC_BOOK_STATUS').cCommons[0].id
+  //     })
+  //   }
+  // }, [generalCategory])
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+  const handleSave = () => {
+    onSave(data);
+  };
+
+  useEffect(() => {
+    if (!open) setData({});
+  }, [open]);
+  const [items] = useState([
+    {
+      id: '1',
+      label: 'Hoạt động',
+      //  value :'Hoạt động'
+    },
+    {
+      id: '2',
+      label: 'Không hoạt động',
+      //  value: 'Không hoạt động'
+    },
+  ]);
+  const handleChangeAuto = (name, value) => {
+    // setQuery({
+    //   ...query,
+    //   [name]: value !== null ? value.id : null
+    // });
+    // setData({
+    //   ...data,
+    //   [name]: value
+    // })
+    if (name == 'status') {
+      setData({
+        ...data,
+        [name]: value.id,
+        createdate: new Date(),
+        [name.concat(2)]: value,
+      });
+    }
+  };
 
   return (
-    <Dialog
-      TransitionComponent={Transition}
-      fullWidth
-      maxWidth={maxWidth}
-      onClose={onClose}
+    <CustomDialog
+      maxWidth="sm"
+      title={title}
       open={open}
-      classes={dialogClasses}
+      onSave={handleSave}
+      onClose={onClose}
+      onCancel={onClose}
+      // className={classes.formControl}
     >
-      {title && (
-        <DialogTitle id="alert-dialog-title" className={classes.root}>
-          {title}
-          {onClose && (
-            <Tooltip title="Đóng">
-              <IconButton
-                size="small"
-                aria-label="close"
-                onClick={onClose}
-                className={classes.closeButton}
-              >
-                <Close />
-              </IconButton>
-            </Tooltip>
-          )}
-        </DialogTitle>
-      )}
-
-      <DialogContent
-        dividers
-        className="dialog-content"
-        style={
-          !disabledFlex ? { display: 'flex', flexDirection: 'column' } : {}
-        }
-      >
-        <Grid
-          container
-          sx={{
-            '& > :not(style)': { m: 1, width: '35ch' },
-          }}
-        >
-          <Grid item sx={6}>
-            <CustomTextField label="Tài khoản" />
-          </Grid>
-          <Grid item sx={6}>
-            <CustomTextField label="Tên người dùng" />
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          sx={{
-            '& > :not(style)': { m: 1, width: '35ch' },
-          }}
-        >
-          <Grid item sx={6}>
-            <CustomTextField label="Mã số  thuế" />
-          </Grid>
-          <Grid item sx={6}>
-            <CustomTextField label="CMND" />
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          sx={{
-            '& > :not(style)': { m: 2, width: '35ch' },
-          }}
-        >
-          <Grid item sx={6}>
-            <AutocompleteCustomer
-              textLabel="Hoạt Động"
+      <Grid container spacing={2} ml={-0.7}>
+        <Grid container xs={12} spacing={1}>
+          <Grid item xs={6}>
+            <CustomTextFieldNew
               id="outlined-basic"
-              error={false}
-              helperText=""
-              // optionLabel="firstName"
-              onChange={(e) => console.log(e)}
+              label="Tài Khoản"
+              variant="outlined"
             />
           </Grid>
-          <Grid item sx={6}>
-            <AutocompleteCustomer
-              textLabel="Trạng Thái"
-              vd="outlined-basic"
-              error={false}
-              helperText=""
-              // optionLabel="firstName"
-              onChange={(e) => console.log(e)}
+          <Grid item xs={6}>
+            <CustomTextFieldNew
+              id="outlined-basic"
+              label="Tên Người Dùng"
+              variant="outlined"
             />
           </Grid>
         </Grid>
-        <Grid
-          container
-          sx={{
-            '& > :not(style)': { m: 1, width: '35ch' },
-          }}
-        >
-          <Grid item sx={6}>
-            <CustomTextField label="Số điện thoại" />
+        <Grid container xs={12} spacing={1}>
+          <Grid item xs={6}>
+            <CustomTextFieldNew
+              id="outlined-basic"
+              label="Mã Số Thuế"
+              variant="outlined"
+            />
           </Grid>
-          <Grid item sx={6}>
-            <CustomTextField label="Email" />
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          sx={{
-            '& > :not(style)': { m: 1, width: '35ch' },
-          }}
-        >
-          <Grid item sx={6}>
-            <CustomTextField label="Địa chỉ" />
+          <Grid item xs={6}>
+            <CustomTextFieldNew
+              id="outlined-basic"
+              label="CMND"
+              variant="outlined"
+            />
           </Grid>
         </Grid>
-      </DialogContent>
-      {dialogAction && (
-        <DialogActions>
-          {onSave && (
-            // checkHasPermission(currentUser, savePermission) &&
-            <Button
-              startIcon={<Save />}
+
+        <Grid container xs={12} spacing={1}>
+          <Grid item xs={6}>
+            <Autocomplete
+              className={classes.formControl}
+              id="size-small-outlined"
               size="small"
-              onClick={onSave}
-              disabled={!canSave}
-              color="primary"
-              variant="contained"
-            >
-              {saveText}
-            </Button>
-          )}
-          {/* {checkHasPermission(currentUser, closePermission) && ( */}
-          <Button
-            startIcon={<Cancel />}
-            size="small"
-            onClick={onCancel || onClose}
-            color="secondary"
-            variant="contained"
-          >
-            {cancelText}
-          </Button>
-          {/* )} */}
-          {extraAction}
-        </DialogActions>
-      )}
-    </Dialog>
+              options={enumStatus}
+              getOptionLabel={(option) => option.name}
+              // defaultValue={enumStatus[1]}
+              renderInput={(params) => (
+                <TextField {...params} placeholder="Loại Khách Hàng" />
+              )}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Autocomplete
+              className={classes.formControl}
+              id="size-small-outlined"
+              size="small"
+              options={enumStatus}
+              getOptionLabel={(option) => option.name}
+              // defaultValue={enumStatus[1]}
+              renderInput={(params) => (
+                <TextField {...params} placeholder="Trạng Thái" />
+              )}
+            />
+          </Grid>
+        </Grid>
+        <Grid container xs={12} spacing={1}>
+          <Grid item xs={6}>
+            <CustomTextFieldNew
+              id="outlined-basic"
+              label="Số Điện Thoại"
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <CustomTextFieldNew
+              id="outlined-basic"
+              label="Email"
+              variant="outlined"
+            />
+          </Grid>
+        </Grid>
+        <Grid container xs={12} spacing={1}>
+          <Grid item xs={6}>
+            <CustomTextFieldNew
+              id="outlined-basic"
+              label="Địa Chỉ"
+              variant="outlined"
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+    </CustomDialog>
   );
 }
 
-FormDialog.propTypes = {
-  title: PropTypes.string,
-  children: PropTypes.any,
+// eslint-disable-next-line react/no-typos
+FormDialog.PropTypes = {
   onClose: PropTypes.func,
-  open: PropTypes.bool,
   onSave: PropTypes.func,
-  onCancel: PropTypes.func,
-  saveText: PropTypes.string,
-  cancelText: PropTypes.string,
-  maxWidth: PropTypes.string,
-  dialogAction: PropTypes.bool,
-  canSave: PropTypes.bool,
-  extraAction: PropTypes.object,
-  disabledFlex: PropTypes.bool,
-  currentUser: PropTypes.object,
-  savePermission: PropTypes.string,
-  closePermission: PropTypes.string,
+  open: PropTypes.bool,
+  title: PropTypes.string,
+  assignPermission: PropTypes.array,
 };
 
-FormDialog.defaultProps = {
-  maxWidth: 'md',
-  saveText: 'Lưu lại',
-  cancelText: 'Hủy',
-  dialogAction: true,
-  canSave: true,
-};
+function mapDispatchToProps(dispatch) {
+  return {
+    // onGetGeneralCategory: query => dispatch(actions.getGeneralCategory(query)),
+  };
+}
 
-export default FormDialog;
+const withConnect = connect(null, mapDispatchToProps);
+
+export default compose(withConnect, memo)(FormDialog);
