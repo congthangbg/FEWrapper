@@ -59,7 +59,7 @@ function thong_tin_app_ky(props) {
         <MainCard title="Thông tin ứng dụng ký">
           <MainCard title="Thông tin tìm kiếm">
             <Grid container spacing={2}>
-              <Grid item xs={3}>
+              <Grid container item xs={3}>
                 <CustomTextField
                   label="Mã/Tên app ký"
                   clearText
@@ -67,7 +67,7 @@ function thong_tin_app_ky(props) {
                 />
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid container item xs={3}>
                 <AutocompleteCustomer
                   options={rows}
                   textLabel="Trạng Thái"
@@ -126,10 +126,10 @@ function thong_tin_app_ky(props) {
         onSave={() => setOpen(false)}
       /> */}
       <InfoApp
-       open={open}
-       title="Confirm"
-       onClose={() => setOpen(false)}
-       onSave={() => setOpen(false)}
+        open={open}
+        title="Chi tiết ứng dụng ký"
+        onClose={() => setOpen(false)}
+        onSave={() => setOpen(false)}
       />
       {/* <CustomizedSnackbars /> */}
     </>

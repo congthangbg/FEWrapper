@@ -4,10 +4,8 @@ import CustomDatePicker from 'components/CustomDatePicker/CustomDatePicker';
 import CustomTextField from 'components/CustomTextField/index';
 import Loading from 'components/Loading/index';
 import MainCard from 'components/MainCard';
-import toastifyAlert from 'components/SnackBar/toastifyAlert';
 import DataTable from 'components/TableCustom/DataTable';
 import ComponentSkeleton from 'pages/components-overview/ComponentSkeleton';
-import FormDialog from 'pages/Thong_tin_nguoi_dung/FormDialog';
 import { memo, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
@@ -28,7 +26,7 @@ function lich_su_nguoi_dung(props) {
     { field: 'stt', headerName: 'STT', width: 100, alignCenter: 'center' },
     {
       field: 'wp_Agency_ID',
-      headerName: 'ứng Dụng',
+      headerName: 'Ứng Dụng',
       width: 250,
       alignCenter: 'center',
     },
@@ -71,7 +69,7 @@ function lich_su_nguoi_dung(props) {
         <MainCard title="Lịch sử người dùng">
           <MainCard title="Thông tin tìm kiếm">
             <Grid container xs={12} spacing={1}>
-              <Grid item xs={3}>
+              <Grid container item xs={4}>
                 <CustomTextField
                   label="User"
                   clearText
@@ -79,15 +77,15 @@ function lich_su_nguoi_dung(props) {
                 />
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid container item xs={4} mt={0.9}>
                 <CustomDatePicker label="Thời gian (từ ngày)" />
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid container item xs={4} mt={0.9}>
                 <CustomDatePicker label="Thời gian (đến ngày)" />
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid container item xs={4} ml={1.1}>
                 <AutocompleteCustomer
                   options={rows}
                   textLabel="Trạng Thái"
@@ -98,7 +96,7 @@ function lich_su_nguoi_dung(props) {
                 />
               </Grid>
 
-              <Grid item xs={3} mt={2}>
+              <Grid item xs={4} mt={5}>
                 <ContainedButtons />
               </Grid>
             </Grid>

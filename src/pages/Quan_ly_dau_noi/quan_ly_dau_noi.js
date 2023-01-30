@@ -66,7 +66,7 @@ function quan_ly_dau_noi(props) {
         <MainCard title="Quản Lý Đầu Nối">
           <MainCard title="Thông tin tìm kiếm">
             <Grid container spacing={2}>
-              <Grid item xs={3}>
+              <Grid container item xs={3}>
                 <CustomTextField
                   label="Mã tham số"
                   clearText
@@ -74,7 +74,7 @@ function quan_ly_dau_noi(props) {
                 />
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid container item xs={3}>
                 <CustomTextField
                   label="Tên tham số"
                   clearText

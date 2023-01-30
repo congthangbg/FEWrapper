@@ -63,7 +63,7 @@ function thong_so_cau_hinh(props) {
         <MainCard title="Thông Số Cấu Hình">
           <MainCard title="Thông tin tìm kiếm">
             <Grid container spacing={2}>
-              <Grid item xs={3}>
+              <Grid container item xs={3}>
                 <CustomTextField
                   label="Mã tham số"
                   clearText
@@ -71,7 +71,7 @@ function thong_so_cau_hinh(props) {
                 />
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid container item xs={3}>
                 <CustomTextField
                   label="Tên tham số"
                   clearText

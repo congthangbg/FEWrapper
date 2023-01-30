@@ -32,29 +32,19 @@ function thong_tin_nguoi_dung(props) {
       alignCenter: 'center',
     },
     { field: 'userName', headerName: 'Tên Người Dùng', width: 200 },
-    { field: 'iDNo', headerName: 'CMND/Mã Số Thuế', width: 200 },
+    { field: 'iDNo', headerName: 'CMND/Mã Số Thuế', width: 150 },
     { field: 'status', headerName: 'Trạng Thái', width: 200 },
-    { field: 'phone', headerName: 'Số Điện Thoại', width: 200 },
+    { field: 'phone', headerName: 'Số Điện Thoại', width: 150 },
     {
       field: 'email',
       headerName: 'Email',
       sortable: false,
       flex: 1,
-      width: 0,
+      width: 100,
     },
   ];
 
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
+  const rows = [{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 }];
   const first = (second) => {
     console.log({ second });
     setOpen(true);
@@ -76,8 +66,8 @@ function thong_tin_nguoi_dung(props) {
       <ComponentSkeleton>
         <MainCard title="Thông tin người dùng">
           <MainCard title="Thông tin tìm kiếm">
-            <Grid container>
-              <Grid item xs={3}>
+            <Grid container xs={12} spacing={2}>
+              <Grid container item xs={3}>
                 <CustomTextField
                   label="Tài khoản"
                   clearText
@@ -85,7 +75,7 @@ function thong_tin_nguoi_dung(props) {
                 />
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid container item xs={3}>
                 <CustomTextField
                   label="CMND/MST"
                   clearText
@@ -93,7 +83,7 @@ function thong_tin_nguoi_dung(props) {
                 />
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid container item xs={3}>
                 <AutocompleteCustomer
                   options={rows}
                   textLabel="Trạng Thái"

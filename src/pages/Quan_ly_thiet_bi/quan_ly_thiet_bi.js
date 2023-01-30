@@ -46,8 +46,8 @@ function quan_ly_thiet_bi(props) {
       <ComponentSkeleton>
         <MainCard title="Quản Lý Thiết Bị">
           <MainCard title="Thông tin tìm kiếm">
-            <Grid container>
-              <Grid item xs={3}>
+            <Grid container xs={12} spacing={2}>
+              <Grid container item xs={3}>
                 <CustomTextField
                   label="Mã thiết bị"
                   clearText
@@ -55,7 +55,7 @@ function quan_ly_thiet_bi(props) {
                 />
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid container item xs={3}>
                 <CustomTextField
                   label="Tên người dùng"
                   clearText
@@ -63,7 +63,7 @@ function quan_ly_thiet_bi(props) {
                 />
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid container item xs={3}>
                 <AutocompleteCustomer
                   options={rows}
                   textLabel="Loại thiết bị"
