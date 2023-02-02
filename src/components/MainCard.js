@@ -101,7 +101,10 @@ const MainCard = forwardRef(
                   sx={{
                     display: 'flex',
                     justifyContent: 'flex-start',
-                    height:15
+                    height:15,
+                    alignItems: 'center',
+                    alignContent: 'center',
+                    marginTop:'auto'
                   }}
                   titleTypographyProps={{variant: "subtitle1"}}
                   title={title}
@@ -109,7 +112,7 @@ const MainCard = forwardRef(
                 />
                 {onAdd &&
                 <Tooltip disabled = {addDisabled ? true:false} size="small" title={titleAdd ? titleAdd : "Add"} onClick={handleClickAdd} aria-label="add">
-                  <Fab color="primary"  sx={{mr:5,mt:1}}>
+                  <Fab color="primary" size="small"  sx={{mr:5}}>
                     <AddIcon />
                   </Fab>
                 </Tooltip>

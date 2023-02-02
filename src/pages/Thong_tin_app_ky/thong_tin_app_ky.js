@@ -97,10 +97,12 @@ function thong_tin_app_ky(props) {
         <ComponentSkeleton>
           <MainCard
             title="Danh sách ứng dụng ký"
-            // onAdd={true}
+            onAdd={true}
             // addDisabled={true}
             // onClickAdd={onClickAdd}
             // titleAdd="Thêm mới"
+            content={true}
+            contentSX={5000}
           >
             <Grid item xs={12} md={7} lg={8}>
               <DataTable
