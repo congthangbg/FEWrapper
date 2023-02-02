@@ -1,48 +1,48 @@
-import { Box, Grid } from '@mui/material';
-import AutocompleteCustomer from 'components/AutocompleteCustomer/index';
-import CustomDialog from 'components/ConfirmDialog/CustomDialog';
-import CustomTextField from 'components/CustomTextField/index';
-import Loading from 'components/Loading/index';
-import MainCard from 'components/MainCard';
-import toastifyAlert from 'components/SnackBar/toastifyAlert';
-import DataTable from 'components/TableCustom/DataTable';
-import ComponentSkeleton from 'pages/components-overview/ComponentSkeleton';
-import { memo, useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
-import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
-import { InfoApp } from './InfoApp';
+import {Box, Grid, TextField} from "@mui/material";
+import AutocompleteCustomer from "components/AutocompleteCustomer/index";
+import CustomDialog from "components/ConfirmDialog/CustomDialog";
+import CustomTextField from "components/CustomTextField/index";
+import Loading from "components/Loading/index";
+import MainCard from "components/MainCard";
+import toastifyAlert from "components/SnackBar/toastifyAlert";
+import DataTable from "components/TableCustom/DataTable";
+import ComponentSkeleton from "pages/components-overview/ComponentSkeleton";
+import {memo, useCallback, useState} from "react";
+import {useSelector} from "react-redux";
+import ContainedButtons from "../../components/ContainedButtons/ContainedButtons";
+import {InfoApp} from "./InfoApp";
 // import { Component} form '../'
-// 1: rows = Danh sách data
-// 2: checkBoxTable = checkBoxTable
+import {Autocomplete} from "@mui/material";
+import { useStylesComboBox } from "utils/styles";
 
 function thong_tin_app_ky(props) {
   const dataLogin = useSelector((state) => state.loginReducer);
-  console.log({ dataLogin });
-
+  console.log({dataLogin});
+  const classes = useStylesComboBox();
   let [open, setOpen] = useState(false);
   const a = 3;
 
   const columns = [
-    { field: 'stt', headerName: 'STT', width: 100, alignCenter: 'center' },
+    {field: "stt", headerName: "STT", width: 100, alignCenter: "center"},
     {
-      field: 'appcode',
-      headerName: 'Mã app ký',
+      field: "appcode",
+      headerName: "Mã app ký",
       width: 150,
-      alignCenter: 'center',
+      alignCenter: "center",
     },
-    { field: 'nameappky', headerName: 'Tên app ký', width: 200 },
+    {field: "nameappky", headerName: "Tên app ký", width: 200},
     {
-      field: 'status',
-      headerName: 'Trạng thái',
+      field: "status",
+      headerName: "Trạng thái",
       sortable: false,
       flex: 1,
       width: 160,
     },
   ];
 
-  const rows = [{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 }];
+  const rows = [{id: 1, lastName: "Snow", firstName: "Jon", age: 35}];
   const first = (second) => {
-    console.log({ second });
+    console.log({second});
     setOpen(true);
     // toastifyAlert.success('Success');
   };
@@ -55,42 +55,46 @@ function thong_tin_app_ky(props) {
   return (
     <>
       <ComponentSkeleton>
-        <MainCard title="Thông tin ứng dụng ký">
-          <MainCard title="Thông tin tìm kiếm">
-            <Grid container spacing={2}>
-              <Grid container item xs={3}>
-                <CustomTextField
-                  label="Mã/Tên app ký"
-                  clearText
-                  onChange={(e) => console.log(e)}
-                />
-              </Grid>
+        <MainCard title="Tìm kiếm ứng dụng ký">
+          {/* <MainCard title="Thông tin tìm kiếm"> */}
+          <Grid container spacing={1}>
+            <Grid item xs={3}>
+              <TextField
+                fullWidth
+                size="small"
+                id="outlined-basic"
+                label="Outlined"
+              />
+            </Grid>
 
-              <Grid container item xs={3}>
-                <AutocompleteCustomer
-                  options={rows}
-                  textLabel="Trạng Thái"
-                  error={false}
-                  helperText=""
-                  optionLabel="firstName"
-                  onChange={(e) => console.log(e)}
-                />
-              </Grid>
+            <Grid item xs={3}>
+              <Autocomplete
+                id="size-small-outlined"
+                size="small"
+                options={columns}
+                getOptionLabel={(option) => option.headerName}
+                defaultValue={columns[0]}
+                renderInput={(params) => (
+                  <TextField {...params} placeholder="Size Small" />
+                )}
+                classes={classes}
+              />
+            </Grid>
 
-              <Grid item xs={3} mt={1}>
-                <ContainedButtons />
-              </Grid>
+            <Grid item xs={3}>
+              <ContainedButtons />
+            </Grid>
 
-              {/* <Grid item xs={4}>
+            {/* <Grid item xs={4}>
               <CustomDatePicker />
             </Grid> */}
-            </Grid>
-          </MainCard>
+          </Grid>
+          {/* </MainCard> */}
         </MainCard>
       </ComponentSkeleton>
       <br />
       {a == 2 ? (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{display: "flex"}}>
           <Loading />
         </Box>
       ) : (

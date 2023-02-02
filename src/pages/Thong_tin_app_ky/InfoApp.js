@@ -122,7 +122,7 @@ export function InfoApp(props) {
 
   return (
     <CustomDialog
-      maxWidth="sm"
+      maxWidth="sm1"
       title={title}
       open={open}
       onSave={handleSave}
@@ -130,8 +130,8 @@ export function InfoApp(props) {
       onCancel={onClose}
       // className={classes.formControl}
     >
-      <Grid container spacing={0.5} mt={2} ml={-0.7}>
-        <Grid container xs={12} spacing={1}>
+      <Grid container spacing={0} mt={-1}  >
+        {/* <Grid container xs={12} spacing={1}> */}
           <Grid item xs={6}>
             <CustomTextFieldNew
               id="outlined-basic"
@@ -223,7 +223,7 @@ export function InfoApp(props) {
             />
           </Grid>
         </Grid> */}
-      </Grid>
+      {/* </Grid> */}
     </CustomDialog>
   );
 }

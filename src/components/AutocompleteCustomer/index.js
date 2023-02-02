@@ -51,6 +51,7 @@ function AutocompleteCustomer({
             error={Boolean(error)}
             helperText={helperText}
             size={size}
+           
           />
         )}
         size={size}

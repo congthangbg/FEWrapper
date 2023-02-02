@@ -101,6 +101,7 @@ const MainCard = forwardRef(
                   sx={{
                     display: 'flex',
                     justifyContent: 'flex-start',
+                    height:15
                   }}
                   titleTypographyProps={{variant: "subtitle1"}}
                   title={title}

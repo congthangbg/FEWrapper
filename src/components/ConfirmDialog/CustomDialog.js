@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
   paperWidthSm: {
     height: '296px',
   },
+  paperWidthSm1: {
+    height: '296px',
+  },
 }));
 
 const useStylesSm = makeStyles(theme => ({
@@ -34,6 +37,13 @@ const useStylesSm = makeStyles(theme => ({
     height: '400px',
   },
 }));
+const useStylesSm1 = makeStyles(theme => ({
+  paperWidthSm1: {
+    height: '320px',
+    width:'650px'
+  },
+}));
+
 
 const useStylesMd = makeStyles(theme => ({
   paperWidthMd: {
@@ -70,6 +80,7 @@ export function CustomDialog(props) {
 
   const classes = useStyles();
   const smClasses = useStylesSm();
+  const smClasses1 = useStylesSm1();
   const mdClasses = useStylesMd();
   const lgClasses = useStylesLg();
   let dialogClasses = null;
@@ -79,6 +90,8 @@ export function CustomDialog(props) {
     dialogClasses = mdClasses;
   } else if (maxWidth === 'lg') {
     dialogClasses = lgClasses;
+  } else if (maxWidth === 'sm1') {
+    dialogClasses = smClasses1;
   }
 
   return (

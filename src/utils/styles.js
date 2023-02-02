@@ -50,16 +50,16 @@ export  const useStyles = makeStyles(theme => ({
 
 
 export const useStylesComboBox = makeStyles(theme => ({
-  // clearIndicator: {
-  //   marginTop: -4
-  // },
-  // popupIndicator:{
-  //   marginTop: -4,
-  //   marginRight:-8,
-  // },
-  // inputRoot: {
-  //   height: `2.2rem`
-  // },
+  clearIndicator: {
+    marginTop: -4
+  },
+  popupIndicator:{
+    marginTop: -4,
+    marginRight:-8,
+  },
+  inputRoot: {
+    height: `2.2rem`
+  },
  
 }))
 export default useStyles;
