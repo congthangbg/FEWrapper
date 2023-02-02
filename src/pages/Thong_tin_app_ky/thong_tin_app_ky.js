@@ -102,7 +102,7 @@ function thong_tin_app_ky(props) {
             // onClickAdd={onClickAdd}
             // titleAdd="Thêm mới"
             content={true}
-            contentSX={5000}
+            // contentSX={5000}
           >
             <Grid item xs={12} md={7} lg={8}>
               <DataTable
@@ -110,8 +110,9 @@ function thong_tin_app_ky(props) {
                 columns={columns}
                 checkBoxTable={false}
                 onEdit={first}
-                //   onDelete={first}
-                textAction="action"
+                  onDelete={first}
+                  onView ={first}
+                textAction="Hành động"
                 size={5}
               />
             </Grid>

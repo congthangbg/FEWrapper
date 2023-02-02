@@ -51,10 +51,9 @@ import { useEffect } from 'react';
 // ];
 
 export default function DataTable(props) {
-  const { rows, columns, checkBoxTable, onEdit, onDelete, onView, size } =
+  const { rows, columns, checkBoxTable, onEdit, onDelete, onView, textAction } =
     props;
   const styles = useStyles();
-  console.log(props);
   const onEditData = React.useCallback(
     (id) => () => {
       onEdit && onEdit(id);
@@ -79,7 +78,7 @@ export default function DataTable(props) {
   const onAction = () => {
     return {
       field: 'action',
-      headerName: 'Action',
+      headerName: textAction ? textAction :"Action",
       type: 'actions',
       width: "100px",
       sortable: false,
@@ -88,9 +87,21 @@ export default function DataTable(props) {
       renderCell: (params) => {
         return (
           <>
+           {onView && (
+              <Button
+                style={{ minWidth: 10}}
+                variant="outlined"
+                color="warning"
+                size="small"
+                onClick={onViewData(params.row)}
+                // startIcon={<EditIcon />}
+              >
+                <VisibilityIcon size="small" />
+              </Button>
+            )}
             {onEdit && (
               <Button
-                style={{ minWidth: 10 }}
+                style={{ minWidth: 10 ,marginLeft: 2 }}
                 variant="outlined"
                 color="warning"
                 size="small"
@@ -103,7 +114,7 @@ export default function DataTable(props) {
 
             {onDelete && (
               <Button
-                style={{ minWidth: 30 }}
+                style={{ minWidth: 30 ,marginLeft: 2}}
                 variant="outlined"
                 color="error"
                 size="small"
@@ -112,18 +123,7 @@ export default function DataTable(props) {
                 <DeleteIcon />
               </Button>
             )}
-            {onView && (
-              <Button
-                style={{ minWidth: 10 }}
-                variant="outlined"
-                color="warning"
-                size="small"
-                onClick={onViewData(params.row)}
-                // startIcon={<EditIcon />}
-              >
-                <VisibilityIcon size="small" />
-              </Button>
-            )}
+           
           </>
         );
       },
@@ -170,7 +170,7 @@ DataTable.propTypes = {
   checkBoxTable: PropTypes.bool,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
-  onView1: PropTypes.func,
+  onView: PropTypes.func,
 };
 
 DataTable.defaultProps = {
