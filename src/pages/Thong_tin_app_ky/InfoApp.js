@@ -11,17 +11,17 @@ import CustomTextField from 'components/CustomTextField/index';
 import AutocompleteCustomer from 'components/AutocompleteCustomer/index';
 import { Autocomplete } from '../../../node_modules/@mui/material/index';
 
-const useStyles = styled((theme) => ({
-  formControl: {
-    width: '100%',
-    '$MuiInputBase-input': {
-      textAlign: 'center',
-    },
-  },
-}));
+// const useStyles = styled((theme) => ({
+//   formControl: {
+//     width: '100%',
+//     '$MuiInputBase-input': {
+//       textAlign: 'center',
+//     },
+//   },
+// }));
 
 export function InfoApp(props) {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const {
     assignPermission,
@@ -130,7 +130,7 @@ export function InfoApp(props) {
       onCancel={onClose}
       // className={classes.formControl}
     >
-      <Grid container spacing={0} mt={-1}  >
+      <Grid container spacing={1} mt={-2}   >
         {/* <Grid container xs={12} spacing={1}> */}
           <Grid item xs={6}>
             <CustomTextFieldNew
@@ -146,8 +146,8 @@ export function InfoApp(props) {
               variant="outlined"
             />
           </Grid>
-        </Grid>
-        <Grid container xs={12} spacing={1}>
+        {/* </Grid> */}
+        {/* <Grid container xs={12} spacing={1}> */}
           <Grid item xs={6}>
             <CustomTextFieldNew
               id="outlined-basic"
@@ -162,8 +162,8 @@ export function InfoApp(props) {
               variant="outlined"
             />
           </Grid>
-        </Grid>
-        <Grid container xs={12} spacing={1}>
+        {/* </Grid> */}
+        {/* <Grid container xs={12} spacing={1}> */}
           <Grid item xs={6}>
             <CustomTextFieldNew
               id="outlined-basic"
@@ -177,9 +177,9 @@ export function InfoApp(props) {
               label="Email"
               variant="outlined"
             />
-          </Grid>
+          {/* </Grid> */}
         </Grid>
-        <Grid container xs={12} spacing={1}>
+         {/* <Grid container xs={12} spacing={1}> */}
           <Grid item xs={6}>
             <CustomTextFieldNew
               id="outlined-basic"
@@ -229,7 +229,7 @@ export function InfoApp(props) {
 }
 
 // eslint-disable-next-line react/no-typos
-InfoApp.PropTypes = {
+InfoApp.propTypes = {
   onClose: PropTypes.func,
   onSave: PropTypes.func,
   open: PropTypes.bool,

@@ -1,18 +1,13 @@
-import {Box, Grid, TextField} from "@mui/material";
-import AutocompleteCustomer from "components/AutocompleteCustomer/index";
-import CustomDialog from "components/ConfirmDialog/CustomDialog";
-import CustomTextField from "components/CustomTextField/index";
+import { Box, Grid, TextField } from "@mui/material";
 import Loading from "components/Loading/index";
 import MainCard from "components/MainCard";
-import toastifyAlert from "components/SnackBar/toastifyAlert";
 import DataTable from "components/TableCustom/DataTable";
 import ComponentSkeleton from "pages/components-overview/ComponentSkeleton";
-import {memo, useCallback, useState} from "react";
-import {useSelector} from "react-redux";
+import { memo, useState } from "react";
+import { useSelector } from "react-redux";
 import ContainedButtons from "../../components/ContainedButtons/ContainedButtons";
-import {InfoApp} from "./InfoApp";
-// import { Component} form '../'
-import {Autocomplete} from "@mui/material";
+import { InfoApp } from "./InfoApp";
+import { Autocomplete } from "@mui/material";
 import { useStylesComboBox } from "utils/styles";
 
 function thong_tin_app_ky(props) {
@@ -23,16 +18,16 @@ function thong_tin_app_ky(props) {
   const a = 3;
 
   const columns = [
-    {field: "stt", headerName: "STT", width: 100, alignCenter: "center"},
+    {field: "id", headerName: "STT", width: 100, alignCenter: "center"},
     {
-      field: "appcode",
+      field: "lastName",
       headerName: "Mã app ký",
       width: 150,
       alignCenter: "center",
     },
-    {field: "nameappky", headerName: "Tên app ký", width: 200},
+    {field: "firstName", headerName: "Tên app ký", width: 200},
     {
-      field: "status",
+      field: "age",
       headerName: "Trạng thái",
       sortable: false,
       flex: 1,
@@ -40,7 +35,7 @@ function thong_tin_app_ky(props) {
     },
   ];
 
-  const rows = [{id: 1, lastName: "Snow", firstName: "Jon", age: 35}];
+  const rows = [{id: 1, lastName: "Snow", firstName: "Jon", age: "35"}];
   const first = (second) => {
     console.log({second});
     setOpen(true);
@@ -57,7 +52,7 @@ function thong_tin_app_ky(props) {
       <ComponentSkeleton>
         <MainCard title="Tìm kiếm ứng dụng ký">
           {/* <MainCard title="Thông tin tìm kiếm"> */}
-          <Grid container spacing={1}>
+          <Grid container spacing={2}>
             <Grid item xs={3}>
               <TextField
                 fullWidth
@@ -115,6 +110,7 @@ function thong_tin_app_ky(props) {
                 onEdit={first}
                 //   onDelete={first}
                 textAction="action"
+                size={5}
               />
             </Grid>
           </MainCard>
@@ -139,6 +135,8 @@ function thong_tin_app_ky(props) {
   );
 }
 
-thong_tin_app_ky.propTypes = {};
+thong_tin_app_ky.propTypes  = {
+
+};
 
 export default memo(thong_tin_app_ky);

@@ -1,11 +1,9 @@
+import { Grid } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { makeStyles } from '@mui/styles';
 import { PropTypes } from 'prop-types';
 import { memo, useEffect, useState } from 'react';
-import { useStyles, useStylesComboBox } from './../../utils/styles';
-import { Grid } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { useStylesComboBox } from './../../utils/styles';
 
 function AutocompleteCustomer({
   textLabel,

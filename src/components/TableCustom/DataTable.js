@@ -51,7 +51,7 @@ import { useEffect } from 'react';
 // ];
 
 export default function DataTable(props) {
-  const { rows, columns, checkBoxTable, onEdit, onDelete, onView, isAction } =
+  const { rows, columns, checkBoxTable, onEdit, onDelete, onView, size } =
     props;
   const styles = useStyles();
   console.log(props);
@@ -81,7 +81,7 @@ export default function DataTable(props) {
       field: 'action',
       headerName: 'Action',
       type: 'actions',
-      width: 100,
+      width: "100px",
       sortable: false,
       // disableClickEventBubbling: true,
       flex: 0.2,
@@ -166,7 +166,7 @@ export default function DataTable(props) {
 }
 DataTable.propTypes = {
   classes: PropTypes.object,
-  size: PropTypes.number,
+  size: PropTypes.any,
   checkBoxTable: PropTypes.bool,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
