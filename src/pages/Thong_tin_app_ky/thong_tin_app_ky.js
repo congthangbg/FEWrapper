@@ -11,7 +11,6 @@ import { memo, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
 import { InfoApp } from './InfoApp';
-import FormView from './FormView';
 // import { Component} form '../'
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
