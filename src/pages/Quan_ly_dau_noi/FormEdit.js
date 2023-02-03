@@ -122,7 +122,7 @@ export function FormEdit(props) {
 
   return (
     <CustomDialog
-      maxWidth="sm"
+      maxWidth="sm2"
       title={title}
       open={open}
       onSave={handleSave}

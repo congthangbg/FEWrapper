@@ -10,6 +10,7 @@ import { memo, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
 import FormView from './FormView';
+import { TextField, Autocomplete } from '@mui/material';
 // import { Component} form '../'
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
@@ -66,44 +67,49 @@ function lich_su_nguoi_dung(props) {
   return (
     <>
       <ComponentSkeleton>
-        <MainCard title="Lịch sử người dùng">
-          <MainCard title="Thông tin tìm kiếm">
-            <Grid container xs={12} spacing={1}>
-              <Grid container item xs={4}>
-                <CustomTextField
-                  label="User"
-                  clearText
-                  onChange={(e) => console.log(e)}
-                />
-              </Grid>
-
-              <Grid container item xs={4} mt={0.9}>
-                <CustomDatePicker label="Thời gian (từ ngày)" />
-              </Grid>
-
-              <Grid container item xs={4} mt={0.9}>
-                <CustomDatePicker label="Thời gian (đến ngày)" />
-              </Grid>
-
-              <Grid container item xs={4} ml={1.1}>
-                <AutocompleteCustomer
-                  options={rows}
-                  textLabel="Trạng Thái"
-                  error={false}
-                  helperText=""
-                  // optionLabel="firstName"
-                  onChange={(e) => console.log(e)}
-                />
-              </Grid>
-
-              <Grid item xs={4} mt={5}>
-                <ContainedButtons />
-              </Grid>
+        <MainCard title="Tìm kiếm lịch sử người dùng">
+          {/* <MainCard title="Thông tin tìm kiếm"> */}
+          <Grid container xs={10} spacing={1}>
+            <Grid item xs={2} mt={1}>
+              <TextField
+                fullWidth
+                size="small"
+                id="outlined-basic"
+                label="Mã/Tên app ký"
+                clearText
+                onChange={(e) => console.log(e)}
+              />
             </Grid>
-          </MainCard>
+
+            <Grid container item xs={2} mt={0.9}>
+              <CustomDatePicker label="Thời gian (từ ngày)" />
+            </Grid>
+
+            <Grid container item xs={2} mt={0.9}>
+              <CustomDatePicker label="Thời gian (đến ngày)" />
+            </Grid>
+
+            <Grid item xs={2} mt={1}>
+              <Autocomplete
+                id="size-small-outlined"
+                size="small"
+                options={columns}
+                getOptionLabel={(option) => option.headerName}
+                defaultValue={columns[0]}
+                renderInput={(params) => (
+                  <TextField {...params} placeholder="Trạng Thái" />
+                )}
+                // classes={classes}
+              />
+            </Grid>
+
+            <Grid item xs={2} mt={1.05}>
+              <ContainedButtons />
+            </Grid>
+          </Grid>
         </MainCard>
+        {/* </MainCard> */}
       </ComponentSkeleton>
-      <br />
       {a == 2 ? (
         <Box sx={{ display: 'flex' }}>
           <Loading />

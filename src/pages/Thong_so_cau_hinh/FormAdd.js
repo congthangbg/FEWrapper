@@ -122,7 +122,7 @@ export function FormAdd(props) {
 
   return (
     <CustomDialog
-      maxWidth="sm"
+      maxWidth="sm2"
       title={title}
       open={open}
       onSave={handleSave}

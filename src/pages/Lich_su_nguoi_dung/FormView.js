@@ -122,7 +122,7 @@ export function FormView(props) {
 
   return (
     <CustomDialog
-      maxWidth="sm"
+      maxWidth="sm1"
       title={title}
       open={open}
       onSave={handleSave}

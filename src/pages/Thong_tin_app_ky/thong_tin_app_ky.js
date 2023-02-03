@@ -1,43 +1,43 @@
-import { Box, Grid, TextField } from "@mui/material";
-import Loading from "components/Loading/index";
-import MainCard from "components/MainCard";
-import DataTable from "components/TableCustom/DataTable";
-import ComponentSkeleton from "pages/components-overview/ComponentSkeleton";
-import { memo, useState } from "react";
-import { useSelector } from "react-redux";
-import ContainedButtons from "../../components/ContainedButtons/ContainedButtons";
-import { InfoApp } from "./InfoApp";
-import { Autocomplete } from "@mui/material";
-import { useStylesComboBox } from "utils/styles";
+import { Box, Grid, TextField } from '@mui/material';
+import Loading from 'components/Loading/index';
+import MainCard from 'components/MainCard';
+import DataTable from 'components/TableCustom/DataTable';
+import ComponentSkeleton from 'pages/components-overview/ComponentSkeleton';
+import { memo, useState } from 'react';
+import { useSelector } from 'react-redux';
+import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
+import { InfoApp } from './InfoApp';
+import { Autocomplete } from '@mui/material';
+import { useStylesComboBox } from 'utils/styles';
 
 function thong_tin_app_ky(props) {
   const dataLogin = useSelector((state) => state.loginReducer);
-  console.log({dataLogin});
+  console.log({ dataLogin });
   const classes = useStylesComboBox();
   let [open, setOpen] = useState(false);
   const a = 3;
 
   const columns = [
-    {field: "id", headerName: "STT", width: 100, alignCenter: "center"},
+    { field: 'id', headerName: 'STT', width: 100, alignCenter: 'center' },
     {
-      field: "lastName",
-      headerName: "Mã app ký",
+      field: 'appcode',
+      headerName: 'Mã app ký',
       width: 150,
-      alignCenter: "center",
+      alignCenter: 'center',
     },
-    {field: "firstName", headerName: "Tên app ký", width: 200},
+    { field: 'firstName', headerName: 'Tên app ký', width: 200 },
     {
-      field: "age",
-      headerName: "Trạng thái",
+      field: 'age',
+      headerName: 'Trạng thái',
       sortable: false,
       flex: 1,
       width: 160,
     },
   ];
 
-  const rows = [{id: 1, lastName: "Snow", firstName: "Jon", age: "35"}];
+  const rows = [{ id: 1, appcode: '01021', firstName: 'Jon', age: '35' }];
   const first = (second) => {
-    console.log({second});
+    console.log({ second });
     setOpen(true);
     // toastifyAlert.success('Success');
   };
@@ -58,7 +58,9 @@ function thong_tin_app_ky(props) {
                 fullWidth
                 size="small"
                 id="outlined-basic"
-                label="Outlined"
+                label="Mã/Tên app ký"
+                clearText
+                onChange={(e) => console.log(e)}
               />
             </Grid>
 
@@ -70,7 +72,7 @@ function thong_tin_app_ky(props) {
                 getOptionLabel={(option) => option.headerName}
                 defaultValue={columns[0]}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Size Small" />
+                  <TextField {...params} placeholder="Trạng Thái" />
                 )}
                 classes={classes}
               />
@@ -87,9 +89,9 @@ function thong_tin_app_ky(props) {
           {/* </MainCard> */}
         </MainCard>
       </ComponentSkeleton>
-      <br />
+
       {a == 2 ? (
-        <Box sx={{display: "flex"}}>
+        <Box sx={{ display: 'flex' }}>
           <Loading />
         </Box>
       ) : (
@@ -97,7 +99,7 @@ function thong_tin_app_ky(props) {
         <ComponentSkeleton>
           <MainCard
             title="Danh sách ứng dụng ký"
-            onAdd={true}
+            // onAdd={true}
             // addDisabled={true}
             // onClickAdd={onClickAdd}
             // titleAdd="Thêm mới"
@@ -110,8 +112,8 @@ function thong_tin_app_ky(props) {
                 columns={columns}
                 checkBoxTable={false}
                 onEdit={first}
-                  onDelete={first}
-                  onView ={first}
+                onDelete={first}
+                onView={first}
                 textAction="Hành động"
                 size={5}
               />
@@ -138,8 +140,6 @@ function thong_tin_app_ky(props) {
   );
 }
 
-thong_tin_app_ky.propTypes  = {
-
-};
+thong_tin_app_ky.propTypes = {};
 
 export default memo(thong_tin_app_ky);

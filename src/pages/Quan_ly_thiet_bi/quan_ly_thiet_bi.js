@@ -44,44 +44,44 @@ function quan_ly_thiet_bi(props) {
   return (
     <>
       <ComponentSkeleton>
-        <MainCard title="Quản Lý Thiết Bị">
-          <MainCard title="Thông tin tìm kiếm">
-            <Grid container xs={12} spacing={2}>
-              <Grid container item xs={3}>
-                <CustomTextField
-                  label="Mã thiết bị"
-                  clearText
-                  onChange={(e) => console.log(e)}
-                />
-              </Grid>
-
-              <Grid container item xs={3}>
-                <CustomTextField
-                  label="Tên người dùng"
-                  clearText
-                  onChange={(e) => console.log(e)}
-                />
-              </Grid>
-
-              <Grid container item xs={3}>
-                <AutocompleteCustomer
-                  options={rows}
-                  textLabel="Loại thiết bị"
-                  error={false}
-                  helperText=""
-                  optionLabel="firstName"
-                  onChange={(e) => console.log(e)}
-                />
-              </Grid>
-
-              <Grid item xs={3} mt={1}>
-                <ContainedButtons />
-              </Grid>
+        <MainCard title="Tìm kiếm thiết bị">
+          {/* <MainCard title="Thông tin tìm kiếm"> */}
+          <Grid container xs={12} spacing={2}>
+            <Grid container item xs={3}>
+              <CustomTextField
+                label="Mã thiết bị"
+                clearText
+                onChange={(e) => console.log(e)}
+              />
             </Grid>
-          </MainCard>
+
+            <Grid container item xs={3}>
+              <CustomTextField
+                label="Tên người dùng"
+                clearText
+                onChange={(e) => console.log(e)}
+              />
+            </Grid>
+
+            <Grid container item xs={3}>
+              <AutocompleteCustomer
+                options={rows}
+                textLabel="Loại thiết bị"
+                error={false}
+                helperText=""
+                optionLabel="firstName"
+                onChange={(e) => console.log(e)}
+              />
+            </Grid>
+
+            <Grid item xs={3} mt={1}>
+              <ContainedButtons />
+            </Grid>
+          </Grid>
         </MainCard>
+        {/* </MainCard> */}
       </ComponentSkeleton>
-      <br />
+
       {a == 2 ? (
         <Box sx={{ display: 'flex' }}>
           <Loading />

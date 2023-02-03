@@ -71,7 +71,7 @@ CustomTextField.defaultProps = {
   fullWidth: true,
   value: '',
   // label: 'Vui lòng nhập...',
-  width: "100%",
+  width: '300',
 };
 
 CustomTextField.propTypes = {

@@ -60,37 +60,37 @@ function thong_so_cau_hinh(props) {
   return (
     <>
       <ComponentSkeleton>
-        <MainCard title="Thông Số Cấu Hình">
-          <MainCard title="Thông tin tìm kiếm">
-            <Grid container spacing={2}>
-              <Grid container item xs={3}>
-                <CustomTextField
-                  label="Mã tham số"
-                  clearText
-                  onChange={(e) => console.log(e)}
-                />
-              </Grid>
+        <MainCard title="Tìm kiếm thông số cấu hình">
+          {/* <MainCard title="Thông tin tìm kiếm"> */}
+          <Grid container spacing={2}>
+            <Grid container item xs={3}>
+              <CustomTextField
+                label="Mã tham số"
+                clearText
+                onChange={(e) => console.log(e)}
+              />
+            </Grid>
 
-              <Grid container item xs={3}>
-                <CustomTextField
-                  label="Tên tham số"
-                  clearText
-                  onChange={(e) => console.log(e)}
-                />
-              </Grid>
+            <Grid container item xs={3}>
+              <CustomTextField
+                label="Tên tham số"
+                clearText
+                onChange={(e) => console.log(e)}
+              />
+            </Grid>
 
-              <Grid item xs={3} mt={1}>
-                <ContainedButtons />
-              </Grid>
+            <Grid item xs={3} mt={1}>
+              <ContainedButtons />
+            </Grid>
 
-              {/* <Grid item xs={4}>
+            {/* <Grid item xs={4}>
               <CustomDatePicker />
             </Grid> */}
-            </Grid>
-          </MainCard>
+          </Grid>
         </MainCard>
+        {/* </MainCard> */}
       </ComponentSkeleton>
-      <br />
+
       {a === 2 ? (
         <Box sx={{ display: 'flex' }}>
           <Loading />

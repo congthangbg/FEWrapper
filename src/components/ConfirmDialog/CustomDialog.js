@@ -1,22 +1,35 @@
 import React from 'react';
-import { Cancel, Close, Save } from '../../../node_modules/@mui/icons-material/index';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Slide, Tooltip } from '../../../node_modules/@mui/material/index';
+import {
+  Cancel,
+  Close,
+  Save,
+} from '../../../node_modules/@mui/icons-material/index';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  Slide,
+  Tooltip,
+} from '../../../node_modules/@mui/material/index';
 import makeStyles from '@mui/styles/makeStyles';
 import PropTypes from 'prop-types';
-import {createTheme} from "@mui/material/styles";
+import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme();
 
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: 0,
-    padding: 6
+    padding: 6,
   },
   closeButton: {
     position: 'absolute',
     right: 3,
     top: 3,
-    color: "#595959",
+    color: '#595959',
   },
   paperWidthLg: {
     height: '852px',
@@ -30,28 +43,37 @@ const useStyles = makeStyles((theme) => ({
   paperWidthSm1: {
     height: '296px',
   },
-}));
-
-const useStylesSm = makeStyles(theme => ({
-  paperWidthSm: {
-    height: '400px',
+  paperWidthSm2: {
+    height: '296px',
   },
 }));
-const useStylesSm1 = makeStyles(theme => ({
+
+const useStylesSm = makeStyles((theme) => ({
+  paperWidthSm: {
+    height: '350px',
+    width: '630px',
+  },
+}));
+const useStylesSm1 = makeStyles((theme) => ({
   paperWidthSm1: {
     height: '320px',
-    width:'650px'
+    width: '650px',
+  },
+}));
+const useStylesSm2 = makeStyles((theme) => ({
+  paperWidthSm2: {
+    height: '280px',
+    width: '650px',
   },
 }));
 
-
-const useStylesMd = makeStyles(theme => ({
+const useStylesMd = makeStyles((theme) => ({
   paperWidthMd: {
     height: '640px',
   },
 }));
 
-const useStylesLg = makeStyles(theme => ({
+const useStylesLg = makeStyles((theme) => ({
   paperWidthLg: {
     height: '852px',
   },
@@ -81,6 +103,7 @@ export function CustomDialog(props) {
   const classes = useStyles();
   const smClasses = useStylesSm();
   const smClasses1 = useStylesSm1();
+  const smClasses2 = useStylesSm2();
   const mdClasses = useStylesMd();
   const lgClasses = useStylesLg();
   let dialogClasses = null;
@@ -92,6 +115,8 @@ export function CustomDialog(props) {
     dialogClasses = lgClasses;
   } else if (maxWidth === 'sm1') {
     dialogClasses = smClasses1;
+  } else if (maxWidth === 'sm2') {
+    dialogClasses = smClasses2;
   }
 
   return (

@@ -63,37 +63,37 @@ function quan_ly_dau_noi(props) {
   return (
     <>
       <ComponentSkeleton>
-        <MainCard title="Quản Lý Đầu Nối">
-          <MainCard title="Thông tin tìm kiếm">
-            <Grid container spacing={2}>
-              <Grid container item xs={3}>
-                <CustomTextField
-                  label="Mã tham số"
-                  clearText
-                  onChange={(e) => console.log(e)}
-                />
-              </Grid>
+        <MainCard title="Tìm kiếm đầu nối">
+          {/* <MainCard title="Thông tin tìm kiếm"> */}
+          <Grid container spacing={2}>
+            <Grid container item xs={3}>
+              <CustomTextField
+                label="Mã tham số"
+                clearText
+                onChange={(e) => console.log(e)}
+              />
+            </Grid>
 
-              <Grid container item xs={3}>
-                <CustomTextField
-                  label="Tên tham số"
-                  clearText
-                  onChange={(e) => console.log(e)}
-                />
-              </Grid>
+            <Grid container item xs={3}>
+              <CustomTextField
+                label="Tên tham số"
+                clearText
+                onChange={(e) => console.log(e)}
+              />
+            </Grid>
 
-              <Grid item xs={3} mt={1}>
-                <ContainedButtons />
-              </Grid>
+            <Grid item xs={3} mt={1}>
+              <ContainedButtons />
+            </Grid>
 
-              {/* <Grid item xs={4}>
+            {/* <Grid item xs={4}>
               <CustomDatePicker />
             </Grid> */}
-            </Grid>
-          </MainCard>
+          </Grid>
         </MainCard>
+        {/* </MainCard> */}
       </ComponentSkeleton>
-      <br />
+
       {a === 2 ? (
         <Box sx={{ display: 'flex' }}>
           <Loading />

@@ -24,7 +24,7 @@ function thong_tin_nguoi_dung(props) {
   const a = 3;
 
   const columns = [
-    { field: 'stt', headerName: 'STT', width: 100, alignCenter: 'center' },
+    { field: 'id', headerName: 'STT', width: 100, alignCenter: 'center' },
     {
       field: 'serID',
       headerName: 'Tài Khoản',
@@ -40,7 +40,7 @@ function thong_tin_nguoi_dung(props) {
       headerName: 'Email',
       sortable: false,
       flex: 1,
-      width: 100,
+      width: 160,
     },
   ];
 
@@ -64,44 +64,43 @@ function thong_tin_nguoi_dung(props) {
   return (
     <>
       <ComponentSkeleton>
-        <MainCard title="Thông tin người dùng">
-          <MainCard title="Thông tin tìm kiếm">
-            <Grid container xs={12} spacing={2}>
-              <Grid container item xs={3}>
-                <CustomTextField
-                  label="Tài khoản"
-                  clearText
-                  onChange={(e) => console.log(e)}
-                />
-              </Grid>
-
-              <Grid container item xs={3}>
-                <CustomTextField
-                  label="CMND/MST"
-                  clearText
-                  onChange={(e) => console.log(e)}
-                />
-              </Grid>
-
-              <Grid container item xs={3}>
-                <AutocompleteCustomer
-                  options={rows}
-                  textLabel="Trạng Thái"
-                  error={false}
-                  helperText=""
-                  // optionLabel="firstName"
-                  onChange={(e) => console.log(e)}
-                />
-              </Grid>
-
-              <Grid item xs={3} mt={1}>
-                <ContainedButtons />
-              </Grid>
+        <MainCard title="Tìm kiếm người dùng">
+          {/* <MainCard title="Thông tin tìm kiếm"> */}
+          <Grid container xs={12} spacing={2}>
+            <Grid container item xs={3}>
+              <CustomTextField
+                label="Tài khoản"
+                clearText
+                onChange={(e) => console.log(e)}
+              />
             </Grid>
-          </MainCard>
+
+            <Grid container item xs={3}>
+              <CustomTextField
+                label="CMND/MST"
+                clearText
+                onChange={(e) => console.log(e)}
+              />
+            </Grid>
+
+            <Grid container item xs={3}>
+              <AutocompleteCustomer
+                options={rows}
+                textLabel="Trạng Thái"
+                error={false}
+                helperText=""
+                // optionLabel="firstName"
+                onChange={(e) => console.log(e)}
+              />
+            </Grid>
+
+            <Grid item xs={3} mt={1}>
+              <ContainedButtons />
+            </Grid>
+          </Grid>
         </MainCard>
+        {/* </MainCard> */}
       </ComponentSkeleton>
-      <br />
       {a == 2 ? (
         <Box sx={{ display: 'flex' }}>
           <Loading />
