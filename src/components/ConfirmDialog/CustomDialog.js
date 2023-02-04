@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
 const useStylesSm = makeStyles((theme) => ({
   paperWidthSm: {
-    height: '350px',
+    // height: '350px',
     width: '630px',
   },
 }));

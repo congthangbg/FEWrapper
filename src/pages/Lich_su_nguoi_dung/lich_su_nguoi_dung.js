@@ -1,13 +1,10 @@
 import { Box, Grid } from '@mui/material';
-import AutocompleteCustomer from 'components/AutocompleteCustomer/index';
 import CustomDatePicker from 'components/CustomDatePicker/CustomDatePicker';
-import CustomTextField from 'components/CustomTextField/index';
 import Loading from 'components/Loading/index';
 import MainCard from 'components/MainCard';
 import DataTable from 'components/TableCustom/DataTable';
 import ComponentSkeleton from 'pages/components-overview/ComponentSkeleton';
 import { memo, useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
 import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
 import FormView from './FormView';
 import { TextField, Autocomplete } from '@mui/material';
@@ -16,9 +13,6 @@ import { TextField, Autocomplete } from '@mui/material';
 // 2: checkBoxTable = checkBoxTable
 
 function lich_su_nguoi_dung(props) {
-  const dataLogin = useSelector((state) => state.loginReducer);
-
-  let [open, setOpen] = useState(false);
   let [view, setView] = useState(false);
 
   const a = 3;
@@ -48,16 +42,6 @@ function lich_su_nguoi_dung(props) {
     { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
     { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
   ];
-  const first = (second) => {
-    console.log({ second });
-    setOpen(true);
-    // toastifyAlert.success('Success');
-  };
-
-  const onEdit = useCallback((isClick) => {
-    console.log(isClick);
-    setOpen(true);
-  }, []);
 
   const onView = useCallback((isClick) => {
     console.log(isClick);
@@ -76,7 +60,6 @@ function lich_su_nguoi_dung(props) {
                 size="small"
                 id="outlined-basic"
                 label="Mã/Tên app ký"
-                clearText
                 onChange={(e) => console.log(e)}
               />
             </Grid>
@@ -109,8 +92,9 @@ function lich_su_nguoi_dung(props) {
           </Grid>
         </MainCard>
         {/* </MainCard> */}
+        <br />
       </ComponentSkeleton>
-      {a == 2 ? (
+      {a === 2 ? (
         <Box sx={{ display: 'flex' }}>
           <Loading />
         </Box>
@@ -133,7 +117,7 @@ function lich_su_nguoi_dung(props) {
                 onView={onView}
                 isAction={false}
                 // onEdit={onEdit}
-                textAction="action"
+                // textAction="action"
               />
             </Grid>
           </MainCard>

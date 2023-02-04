@@ -78,18 +78,18 @@ export default function DataTable(props) {
   const onAction = () => {
     return {
       field: 'action',
-      headerName: textAction ? textAction :"Action",
+      headerName: textAction ? textAction : 'Hành Động',
       type: 'actions',
-      width: "100px",
+      width: '100px',
       sortable: false,
       // disableClickEventBubbling: true,
       flex: 0.2,
       renderCell: (params) => {
         return (
           <>
-           {onView && (
+            {onView && (
               <Button
-                style={{ minWidth: 10}}
+                style={{ minWidth: 10 }}
                 variant="outlined"
                 color="warning"
                 size="small"
@@ -101,7 +101,7 @@ export default function DataTable(props) {
             )}
             {onEdit && (
               <Button
-                style={{ minWidth: 10 ,marginLeft: 2 }}
+                style={{ minWidth: 10, marginLeft: 2 }}
                 variant="outlined"
                 color="warning"
                 size="small"
@@ -114,7 +114,7 @@ export default function DataTable(props) {
 
             {onDelete && (
               <Button
-                style={{ minWidth: 30 ,marginLeft: 2}}
+                style={{ minWidth: 30, marginLeft: 2 }}
                 variant="outlined"
                 color="error"
                 size="small"
@@ -123,7 +123,6 @@ export default function DataTable(props) {
                 <DeleteIcon />
               </Button>
             )}
-           
           </>
         );
       },

@@ -110,6 +110,14 @@ const utilities = {
       icon: icons.AntDesignOutlined,
       breadcrumbs: true,
     },
+    {
+      id: 'lich_su_thao_tac',
+      title: 'Lịch Sử Thao Tác',
+      type: 'item',
+      url: '/lich_su_thao_tac',
+      icon: icons.AntDesignOutlined,
+      breadcrumbs: true,
+    },
   ],
 };
 

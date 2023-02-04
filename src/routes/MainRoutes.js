@@ -10,6 +10,7 @@ import Quan_ly_thiet_bi from 'pages/Quan_ly_thiet_bi/quan_ly_thiet_bi';
 import Lich_su_nguoi_dung from 'pages/Lich_su_nguoi_dung/lich_su_nguoi_dung';
 import Quan_ly_dau_noi from 'pages/Quan_ly_dau_noi/quan_ly_dau_noi';
 import Thong_so_cau_hinh from 'pages/Thong_so_cau_hinh/thong_so_cau_hinh';
+import Lich_su_thao_tac from 'pages/Lich_su_thao_tac/lich_su_thao_tac';
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 
@@ -104,6 +105,11 @@ const MainRoutes = {
       path: '/thong_so_cau_hinh',
       // eslint-disable-next-line react/jsx-pascal-case
       element: <Thong_so_cau_hinh />,
+    },
+    {
+      path: '/lich_su_thao_tac',
+      // eslint-disable-next-line react/jsx-pascal-case
+      element: <Lich_su_thao_tac />,
     },
   ],
 };

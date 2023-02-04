@@ -125,7 +125,7 @@ export function FormView(props) {
       maxWidth="sm"
       title={title}
       open={open}
-      onSave={handleSave}
+      // onSave={handleSave}
       onClose={onClose}
       onCancel={onClose}
       // className={classes.formControl}
@@ -229,8 +229,8 @@ export function FormView(props) {
 // eslint-disable-next-line react/no-typos
 FormView.PropTypes = {
   onClose: PropTypes.func,
-  onSave: PropTypes.func,
-  open: PropTypes.bool,
+  // onSave: PropTypes.func,
+  // open: PropTypes.bool,
   title: PropTypes.string,
   assignPermission: PropTypes.array,
 };

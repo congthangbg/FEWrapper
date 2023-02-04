@@ -18,7 +18,7 @@ function thong_tin_app_ky(props) {
   const a = 3;
 
   const columns = [
-    { field: 'id', headerName: 'STT', width: 100, alignCenter: 'center' },
+    // { field: 'id', headerName: 'STT', width: 100, alignCenter: 'center' },
     {
       field: 'appcode',
       headerName: 'Mã app ký',
@@ -59,7 +59,6 @@ function thong_tin_app_ky(props) {
                 size="small"
                 id="outlined-basic"
                 label="Mã/Tên app ký"
-                clearText
                 onChange={(e) => console.log(e)}
               />
             </Grid>
@@ -90,7 +89,7 @@ function thong_tin_app_ky(props) {
         </MainCard>
       </ComponentSkeleton>
 
-      {a == 2 ? (
+      {a === 2 ? (
         <Box sx={{ display: 'flex' }}>
           <Loading />
         </Box>
@@ -121,7 +120,6 @@ function thong_tin_app_ky(props) {
           </MainCard>
         </ComponentSkeleton>
       )}
-      {/* <ConfirmDialog isOpen={open} setIsOpen={setOpen} /> */}
       {/* <CustomDialog
       <FormView
         open={open}

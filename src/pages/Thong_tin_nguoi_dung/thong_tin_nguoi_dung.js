@@ -1,9 +1,7 @@
-import { Box, Grid } from '@mui/material';
-import AutocompleteCustomer from 'components/AutocompleteCustomer/index';
-import CustomTextField from 'components/CustomTextField/index';
+import { Box, Grid, TextField } from '@mui/material';
+import { Autocomplete } from '@mui/material';
 import Loading from 'components/Loading/index';
 import MainCard from 'components/MainCard';
-import toastifyAlert from 'components/SnackBar/toastifyAlert';
 import DataTable from 'components/TableCustom/DataTable';
 import ComponentSkeleton from 'pages/components-overview/ComponentSkeleton';
 import FormDialog from 'pages/Thong_tin_nguoi_dung/FormDialog';
@@ -11,13 +9,15 @@ import { memo, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
 import FormView from './FormView';
+import { useStylesComboBox } from 'utils/styles';
 // import { Component} form '../'
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
 
 function thong_tin_nguoi_dung(props) {
   const dataLogin = useSelector((state) => state.loginReducer);
-
+  console.log({ dataLogin });
+  const classes = useStylesComboBox();
   let [open, setOpen] = useState(false);
   let [view, setView] = useState(false);
 
@@ -44,12 +44,22 @@ function thong_tin_nguoi_dung(props) {
     },
   ];
 
-  const rows = [{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 }];
-  const first = (second) => {
-    console.log({ second });
-    setOpen(true);
-    // toastifyAlert.success('Success');
-  };
+  const rows = [
+    {
+      id: 1,
+      serID: 'Snow',
+      userName: 'Jon',
+      iDNo: 35545,
+      status: 'Duyệt',
+      phone: '0384829738',
+      email: 'nttung.code@gmail.com',
+    },
+  ];
+  // const first = (second) => {
+  //   console.log({ second });
+  //   setOpen(true);
+  //   // toastifyAlert.success('Success');
+  // };
 
   const onEdit = useCallback((isClick) => {
     console.log(isClick);
@@ -66,42 +76,49 @@ function thong_tin_nguoi_dung(props) {
       <ComponentSkeleton>
         <MainCard title="Tìm kiếm người dùng">
           {/* <MainCard title="Thông tin tìm kiếm"> */}
-          <Grid container xs={12} spacing={2}>
-            <Grid container item xs={3}>
-              <CustomTextField
-                label="Tài khoản"
-                clearText
+          <Grid container spacing={2}>
+            <Grid item xs={3}>
+              <TextField
+                fullWidth
+                size="small"
+                id="outlined-basic"
+                label="Tài Khoản"
                 onChange={(e) => console.log(e)}
               />
             </Grid>
 
-            <Grid container item xs={3}>
-              <CustomTextField
+            <Grid item xs={3}>
+              <TextField
+                fullWidth
+                size="small"
+                id="outlined-basic"
                 label="CMND/MST"
-                clearText
                 onChange={(e) => console.log(e)}
               />
             </Grid>
 
-            <Grid container item xs={3}>
-              <AutocompleteCustomer
-                options={rows}
-                textLabel="Trạng Thái"
-                error={false}
-                helperText=""
-                // optionLabel="firstName"
-                onChange={(e) => console.log(e)}
+            <Grid item xs={3}>
+            <Autocomplete
+                id="size-small-outlined"
+                size="small"
+                options={columns}
+                getOptionLabel={(option) => option.headerName}
+                defaultValue={columns[0]}
+                renderInput={(params) => (
+                  <TextField {...params} placeholder="Trạng Thái" />
+                )}
+                classes={classes}
               />
             </Grid>
 
-            <Grid item xs={3} mt={1}>
+            <Grid item xs={3}>
               <ContainedButtons />
             </Grid>
           </Grid>
         </MainCard>
         {/* </MainCard> */}
       </ComponentSkeleton>
-      {a == 2 ? (
+      {a === 2 ? (
         <Box sx={{ display: 'flex' }}>
           <Loading />
         </Box>
@@ -124,7 +141,8 @@ function thong_tin_nguoi_dung(props) {
                 onView={onView}
                 isAction={false}
                 onEdit={onEdit}
-                textAction="action"
+                textAction="Hành động"
+                size={5}
               />
             </Grid>
           </MainCard>
@@ -141,7 +159,7 @@ function thong_tin_nguoi_dung(props) {
         open={view}
         title="Chi Tiết Người Dùng"
         onClose={() => setView(false)}
-        onSave={() => setView(false)}
+        // onSave={() => setView(false)}
       />
       {/* <CustomizedSnackbars /> */}
     </>

@@ -1,229 +1,198 @@
-import { memo, useEffect, useState } from 'react';
+import { memo } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import PropTypes from 'prop-types';
-import { styled } from '@mui/material/styles';
-import { Grid, FormControl, TextField } from '@mui/material';
+import { Grid, TextField } from '@mui/material';
 import { CustomDialog } from './../../components/ConfirmDialog/CustomDialog';
-import CustomTextFieldNew from 'components/CustomTextFieldNew/index';
-import CustomTextField from 'components/CustomTextField/index';
-import AutocompleteCustomer from 'components/AutocompleteCustomer/index';
-import { Autocomplete } from '../../../node_modules/@mui/material/index';
-
-// const useStyles = styled((theme) => ({
-//   formControl: {
-//     width: '100%',
-//     '$MuiInputBase-input': {
-//       textAlign: 'center',
-//     },
-//   },
-// }));
 
 export function InfoApp(props) {
-  // const classes = useStyles();
+  const { title, onClose, open, dataEdit } = props;
 
-  const {
-    assignPermission,
-    open,
-    onClose,
-    onSave,
-    title,
-    dataSample,
-    //onGetGeneralCategory
-  } = props;
+  // const [data, setData] = useState({});
 
-  // const {
-  //   //generalCategory
-  // } = assignPermission;
-
-  const [data, setData] = useState({});
-  const [documentStatusCate, setDocumentStatusCate] = useState();
-
-  const [defaultStatus, setDefaultStatus] = useState();
-  const enumStatus = [
-    {
-      id: 1,
-      name: 'Kích hoạt',
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      // id: dataEdit ? dataEdit.id : '',
+      appcode: dataEdit ? dataEdit.appcode : '',
+      ipwhitelist: dataEdit ? dataEdit.ipwhitelist : '',
+      status: dataEdit ? dataEdit.status : '',
+      appDescription: dataEdit ? dataEdit.appDescription : '',
+      phone: dataEdit ? dataEdit.phone : '',
+      email: dataEdit ? dataEdit.email : '',
+      createDate: dataEdit ? dataEdit.createDate : '',
+      createBy: dataEdit ? dataEdit.createBy : '',
     },
-    {
-      id: 2,
-      name: 'Chưa kích hoạt',
+    validationSchema: Yup.object({
+      appcode: Yup.string().max(255).trim().required('Chưa Nhập Tên'),
+      ipwhitelist: Yup.string().max(255).trim().required('Chưa Nhập Danh Sách'),
+      status: Yup.string().max(255).trim().required('Chưa Nhập Trạng Thái'),
+      appDescription: Yup.string().max(255).trim().required('Chưa Nhập Mô Tả'),
+      phone: Yup.string()
+        .min(10, 'PHONE.MIN')
+        .max(10, 'PHONE.MAX')
+        .required('Chưa Nhập Số Điện Thoại'),
+      email: Yup.string().max(255).trim().required('Chưa Nhập Email'),
+      createDate: Yup.string().max(255).trim().required('Chưa Click Ngày Tạo'),
+      createBy: Yup.string().max(255).trim().required('Chưa Click Người Tạo'),
+    }),
+    onSubmit: (values, { resetForm }) => {
+      // onSave();
+      console.log(values);
     },
-  ];
-  useEffect(() => {
-    if (dataSample) {
-      enumStatus.forEach((element) => {
-        if (element.id == dataSample.status) {
-          dataSample.status2 = element;
-        }
-      });
+  });
 
-      setData(dataSample);
-    } else {
-      setData();
-    }
-  }, [dataSample]);
-
-  // useEffect(() => {
-  //   onGetGeneralCategory();
-  // }, [])
-
-  // useEffect(() => {
-  //   if (generalCategory) {
-  //     setDocumentStatusCate(generalCategory.filter(x => x.code === 'DOC_BOOK_STATUS'));
-  //     setDefaultStatus(generalCategory.find(x => x.code === 'DOC_BOOK_STATUS').cCommons[0].id);
-  //     setData({
-  //       ...data, cateStatus: generalCategory.find(x => x.code === 'DOC_BOOK_STATUS').cCommons[0].id
-  //     })
-  //   }
-  // }, [generalCategory])
-
-  const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
   const handleSave = () => {
-    onSave(data);
+    // onSave(data);
+    console.log(formik.values);
+    formik.resetForm();
   };
-
-  useEffect(() => {
-    if (!open) setData({});
-  }, [open]);
-  const [items] = useState([
-    {
-      id: '1',
-      label: 'Hoạt động',
-      //  value :'Hoạt động'
-    },
-    {
-      id: '2',
-      label: 'Không hoạt động',
-      //  value: 'Không hoạt động'
-    },
-  ]);
-  const handleChangeAuto = (name, value) => {
-    // setQuery({
-    //   ...query,
-    //   [name]: value !== null ? value.id : null
-    // });
-    // setData({
-    //   ...data,
-    //   [name]: value
-    // })
-    if (name == 'status') {
-      setData({
-        ...data,
-        [name]: value.id,
-        createdate: new Date(),
-        [name.concat(2)]: value,
-      });
-    }
-  };
-
   return (
     <CustomDialog
-      maxWidth="sm1"
+      maxWidth="sm"
       title={title}
       open={open}
       onSave={handleSave}
       onClose={onClose}
       onCancel={onClose}
-      // className={classes.formControl}
     >
-      <Grid container spacing={1} mt={-2}   >
-        {/* <Grid container xs={12} spacing={1}> */}
+      <form onSubmit={formik.handleSubmit}>
+        <Grid container spacing={1} mt={-4}>
           <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
-              label="Mã  App Ký"
+            <TextField
+              error={Boolean(formik.touched.appcode && formik.errors.appcode)}
+              fullWidth
+              helperText={formik.touched.appcode && formik.errors.appcode}
+              label="Mã App Ký"
+              margin="normal"
+              name="appcode"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.appcode}
               variant="outlined"
+              id="outlined-basic"
             />
           </Grid>
           <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
-              label="Danh Sách IP"
+            <TextField
+              error={Boolean(
+                formik.touched.ipwhitelist && formik.errors.ipwhitelist
+              )}
+              fullWidth
+              helperText={
+                formik.touched.ipwhitelist && formik.errors.ipwhitelist
+              }
+              label="Danh dách IP"
+              margin="normal"
+              name="ipwhitelist"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.ipwhitelist}
               variant="outlined"
+              id="outlined-basic"
             />
           </Grid>
-        {/* </Grid> */}
-        {/* <Grid container xs={12} spacing={1}> */}
-          <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
+
+          <Grid item xs={6} mt={-2.8}>
+            <TextField
+              error={Boolean(formik.touched.status && formik.errors.status)}
+              fullWidth
+              helperText={formik.touched.status && formik.errors.status}
               label="Trạng Thái"
+              margin="normal"
+              name="status"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.status}
               variant="outlined"
+              id="outlined-basic"
             />
           </Grid>
-          <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
+          <Grid item xs={6} mt={-2.8}>
+            <TextField
+              error={Boolean(
+                formik.touched.appDescription && formik.errors.appDescription
+              )}
+              fullWidth
+              helperText={formik.touched.status && formik.errors.appDescription}
               label="Mô Tả"
+              margin="normal"
+              name="appDescription"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.appDescription}
               variant="outlined"
+              id="outlined-basic"
             />
           </Grid>
-        {/* </Grid> */}
-        {/* <Grid container xs={12} spacing={1}> */}
-          <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
+
+          <Grid item xs={6} mt={-2.8}>
+            <TextField
+              error={Boolean(formik.touched.phone && formik.errors.phone)}
+              fullWidth
+              helperText={formik.touched.phone && formik.errors.phone}
               label="Số Điện Thoại"
+              margin="normal"
+              name="phone"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.phone}
               variant="outlined"
+              id="outlined-basic"
             />
           </Grid>
-          <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
+          <Grid item xs={6} mt={-2.8}>
+            <TextField
+              error={Boolean(formik.touched.email && formik.errors.email)}
+              fullWidth
+              helperText={formik.touched.email && formik.errors.email}
               label="Email"
+              margin="normal"
+              name="email"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.email}
               variant="outlined"
-            />
-          {/* </Grid> */}
-        </Grid>
-         {/* <Grid container xs={12} spacing={1}> */}
-          <Grid item xs={6}>
-            <CustomTextFieldNew
               id="outlined-basic"
+            />
+          </Grid>
+
+          <Grid item xs={6} mt={-2.6}>
+            <TextField
+              error={Boolean(
+                formik.touched.createDate && formik.errors.createDate
+              )}
+              fullWidth
+              helperText={formik.touched.createDate && formik.errors.createDate}
               label="Ngày Tạo"
+              margin="normal"
+              name="createDate"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.createDate}
               variant="outlined"
+              id="outlined-basic"
             />
           </Grid>
-          <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
+          <Grid item xs={6} mt={-2.6}>
+            <TextField
+              error={Boolean(formik.touched.createBy && formik.errors.createBy)}
+              fullWidth
+              helperText={formik.touched.createBy && formik.errors.createBy}
               label="Người Tạo"
+              margin="normal"
+              name="createBy"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.createBy}
               variant="outlined"
+              id="outlined-basic"
             />
           </Grid>
         </Grid>
-        {/* <Grid container xs={12} spacing={1}>
-          <Grid item xs={6}>
-            <Autocomplete
-              className={classes.formControl}
-              id="size-small-outlined"
-              size="small"
-              options={enumStatus}
-              getOptionLabel={(option) => option.name}
-              defaultValue={enumStatus[1]}
-              renderInput={(params) => (
-                <TextField {...params} placeholder="Size Small" />
-              )}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Autocomplete
-              className={classes.formControl}
-              id="size-small-outlined"
-              size="small"
-              options={enumStatus}
-              getOptionLabel={(option) => option.name}
-              defaultValue={enumStatus[1]}
-              renderInput={(params) => (
-                <TextField {...params} placeholder="Size Small" />
-              )}
-            />
-          </Grid>
-        </Grid> */}
-      {/* </Grid> */}
+      </form>
     </CustomDialog>
   );
 }

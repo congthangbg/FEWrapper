@@ -30,8 +30,8 @@ function thong_so_cau_hinh(props) {
       alignCenter: 'center',
     },
     { field: 'name', headerName: 'Tên tham số', width: 200 },
-    { field: 'type', headerName: 'Tên tham số', width: 200 },
-    { field: 'value', headerName: 'Tên tham số', width: 200 },
+    { field: 'type', headerName: 'Loại tham số', width: 200 },
+    { field: 'value', headerName: 'Giá trị', width: 200 },
     {
       field: 'status',
       headerName: 'Trạng thái',
@@ -112,7 +112,7 @@ function thong_so_cau_hinh(props) {
                 checkBoxTable={false}
                 onEdit={onEdit}
                 //   onDelete={first}
-                textAction="action"
+                textAction="Hành động"
               />
             </Grid>
           </MainCard>
