@@ -23,14 +23,10 @@ function CustomDatePicker(props) {
     setValue(params);
     onChangeDate && onChangeDate(params);
   };
-  function handleClearDate() {
-    setValue(null);
-  }
-  const dateFormat = 'YYYY-MM-DD';
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Stack spacing={3} sx={{ width: 300 }}>
+        <Stack spacing={3} sx={{ width: 285 }}>
           <DesktopDatePicker
             // label={title ? title : "Chọn ngày"}
             inputFormat="DD/MM/YYYY"

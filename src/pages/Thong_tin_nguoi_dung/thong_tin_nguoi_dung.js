@@ -55,11 +55,6 @@ function thong_tin_nguoi_dung(props) {
       email: 'nttung.code@gmail.com',
     },
   ];
-  // const first = (second) => {
-  //   console.log({ second });
-  //   setOpen(true);
-  //   // toastifyAlert.success('Success');
-  // };
 
   const onEdit = useCallback((isClick) => {
     console.log(isClick);
@@ -98,7 +93,7 @@ function thong_tin_nguoi_dung(props) {
             </Grid>
 
             <Grid item xs={3}>
-            <Autocomplete
+              <Autocomplete
                 id="size-small-outlined"
                 size="small"
                 options={columns}

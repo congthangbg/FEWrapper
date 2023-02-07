@@ -27,21 +27,16 @@ function quan_ly_thiet_bi(props) {
     },
     { field: 'platform', headerName: 'Loại thiết bị', width: 200 },
     { field: 'userName', headerName: 'Tên người dùng', width: 200 },
-    { field: 'date', headerName: 'Ngày đăng ký', width: 200 },
+    {
+      field: 'date',
+      headerName: 'Ngày đăng ký',
+      sortable: false,
+      flex: 1,
+      width: 200,
+    },
   ];
 
   const rows = [{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 }];
-  const first = (second) => {
-    console.log({ second });
-    setOpen(true);
-    toastifyAlert.success('Success');
-  };
-
-  const onEdit = useCallback((isClick) => {
-    console.log(isClick);
-    setOpen(true);
-  }, []);
-
   return (
     <>
       <ComponentSkeleton>

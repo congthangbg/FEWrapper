@@ -6,7 +6,7 @@ import ComponentSkeleton from 'pages/components-overview/ComponentSkeleton';
 import { memo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
-import { InfoApp } from './InfoApp';
+import InfoApp from './InfoApp';
 import { Autocomplete } from '@mui/material';
 import { useStylesComboBox } from 'utils/styles';
 
