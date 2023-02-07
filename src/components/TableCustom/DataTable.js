@@ -130,8 +130,6 @@ export default function DataTable(props) {
   };
 
   const columnsAction = React.useMemo(() => [...columns, onAction()], []);
-
-  console.log('columnsAction', columnsAction);
   return (
     <>
       <Box style={{ height: 500, width: '100%' }}>

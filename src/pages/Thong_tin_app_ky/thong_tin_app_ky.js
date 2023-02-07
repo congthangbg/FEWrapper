@@ -12,7 +12,6 @@ import { useStylesComboBox } from 'utils/styles';
 
 function thong_tin_app_ky(props) {
   const dataLogin = useSelector((state) => state.loginReducer);
-  console.log({ dataLogin });
   const classes = useStylesComboBox();
   let [open, setOpen] = useState(false);
   const a = 3;
@@ -37,7 +36,6 @@ function thong_tin_app_ky(props) {
 
   const rows = [{ id: 1, appcode: '01021', firstName: 'Jon', age: '35' }];
   const first = (second) => {
-    console.log({ second });
     setOpen(true);
     // toastifyAlert.success('Success');
   };

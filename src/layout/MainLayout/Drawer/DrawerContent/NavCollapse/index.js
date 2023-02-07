@@ -17,7 +17,6 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 // ==============================|| SIDEBAR MENU LIST COLLAPSE ITEMS ||============================== //
 
 const NavCollapse = ({ menu, level }) => {
-    console.log(menu);
     const theme = useTheme();
     const customization = useSelector((state) => state.customization);
 
