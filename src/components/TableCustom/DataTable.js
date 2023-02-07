@@ -15,7 +15,7 @@ import './DataTable.css';
 import useStyles from '../../utils/styles';
 import AddIcon from '@mui/icons-material/Add';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // const columns = [
 //   { field: 'id', headerName: 'ID', width: 70 },
@@ -51,8 +51,10 @@ import { useEffect } from 'react';
 // ];
 
 export default function DataTable(props) {
-  const { rows, columns, checkBoxTable, onEdit, onDelete, onView, textAction } =
+  const { rows, columns, checkBoxTable, onEdit, onDelete, onView, textAction,isAction } =
     props;
+
+  const [action,setAction] = useState(columns)
   const styles = useStyles();
   const onEditData = React.useCallback(
     (id) => () => {
@@ -129,13 +131,19 @@ export default function DataTable(props) {
     };
   };
 
-  const columnsAction = React.useMemo(() => [...columns, onAction()], []);
+  useEffect(()=>{
+    if(isAction){
+      setAction([...action,onAction()])
+    }else{
+      setAction(columns)
+    }
+  },[isAction])
   return (
     <>
       <Box style={{ height: 500, width: '100%' }}>
         <DataGrid
           rows={rows}
-          columns={columnsAction}
+          columns={action}
           pageSize={5}
           rowsPerPageOptions={[5]}
           checkboxSelection={checkBoxTable ? checkBoxTable : false}

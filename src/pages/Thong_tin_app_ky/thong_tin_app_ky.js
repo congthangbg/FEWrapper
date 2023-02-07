@@ -113,6 +113,7 @@ function thong_tin_app_ky(props) {
                 onView={first}
                 textAction="Hành động"
                 size={5}
+                isAction={true}
               />
             </Grid>
           </MainCard>
