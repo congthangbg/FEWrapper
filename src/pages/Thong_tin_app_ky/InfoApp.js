@@ -21,33 +21,33 @@ function InfoApp(props) {
   // const [data, setData] = useState({});
 
   const formik = useFormik({
-    // enableReinitialize: true,
-    // initialValues: {
-    //   appcode: dataEdit ? dataEdit.appcode : '',
-    //   ipwhitelist: dataEdit ? dataEdit.ipwhitelist : '',
-    //   status: dataEdit ? dataEdit.status : '',
-    //   appDescription: dataEdit ? dataEdit.appDescription : '',
-    //   phone: dataEdit ? dataEdit.phone : '',
-    //   email: dataEdit ? dataEdit.email : '',
-    //   setStartDate: Date.now(),
-    //   createBy: dataEdit ? dataEdit.createBy : '',
-    // },
-    // validationSchema: Yup.object({
-    //   appcode: Yup.string().max(255).trim().required('Chưa Nhập Tên'),
-    //   ipwhitelist: Yup.string().max(255).trim().required('Chưa Nhập Danh Sách'),
-    //   status: Yup.string().max(255).trim().required('Chưa Nhập Trạng Thái'),
-    //   appDescription: Yup.string().max(255).trim().required('Chưa Nhập Mô Tả'),
-    //   phone: Yup.string()
-    //     .min(10, 'PHONE.MIN')
-    //     .max(10, 'PHONE.MAX')
-    //     .required('Chưa Nhập Số Điện Thoại'),
-    //   email: Yup.string().max(255).trim().required('Chưa Nhập Email'),
-    //   setStartDate: Yup.date()
-    //     .nullable()
-    //     .typeError('Start date is required')
-    //     .required('Start Date is required'),
-    //   createBy: Yup.string().max(255).trim().required('Chưa Click Người Tạo'),
-    // }),
+    enableReinitialize: false,
+    initialValues: {
+      appcode: dataEdit ? dataEdit.appcode : '',
+      ipwhitelist: dataEdit ? dataEdit.ipwhitelist : '',
+      status: dataEdit ? dataEdit.status : '',
+      appDescription: dataEdit ? dataEdit.appDescription : '',
+      phone: dataEdit ? dataEdit.phone : '',
+      email: dataEdit ? dataEdit.email : '',
+      setStartDate: Date.now(),
+      createBy: dataEdit ? dataEdit.createBy : '',
+    },
+    validationSchema: Yup.object({
+      appcode: Yup.string().max(255).trim().required('Chưa Nhập Tên'),
+      ipwhitelist: Yup.string().max(255).trim().required('Chưa Nhập Danh Sách'),
+      status: Yup.string().max(255).trim().required('Chưa Nhập Trạng Thái'),
+      appDescription: Yup.string().max(255).trim().required('Chưa Nhập Mô Tả'),
+      phone: Yup.string()
+        .min(10, 'PHONE.MIN')
+        .max(10, 'PHONE.MAX')
+        .required('Chưa Nhập Số Điện Thoại'),
+      email: Yup.string().max(255).trim().required('Chưa Nhập Email'),
+      setStartDate: Yup.date()
+        .nullable()
+        .typeError('Start date is required')
+        .required('Start Date is required'),
+      createBy: Yup.string().max(255).trim().required('Chưa Click Người Tạo'),
+    }),
     onSubmit: (values, { resetForm }) => {
       // onSave();
       console.log(values);
@@ -68,13 +68,13 @@ function InfoApp(props) {
       maxWidth="sm"
       title={title}
       open={open}
-      // onSave={handleSave}
+      onSave={handleSave}
       onClose={onClose}
       onCancel={onClose}
     >
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={1} mt={-4}>
-          {/* <Grid item xs={6}>
+          <Grid item xs={6}>
             <TextField
               error={Boolean(formik.touched.appcode && formik.errors.appcode)}
               fullWidth
@@ -171,27 +171,26 @@ function InfoApp(props) {
               variant="outlined"
               id="outlined-basic"
             />
-          </Grid> */}
+          </Grid>
 
-          {/* <Grid item xs={6} mt={-0.6}>
+          <Grid item xs={6} mt={-0.6}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Stack spacing={3}>
                 <DesktopDatePicker
                   label="For desktop"
                   name="setStartDate"
                   sỉze="small"
-                  value={value}
+                  value={formik.values.setStartDate}
                   minDate={dayjs('2017-01-01')}
                   onChange={(newValue) => {
-                    // formik.setFieldValue('setStartDate', newValue);
-                    // setValue(newValue);
+                    formik.setFieldValue('setStartDate', new Date(newValue));
                   }}
                   renderInput={(params) => <TextField {...params} />}
                 />
               </Stack>
             </LocalizationProvider>
-          </Grid> */}
-          {/* <Grid item xs={6} mt={-2.6}>
+          </Grid>
+          <Grid item xs={6} mt={-2.6}>
             <TextField
               error={Boolean(formik.touched.createBy && formik.errors.createBy)}
               fullWidth
@@ -205,7 +204,7 @@ function InfoApp(props) {
               variant="outlined"
               id="outlined-basic"
             />
-          </Grid> */}
+          </Grid>
         </Grid>
       </form>
     </CustomDialog>
