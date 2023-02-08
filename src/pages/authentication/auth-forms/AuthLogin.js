@@ -48,8 +48,6 @@ const AuthLogin = (props) => {
     setShowPassword(!showPassword);
   };
 
-  console.log('sssss');
-
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
@@ -90,7 +88,11 @@ const AuthLogin = (props) => {
               profile_id: values.profile_id,
             };
             // onLogin(valuesSub);
-            navigate('/dashboard/default');
+            toastifyAlert.success(MESSAGE.SUCCES);
+            setTimeout(async() => {
+              await navigate('/dashboard/default');
+            },300)
+          
             // setStatus({success: true});
             // setSubmitting(true);
           } catch (err) {

@@ -39,10 +39,10 @@ const MainRoutes = {
       path: '/',
       element: <DashboardDefault />,
     },
-    {
-      path: 'color',
-      element: <Color />,
-    },
+    // {
+    //   path: 'color',
+    //   element: <Color />,
+    // },
     {
       path: 'dashboard',
       children: [
@@ -52,30 +52,30 @@ const MainRoutes = {
         },
       ],
     },
-    {
-      path: 'sample-page',
-      element: <SamplePage />,
-    },
-    {
-      path: 'shadow',
-      element: <Shadow />,
-    },
-    {
-      path: 'typography',
-      element: <Typography />,
-    },
-    {
-      path: 'icons/ant',
-      element: <AntIcons />,
-    },
-    {
-      path: '*',
-      element: <NotFound />,
-    },
-    {
-      path: '/demo',
-      element: <Demo />,
-    },
+    // {
+    //   path: 'sample-page',
+    //   element: <SamplePage />,
+    // },
+    // {
+    //   path: 'shadow',
+    //   element: <Shadow />,
+    // },
+    // {
+    //   path: 'typography',
+    //   element: <Typography />,
+    // },
+    // {
+    //   path: 'icons/ant',
+    //   element: <AntIcons />,
+    // },
+    // {
+    //   path: '*',
+    //   element: <NotFound />,
+    // },
+    // {
+    //   path: '/demo',
+    //   element: <Demo />,
+    // },
     {
       path: '/thong_tin_app_ky',
       // eslint-disable-next-line react/jsx-pascal-case

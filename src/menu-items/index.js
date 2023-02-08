@@ -9,7 +9,7 @@ import info from './info';
 
 const menuItems = {
   // items: [dashboard, pages, utilities, support]
-  items: [dashboard, utilities, support],
+  items: [ utilities],
 };
 
 export default menuItems;
