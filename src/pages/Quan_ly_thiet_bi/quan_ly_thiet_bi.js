@@ -39,7 +39,7 @@ function quan_ly_thiet_bi(props) {
   const rows = [{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 }];
   return (
     <>
-      <ComponentSkeleton>
+      <Grid item mb={1.5}>
         <MainCard title="Tìm kiếm thiết bị">
           {/* <MainCard title="Thông tin tìm kiếm"> */}
           <Grid container xs={12} spacing={2}>
@@ -76,7 +76,7 @@ function quan_ly_thiet_bi(props) {
           </Grid>
         </MainCard>
         {/* </MainCard> */}
-      </ComponentSkeleton>
+      </Grid>
 
       {a === 2 ? (
         <Box sx={{ display: 'flex' }}>

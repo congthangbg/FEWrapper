@@ -50,7 +50,7 @@ function lich_su_nguoi_dung(props) {
 
   return (
     <>
-      <ComponentSkeleton>
+      <Grid item mb={1.5}>
         <MainCard title="Tìm kiếm lịch sử người dùng">
           {/* <MainCard title="Thông tin tìm kiếm"> */}
           <Grid container xs={10} spacing={1}>
@@ -92,8 +92,7 @@ function lich_su_nguoi_dung(props) {
           </Grid>
         </MainCard>
         {/* </MainCard> */}
-        <br />
-      </ComponentSkeleton>
+      </Grid>
       {a === 2 ? (
         <Box sx={{ display: 'flex' }}>
           <Loading />

@@ -47,7 +47,7 @@ function thong_tin_app_ky(props) {
 
   return (
     <>
-      <ComponentSkeleton>
+      <Grid item mb={1.5}>
         <MainCard title="Tìm kiếm ứng dụng ký">
           {/* <MainCard title="Thông tin tìm kiếm"> */}
           <Grid container spacing={2}>
@@ -85,7 +85,7 @@ function thong_tin_app_ky(props) {
           </Grid>
           {/* </MainCard> */}
         </MainCard>
-      </ComponentSkeleton>
+      </Grid>
 
       {a === 2 ? (
         <Box sx={{ display: 'flex' }}>

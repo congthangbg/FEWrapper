@@ -68,7 +68,7 @@ function thong_tin_nguoi_dung(props) {
 
   return (
     <>
-      <ComponentSkeleton>
+      <Grid item mb={1.5}>
         <MainCard title="Tìm kiếm người dùng">
           {/* <MainCard title="Thông tin tìm kiếm"> */}
           <Grid container spacing={2}>
@@ -112,7 +112,7 @@ function thong_tin_nguoi_dung(props) {
           </Grid>
         </MainCard>
         {/* </MainCard> */}
-      </ComponentSkeleton>
+      </Grid>
       {a === 2 ? (
         <Box sx={{ display: 'flex' }}>
           <Loading />

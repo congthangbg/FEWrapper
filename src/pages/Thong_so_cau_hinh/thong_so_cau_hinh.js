@@ -59,7 +59,7 @@ function thong_so_cau_hinh(props) {
   }, []);
   return (
     <>
-      <ComponentSkeleton>
+      <Grid item mb={1.5}>
         <MainCard title="Tìm kiếm thông số cấu hình">
           {/* <MainCard title="Thông tin tìm kiếm"> */}
           <Grid container spacing={2}>
@@ -89,7 +89,7 @@ function thong_so_cau_hinh(props) {
           </Grid>
         </MainCard>
         {/* </MainCard> */}
-      </ComponentSkeleton>
+      </Grid>
 
       {a === 2 ? (
         <Box sx={{ display: 'flex' }}>

@@ -36,7 +36,7 @@ function quan_ly_dau_noi(props) {
   const rows = [{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 }];
   return (
     <>
-      <ComponentSkeleton>
+      <Grid item mb={1.5}>
         <MainCard title="Tìm kiếm đầu nối">
           {/* <MainCard title="Thông tin tìm kiếm"> */}
           <Grid container spacing={2}>
@@ -66,7 +66,7 @@ function quan_ly_dau_noi(props) {
           </Grid>
         </MainCard>
         {/* </MainCard> */}
-      </ComponentSkeleton>
+      </Grid>
 
       {a === 2 ? (
         <Box sx={{ display: 'flex' }}>

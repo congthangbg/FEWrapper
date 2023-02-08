@@ -40,7 +40,7 @@ function lich_su_thao_tac(props) {
 
   return (
     <>
-      <ComponentSkeleton>
+      <Grid item mb={1.5}>
         <MainCard title="Tìm kiếm lịch sử người dùng">
           {/* <MainCard title="Thông tin tìm kiếm"> */}
           <Grid container spacing={1}>
@@ -68,8 +68,7 @@ function lich_su_thao_tac(props) {
           </Grid>
         </MainCard>
         {/* </MainCard> */}
-        <br />
-      </ComponentSkeleton>
+      </Grid>
       {a === 2 ? (
         <Box sx={{ display: 'flex' }}>
           <Loading />
