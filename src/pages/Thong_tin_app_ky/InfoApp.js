@@ -14,135 +14,163 @@ import dayjs, { Dayjs } from 'dayjs';
 import Stack from '@mui/material/Stack';
 import { DesktopDatePicker } from '@mui/x-date-pickers';
 import { memo, useState } from 'react';
+import { NOTIFY, PHONE, emailRegExp, phoneRegExp } from 'utils/MessageContants';
+import { Autocomplete } from '../../../node_modules/@mui/material/index';
+import { useStylesComboBox } from 'utils/styles';
+import { TT_APP_KY } from 'utils/MockData';
 
 function InfoApp(props) {
-  const { title, onClose, open, dataEdit } = props;
+  const { title, onClose, open, dataEdit,setDataEdit,onSave,isView,setIsView } = props;
+  const classes = useStylesComboBox();
+  const status = [{id:1,name: 'Hoạt động'},{id:2,name: 'Không hoạt động'}]
 
+  const onCloseForm =()=>{
+    onClose();
+    setDataEdit(null) 
+    setIsView(false)
+  }
+
+  React.useEffect(()=>{
+    if(!open) setDataEdit(null) 
+  },[open])
+  
   // const [data, setData] = useState({});
 
   const formik = useFormik({
-    enableReinitialize: false,
+    enableReinitialize: true,
     initialValues: {
-      appcode: dataEdit ? dataEdit.appcode : '',
-      ipwhitelist: dataEdit ? dataEdit.ipwhitelist : '',
-      status: dataEdit ? dataEdit.status : '',
-      appDescription: dataEdit ? dataEdit.appDescription : '',
+      id: dataEdit ? dataEdit.id : '',
+      appCode: dataEdit ? dataEdit.appCode : '',
+      ipWhitelist: dataEdit ? dataEdit.ipWhitelist : '',
+      status: dataEdit ? status.find(x=> x.id==dataEdit.status ) : status[0],
+      description: dataEdit ? dataEdit.description : '',
       phone: dataEdit ? dataEdit.phone : '',
       email: dataEdit ? dataEdit.email : '',
-      setStartDate: Date.now(),
       createBy: dataEdit ? dataEdit.createBy : '',
+      createDate: dataEdit ? new Date(dataEdit.createDate) : '',
+      appSecret: dataEdit ? dataEdit.appSecret :""
     },
     validationSchema: Yup.object({
-      appcode: Yup.string().max(255).trim().required('Chưa Nhập Tên'),
-      ipwhitelist: Yup.string().max(255).trim().required('Chưa Nhập Danh Sách'),
-      status: Yup.string().max(255).trim().required('Chưa Nhập Trạng Thái'),
-      appDescription: Yup.string().max(255).trim().required('Chưa Nhập Mô Tả'),
+      appCode: Yup.string().max(255).trim().required(NOTIFY.NOT_BLANK),
+      ipWhitelist: Yup.string().max(255).trim().required(NOTIFY.NOT_BLANK),
+      status: Yup.object().nullable().required(NOTIFY.STATUS),
+      description: Yup.string().max(255).trim().required(NOTIFY.NOT_BLANK),
       phone: Yup.string()
-        .min(10, 'PHONE.MIN')
-        .max(10, 'PHONE.MAX')
-        .required('Chưa Nhập Số Điện Thoại'),
-      email: Yup.string().max(255).trim().required('Chưa Nhập Email'),
-      setStartDate: Yup.date()
+        .min(8, PHONE.MIN)
+        .max(10, PHONE.MAX)
+        .matches(phoneRegExp, PHONE.VALID_PHONE),
+      email: Yup.string().max(255).trim().matches(emailRegExp, NOTIFY.EMAIL_VALID).required(NOTIFY.EMAIL),
+      createDate: Yup.date()
         .nullable()
-        .typeError('Start date is required')
-        .required('Start Date is required'),
-      createBy: Yup.string().max(255).trim().required('Chưa Click Người Tạo'),
+        // .typeError('Start date is required1')
+        .max(new Date() ,NOTIFY.DATE),
+      createBy: Yup.string().max(255).trim().required(NOTIFY.NOT_BLANK),
     }),
     onSubmit: (values, { resetForm }) => {
       // onSave();
-      console.log(values);
+      const value = {
+        ...values,
+        status:values.status.id,
+        createDate: new Date(values.createDate).getTime()
+      }
+      onSave(value)
+      formik.resetForm();
     },
   });
 
   const handleSave = () => {
-    // onSave(data);
-    console.log(formik.values);
-    //
-    // formik.resetForm();
+    formik.handleSubmit();
   };
-
-  const [value, setValue] = useState(dayjs('2022-04-07'));
-  // console.log('valie', value);
   return (
     <CustomDialog
       maxWidth="sm"
       title={title}
       open={open}
-      onSave={handleSave}
-      onClose={onClose}
-      onCancel={onClose}
+      onSave={isView ? "": handleSave}
+      onClose={onCloseForm}
+      onCancel={onCloseForm}
     >
-      <form onSubmit={formik.handleSubmit}>
-        <Grid container spacing={1} mt={-4}>
+    <form onSubmit={formik.handleSubmit}>
+        <Grid container spacing={1} mt={-3}>
           <Grid item xs={6}>
             <TextField
-              error={Boolean(formik.touched.appcode && formik.errors.appcode)}
+              error={Boolean(formik.touched.appCode && formik.errors.appCode)}
               fullWidth
-              helperText={formik.touched.appcode && formik.errors.appcode}
+              helperText={formik.touched.appCode && formik.errors.appCode}
               label="Mã App Ký"
               margin="normal"
-              name="appcode"
+              name="appCode"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              value={formik.values.appcode}
+              value={formik.values.appCode}
               variant="outlined"
               id="outlined-basic"
+              size="small"
+              disabled
             />
           </Grid>
           <Grid item xs={6}>
             <TextField
               error={Boolean(
-                formik.touched.ipwhitelist && formik.errors.ipwhitelist
+                formik.touched.ipWhitelist && formik.errors.ipWhitelist
               )}
               fullWidth
               helperText={
-                formik.touched.ipwhitelist && formik.errors.ipwhitelist
+                formik.touched.ipWhitelist && formik.errors.ipWhitelist
               }
               label="Danh dách IP"
               margin="normal"
-              name="ipwhitelist"
+              name="ipWhitelist"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              value={formik.values.ipwhitelist}
+              value={formik.values.ipWhitelist}
               variant="outlined"
               id="outlined-basic"
+              size="small"
+             disabled ={isView ? true :false}
             />
           </Grid>
 
-          <Grid item xs={6} mt={-2.8}>
-            <TextField
-              error={Boolean(formik.touched.status && formik.errors.status)}
-              fullWidth
-              helperText={formik.touched.status && formik.errors.status}
-              label="Trạng Thái"
-              margin="normal"
-              name="status"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.status}
-              variant="outlined"
-              id="outlined-basic"
-            />
+          <Grid item xs={6} >
+            <Autocomplete
+                id="size-small-outlined"
+                size="small"
+                name="status"
+                options={status}
+                getOptionLabel={(option) => option.name}
+                defaultValue={status[0]}
+                renderInput={(params) => (
+                  <TextField {...params} placeholder="Trạng Thái" 
+                  error={Boolean(formik.touched.status && formik.errors.status)}
+                  helperText={formik.touched.status && formik.errors.status}/>
+                )}
+                disabled ={isView ? true :false}
+                classes={classes}
+                onChange={(event, value) => formik.setFieldValue("status", value)}
+                value={formik.values && formik.values.status ? status.find(x=>x.id==formik.values.status.id) : undefined}
+                />
           </Grid>
-          <Grid item xs={6} mt={-2.8}>
+          <Grid item xs={6} mt={-2} >
             <TextField
               error={Boolean(
-                formik.touched.appDescription && formik.errors.appDescription
+                formik.touched.description && formik.errors.description
               )}
               fullWidth
-              helperText={formik.touched.status && formik.errors.appDescription}
+              helperText={formik.touched.description && formik.errors.description}
               label="Mô Tả"
               margin="normal"
-              name="appDescription"
+              name="description"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              value={formik.values.appDescription}
+              value={formik.values.description}
               variant="outlined"
               id="outlined-basic"
+              size="small"
+             disabled ={isView ? true :false}
             />
           </Grid>
 
-          <Grid item xs={6} mt={-2.8}>
+          <Grid item xs={6} mt={-2}>
             <TextField
               error={Boolean(formik.touched.phone && formik.errors.phone)}
               fullWidth
@@ -155,9 +183,11 @@ function InfoApp(props) {
               value={formik.values.phone}
               variant="outlined"
               id="outlined-basic"
+              size="small"
+             disabled ={isView ? true :false}
             />
           </Grid>
-          <Grid item xs={6} mt={-2.8}>
+          <Grid item xs={6} mt={-2}>
             <TextField
               error={Boolean(formik.touched.email && formik.errors.email)}
               fullWidth
@@ -170,27 +200,30 @@ function InfoApp(props) {
               value={formik.values.email}
               variant="outlined"
               id="outlined-basic"
+              size="small"
+             disabled ={isView ? true :false}
             />
           </Grid>
 
-          <Grid item xs={6} mt={-0.6}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Stack spacing={3}>
+          <Grid item xs={6} >
+            <LocalizationProvider  dateAdapter={AdapterDayjs}>
+              <Stack spacing={3} >
                 <DesktopDatePicker
-                  label="For desktop"
-                  name="setStartDate"
-                  sỉze="small"
-                  value={formik.values.setStartDate}
-                  minDate={dayjs('2017-01-01')}
+                  label="Ngày tạo"
+                  name="createDate"
+                  value={formik.values.createDate ? formik.values.createDate : ""}
+                  minDate={dayjs('01-01-2020')}
+                  inputFormat="DD/MM/YYYY"
                   onChange={(newValue) => {
-                    formik.setFieldValue('setStartDate', new Date(newValue));
+                    formik.setFieldValue('createDate', new Date(newValue));
                   }}
-                  renderInput={(params) => <TextField {...params} />}
+                  renderInput={(params) => <TextField size="small" {...params} />}
+                  disabled
                 />
               </Stack>
             </LocalizationProvider>
           </Grid>
-          <Grid item xs={6} mt={-2.6}>
+          <Grid item xs={6} mt={-2}>
             <TextField
               error={Boolean(formik.touched.createBy && formik.errors.createBy)}
               fullWidth
@@ -203,6 +236,8 @@ function InfoApp(props) {
               value={formik.values.createBy}
               variant="outlined"
               id="outlined-basic"
+              size="small"
+              disabled
             />
           </Grid>
         </Grid>
