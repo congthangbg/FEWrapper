@@ -109,7 +109,7 @@ function thong_tin_app_ky(props) {
                 columns={columns}
                 checkBoxTable={false}
                 onEdit={first}
-                onDelete={first}
+                // onDelete={first}
                 onView={first}
                 textAction="Hành động"
                 size={5}

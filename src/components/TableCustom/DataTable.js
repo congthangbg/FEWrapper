@@ -51,10 +51,18 @@ import { useEffect, useState } from 'react';
 // ];
 
 export default function DataTable(props) {
-  const { rows, columns, checkBoxTable, onEdit, onDelete, onView, textAction,isAction } =
-    props;
+  const {
+    rows,
+    columns,
+    checkBoxTable,
+    onEdit,
+    onDelete,
+    onView,
+    textAction,
+    isAction,
+  } = props;
 
-  const [action,setAction] = useState(columns)
+  const [action, setAction] = useState(columns);
   const styles = useStyles();
   const onEditData = React.useCallback(
     (id) => () => {
@@ -131,13 +139,13 @@ export default function DataTable(props) {
     };
   };
 
-  useEffect(()=>{
-    if(isAction){
-      setAction([...action,onAction()])
-    }else{
-      setAction(columns)
+  useEffect(() => {
+    if (isAction) {
+      setAction([...action, onAction()]);
+    } else {
+      setAction(columns);
     }
-  },[isAction])
+  }, [isAction]);
   return (
     <>
       <Box style={{ height: 500, width: '100%' }}>

@@ -22,7 +22,7 @@ function thong_so_cau_hinh(props) {
   const a = 3;
 
   const columns = [
-    { field: 'stt', headerName: 'STT', width: 100, alignCenter: 'center' },
+    { field: 'id', headerName: 'STT', width: 100, alignCenter: 'center' },
     {
       field: 'code',
       headerName: 'Mã tham số',
@@ -31,7 +31,7 @@ function thong_so_cau_hinh(props) {
     },
     { field: 'name', headerName: 'Tên tham số', width: 200 },
     { field: 'type', headerName: 'Loại tham số', width: 200 },
-    { field: 'value', headerName: 'Giá trị', width: 200 },
+    { field: 'value', headerName: 'Giá trị', width: 100 },
     {
       field: 'status',
       headerName: 'Trạng thái',
@@ -41,7 +41,16 @@ function thong_so_cau_hinh(props) {
     },
   ];
 
-  const rows = [{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 }];
+  const rows = [
+    {
+      id: 1,
+      code: '0101',
+      name: 'Jon',
+      type: 'Tétttt',
+      value: 'Int',
+      status: 'Kích Hoạt',
+    },
+  ];
   const first = (second) => {
     console.log({ second });
     setOpen(true);

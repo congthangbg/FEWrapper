@@ -20,9 +20,9 @@ function quan_ly_dau_noi(props) {
   const a = 3;
 
   const columns = [
-    { field: 'stt', headerName: 'STT', width: 100, alignCenter: 'center' },
+    { field: 'id', headerName: 'STT', width: 100, alignCenter: 'center' },
 
-    { field: 'name', headerName: 'Người dùng', width: 200 },
+    { field: 'nameUser', headerName: 'Người dùng', width: 200 },
     { field: 'type', headerName: 'Gói cước', width: 200 },
     {
       field: 'status',
@@ -33,7 +33,9 @@ function quan_ly_dau_noi(props) {
     },
   ];
 
-  const rows = [{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 }];
+  const rows = [
+    { id: 1, nameUser: 'Snow', type: '3G', status: 'Lèo Tèo Test' },
+  ];
   return (
     <>
       <Grid item mb={1.5}>
@@ -77,7 +79,12 @@ function quan_ly_dau_noi(props) {
         <ComponentSkeleton>
           <MainCard title="Danh sách đầu  nối">
             <Grid item xs={12} md={7} lg={8}>
-              <DataTable rows={rows} columns={columns} checkBoxTable={false} />
+              <DataTable
+                rows={rows}
+                columns={columns}
+                checkBoxTable={false}
+                isAction={false}
+              />
             </Grid>
           </MainCard>
         </ComponentSkeleton>

@@ -18,7 +18,7 @@ function lich_su_nguoi_dung(props) {
   const a = 3;
 
   const columns = [
-    { field: 'stt', headerName: 'STT', width: 100, alignCenter: 'center' },
+    { field: 'id', headerName: 'STT', width: 100, alignCenter: 'center' },
     {
       field: 'wp_Agency_ID',
       headerName: 'Ứng Dụng',
@@ -27,8 +27,8 @@ function lich_su_nguoi_dung(props) {
     },
     { field: 'userID', headerName: 'User', width: 100 },
     { field: 'time_Log', headerName: 'Thời Gian', width: 100 },
-    { field: 'ltt', headerName: 'Loại Thao Tác', width: 200 },
-    { field: 'document', headerName: 'Tài Liệu Ký', width: 200 },
+    { field: 'ltt', headerName: 'Loại Thao Tác', width: 120 },
+    { field: 'document', headerName: 'Tài Liệu Ký', width: 100 },
     {
       field: 'sign_status',
       headerName: 'Trạng Thái',
@@ -39,8 +39,24 @@ function lich_su_nguoi_dung(props) {
   ];
 
   const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+    {
+      id: 1,
+      wp_Agency_ID: 'Snow',
+      userID: 'Jon',
+      time_Log: '09/02/2023',
+      ltt: 'Thao Tác Tay',
+      document: 'Phân Trang',
+      sign_status: 'Đang Kích Hoạt',
+    },
+    {
+      id: 2,
+      wp_Agency_ID: 'Snow',
+      userID: 'Jon',
+      time_Log: '09/02/2023',
+      ltt: 'Thao Tác Tay',
+      document: 'Phân Trang',
+      sign_status: 'Đang Kích Hoạt',
+    },
   ];
 
   const onView = useCallback((isClick) => {
@@ -114,7 +130,7 @@ function lich_su_nguoi_dung(props) {
                 checkBoxTable={false}
                 // onDelete={first}
                 onView={onView}
-                isAction={false}
+                isAction={true}
                 // onEdit={onEdit}
                 // textAction="action"
               />

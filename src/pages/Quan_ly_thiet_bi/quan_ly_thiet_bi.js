@@ -18,7 +18,7 @@ function quan_ly_thiet_bi(props) {
   const a = 3;
 
   const columns = [
-    { field: 'stt', headerName: 'STT', width: 100, alignCenter: 'center' },
+    { field: 'id', headerName: 'STT', width: 50, alignCenter: 'center' },
     {
       field: 'device',
       headerName: 'Mã thiết bị',
@@ -36,7 +36,16 @@ function quan_ly_thiet_bi(props) {
     },
   ];
 
-  const rows = [{ id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 }];
+  const rows = [
+    {
+      id: 1,
+      device: '0101',
+      platform: 'Snow',
+      userName: 'Snow',
+      firstName: 'Jon',
+      date: '09/02/2023',
+    },
+  ];
   return (
     <>
       <Grid item mb={1.5}>
@@ -96,6 +105,7 @@ function quan_ly_thiet_bi(props) {
               <DataTable
                 rows={rows}
                 columns={columns}
+                isAction={false}
                 // checkBoxTable={false}
                 // onDelete={first}
                 // onEdit={onEdit}

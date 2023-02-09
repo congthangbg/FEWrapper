@@ -24,23 +24,23 @@ function thong_tin_nguoi_dung(props) {
   const a = 3;
 
   const columns = [
-    { field: 'id', headerName: 'STT', width: 100, alignCenter: 'center' },
+    { field: 'id', headerName: 'STT', width: 50, alignCenter: 'center' },
     {
       field: 'serID',
       headerName: 'Tài Khoản',
       width: 150,
       alignCenter: 'center',
     },
-    { field: 'userName', headerName: 'Tên Người Dùng', width: 200 },
+    { field: 'userName', headerName: 'Tên Người Dùng', width: 150 },
     { field: 'iDNo', headerName: 'CMND/Mã Số Thuế', width: 150 },
-    { field: 'status', headerName: 'Trạng Thái', width: 200 },
-    { field: 'phone', headerName: 'Số Điện Thoại', width: 150 },
+    { field: 'status', headerName: 'Trạng Thái', width: 100 },
+    { field: 'phone', headerName: 'Số Điện Thoại', width: 120 },
     {
       field: 'email',
       headerName: 'Email',
       sortable: false,
       flex: 1,
-      width: 160,
+      width: 180,
     },
   ];
 
@@ -126,15 +126,15 @@ function thong_tin_nguoi_dung(props) {
             // addDisabled={true}
             // onClickAdd={onClickAdd}
             // titleAdd="Thêm mới"
+            content={true}
           >
             <Grid item xs={12} md={7} lg={8}>
               <DataTable
                 rows={rows}
                 columns={columns}
                 checkBoxTable={false}
-                // onDelete={first}
                 onView={onView}
-                isAction={false}
+                isAction={true}
                 onEdit={onEdit}
                 textAction="Hành động"
                 size={5}

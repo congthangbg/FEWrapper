@@ -17,7 +17,7 @@ function lich_su_thao_tac(props) {
   const a = 3;
 
   const columns = [
-    { field: 'stt', headerName: 'STT', width: 100, alignCenter: 'center' },
+    { field: 'id', headerName: 'STT', width: 100, alignCenter: 'center' },
     {
       field: 'nameOperation',
       headerName: 'Tên thao tác',
@@ -25,12 +25,23 @@ function lich_su_thao_tac(props) {
       alignCenter: 'center',
     },
     { field: 'userID', headerName: 'User thực hiện', width: 200 },
-    { field: 'time_Log', headerName: 'Thời gian thực hiện', width: 200 },
+    {
+      field: 'time_Log',
+      headerName: 'Thời gian thực hiện',
+      width: 200,
+      sortable: false,
+      flex: 1,
+    },
   ];
 
   const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+    { id: 1, nameOperation: 'Snow', userID: 'Jon', time_Log: '07/03/2000' },
+    {
+      id: 2,
+      nameOperation: 'Lannister',
+      userID: 'Cersei',
+      time_Log: '07/03/2000',
+    },
   ];
 
   const onView = useCallback((isClick) => {
@@ -88,11 +99,7 @@ function lich_su_thao_tac(props) {
                 rows={rows}
                 columns={columns}
                 checkBoxTable={false}
-                // onDelete={first}
-                // onView={onView}
                 isAction={false}
-                // onEdit={onEdit}
-                // textAction="action"
               />
             </Grid>
           </MainCard>
