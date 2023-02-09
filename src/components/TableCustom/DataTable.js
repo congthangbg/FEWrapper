@@ -51,16 +51,8 @@ import { useEffect, useState } from 'react';
 // ];
 
 export default function DataTable(props) {
-  const {
-    rows,
-    columns,
-    checkBoxTable,
-    onEdit,
-    onDelete,
-    onView,
-    textAction,
-    isAction,
-  } = props;
+  const { rows, columns, checkBoxTable, onEdit, onDelete, onView, textAction,isAction,sizeAction } =
+    props;
 
   const [action, setAction] = useState(columns);
   const styles = useStyles();
@@ -90,10 +82,10 @@ export default function DataTable(props) {
       field: 'action',
       headerName: textAction ? textAction : 'Hành Động',
       type: 'actions',
-      width: '100px',
+      width: sizeAction ? sizeAction :150,
       sortable: false,
       // disableClickEventBubbling: true,
-      flex: 0.2,
+      flex: 0.3,
       renderCell: (params) => {
         return (
           <>
@@ -159,19 +151,11 @@ export default function DataTable(props) {
           disableSelectionOnClick
           showCellRightBorder={true}
           showColumnRightBorder={true}
+          columnAutoWidth={true}
+          columnMinWidth={50}
           autoHeight
-          // onRowClick={e=> console.log(e)}
-          // disableColumnSelector={false}
-          // disableSelectionOnClick={true}
-          // disableDensitySelector
-          // disableColumnFilter
-          // disableColumnMenu
-          // disableExtendRowFullWidth
-          // disableIgnoreModificationsIfProcessingProps
-          // disableVirtualization
-          // isCellEditable ={false}
-          // showCellRightBorder={false}
-          // showColumnRightBorder={false}
+          allowColumnResizing={true}
+          showBorders={true}
         />
       </Box>
     </>

@@ -33,6 +33,7 @@ import toastifyAlert from './../../../components/SnackBar/toastifyAlert';
 import { compose } from '../../../../node_modules/@reduxjs/toolkit/dist/index';
 import { MESSAGE } from 'utils/constants';
 import Loading from 'components/Loading/index';
+// import db from 'utils/config/firebase';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -89,6 +90,10 @@ const AuthLogin = (props) => {
             };
             // onLogin(valuesSub);
             toastifyAlert.success(MESSAGE.SUCCES);
+            // db.collection("wpagency").add({
+            //   name: "test",
+            //   email: "customerPassword@gmail.com",
+            // });
             setTimeout(async() => {
               await navigate('/dashboard/default');
             },300)

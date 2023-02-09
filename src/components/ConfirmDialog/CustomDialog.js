@@ -166,6 +166,7 @@ export function CustomDialog(props) {
               disabled={!canSave}
               color="primary"
               variant="contained"
+              type="submit"
             >
               {saveText}
             </Button>

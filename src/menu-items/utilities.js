@@ -6,7 +6,13 @@ import {
   BgColorsOutlined,
   FontSizeOutlined,
   LoadingOutlined,
-  DashboardOutlined
+  DashboardOutlined,
+  InfoCircleOutlined,
+  UserOutlined ,
+  ApartmentOutlined ,
+  HistoryOutlined ,
+  DisconnectOutlined ,
+  SettingOutlined 
 } from "@ant-design/icons";
 
 // icons
@@ -17,7 +23,13 @@ const icons = {
   AntDesignOutlined,
   LoadingOutlined,
   AppstoreAddOutlined,
-  DashboardOutlined
+  DashboardOutlined,
+  InfoCircleOutlined,
+  UserOutlined,
+  ApartmentOutlined ,
+  HistoryOutlined,
+  DisconnectOutlined ,
+  SettingOutlined 
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
@@ -77,7 +89,7 @@ const utilities = {
       title: "Thông Tin App Ký",
       type: "item",
       url: "/thong_tin_app_ky",
-      icon: icons.AntDesignOutlined,
+      icon: icons.InfoCircleOutlined,
       breadcrumbs: true,
     },
     {
@@ -85,7 +97,7 @@ const utilities = {
       title: "Thông Tin Người Dùng",
       type: "item",
       url: "/thong_tin_nguoi_dung",
-      icon: icons.AntDesignOutlined,
+      icon: icons.UserOutlined,
       breadcrumbs: true,
     },
     {
@@ -93,7 +105,7 @@ const utilities = {
       title: "Quản Lý Thiết Bị",
       type: "item",
       url: "/quan_ly_thiet_bi",
-      icon: icons.AntDesignOutlined,
+      icon: icons.ApartmentOutlined,
       breadcrumbs: true,
     },
     {
@@ -101,7 +113,7 @@ const utilities = {
       title: "Lịch Sử Người Dùng",
       type: "item",
       url: "/lich_su_nguoi_dung",
-      icon: icons.AntDesignOutlined,
+      icon: icons.HistoryOutlined,
       breadcrumbs: true,
     },
     {
@@ -109,7 +121,7 @@ const utilities = {
       title: "Quản Lý Đầu Nối",
       type: "item",
       url: "/quan_ly_dau_noi",
-      icon: icons.AntDesignOutlined,
+      icon: icons.DisconnectOutlined,
       breadcrumbs: true,
     },
     {
@@ -117,7 +129,7 @@ const utilities = {
       title: "Thông Số Cấu Hình",
       type: "item",
       url: "/thong_so_cau_hinh",
-      icon: icons.AntDesignOutlined,
+      icon: icons.SettingOutlined,
       breadcrumbs: true,
     },
     {
@@ -125,7 +137,7 @@ const utilities = {
       title: "Lịch Sử Thao Tác",
       type: "item",
       url: "/lich_su_thao_tac",
-      icon: icons.AntDesignOutlined,
+      icon: icons.HistoryOutlined,
       breadcrumbs: true,
     },
   ],
