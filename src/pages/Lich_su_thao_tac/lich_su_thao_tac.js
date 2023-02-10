@@ -7,12 +7,14 @@ import ComponentSkeleton from 'pages/components-overview/ComponentSkeleton';
 import { memo, useCallback, useState } from 'react';
 import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
 import { TextField, Autocomplete } from '@mui/material';
+import { LS_THAO_TAC } from 'utils/MockData';
 // import { Component} form '../'
 // 1: rows = Danh sách data
 // 2: checkBoxTable = checkBoxTable
 
 function lich_su_thao_tac(props) {
   let [setView] = useState(false);
+  const [dataFake, setDataFake] = useState(LS_THAO_TAC);
 
   const a = 3;
 
@@ -21,28 +23,28 @@ function lich_su_thao_tac(props) {
     {
       field: 'nameOperation',
       headerName: 'Tên thao tác',
-      width: 250,
+      width: 350,
       alignCenter: 'center',
     },
-    { field: 'userID', headerName: 'User thực hiện', width: 200 },
+    { field: 'userID', headerName: 'User thực hiện', width: 350 },
     {
       field: 'time_Log',
       headerName: 'Thời gian thực hiện',
-      width: 200,
+      width: 350,
       sortable: false,
       flex: 1,
     },
   ];
 
-  const rows = [
-    { id: 1, nameOperation: 'Snow', userID: 'Jon', time_Log: '07/03/2000' },
-    {
-      id: 2,
-      nameOperation: 'Lannister',
-      userID: 'Cersei',
-      time_Log: '07/03/2000',
-    },
-  ];
+  // const rows = [
+  //   { id: 1, nameOperation: 'Snow', userID: 'Jon', time_Log: '07/03/2000' },
+  //   {
+  //     id: 2,
+  //     nameOperation: 'Lannister',
+  //     userID: 'Cersei',
+  //     time_Log: '07/03/2000',
+  //   },
+  // ];
 
   const onView = useCallback((isClick) => {
     console.log(isClick);
@@ -96,7 +98,7 @@ function lich_su_thao_tac(props) {
           >
             <Grid item xs={12} md={7} lg={8}>
               <DataTable
-                rows={rows}
+                rows={dataFake}
                 columns={columns}
                 checkBoxTable={false}
                 isAction={false}

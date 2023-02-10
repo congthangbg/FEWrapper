@@ -3,32 +3,29 @@ import AutocompleteCustomer from 'components/AutocompleteCustomer/index';
 import CustomTextField from 'components/CustomTextField/index';
 import Loading from 'components/Loading/index';
 import MainCard from 'components/MainCard';
-import toastifyAlert from 'components/SnackBar/toastifyAlert';
 import DataTable from 'components/TableCustom/DataTable';
 import ComponentSkeleton from 'pages/components-overview/ComponentSkeleton';
-// import FormDialog from 'pages/Thong_tin_nguoi_dung/FormDialog';
-import { memo, useCallback, useState } from 'react';
+import { memo, useState } from 'react';
+import { QL_THIET_BI } from 'utils/MockData';
 import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
-// import { Component} form '../'
-// 1: rows = Danh sách data
-// 2: checkBoxTable = checkBoxTable
 
 function quan_ly_thiet_bi(props) {
-  let [open, setOpen] = useState(false);
+  let [open] = useState(false);
+  const [dataFake] = useState(QL_THIET_BI);
   const a = 3;
 
   const columns = [
     { field: 'id', headerName: 'STT', width: 50, alignCenter: 'center' },
     {
-      field: 'device',
+      field: 'device_id',
       headerName: 'Mã thiết bị',
       width: 150,
       alignCenter: 'center',
     },
-    { field: 'platform', headerName: 'Loại thiết bị', width: 200 },
-    { field: 'userName', headerName: 'Tên người dùng', width: 200 },
+    { field: 'platform', headerName: 'Loại thiết bị', width: 300 },
+    { field: 'userName', headerName: 'Tên người dùng', width: 300 },
     {
-      field: 'date',
+      field: 'registration_date',
       headerName: 'Ngày đăng ký',
       sortable: false,
       flex: 1,
@@ -36,23 +33,12 @@ function quan_ly_thiet_bi(props) {
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      device: '0101',
-      platform: 'Snow',
-      userName: 'Snow',
-      firstName: 'Jon',
-      date: '09/02/2023',
-    },
-  ];
   return (
     <>
       <Grid item mb={1.5}>
         <MainCard title="Tìm kiếm thiết bị">
-          {/* <MainCard title="Thông tin tìm kiếm"> */}
-          <Grid container xs={12} spacing={2}>
-            <Grid container item xs={3}>
+          <Grid container spacing={2}>
+            <Grid item xs={3}>
               <CustomTextField
                 label="Mã thiết bị"
                 clearText
@@ -60,7 +46,7 @@ function quan_ly_thiet_bi(props) {
               />
             </Grid>
 
-            <Grid container item xs={3}>
+            <Grid item xs={3}>
               <CustomTextField
                 label="Tên người dùng"
                 clearText
@@ -68,9 +54,9 @@ function quan_ly_thiet_bi(props) {
               />
             </Grid>
 
-            <Grid container item xs={3}>
+            <Grid item xs={3}>
               <AutocompleteCustomer
-                options={rows}
+                options={dataFake}
                 textLabel="Loại thiết bị"
                 error={false}
                 helperText=""
@@ -84,7 +70,6 @@ function quan_ly_thiet_bi(props) {
             </Grid>
           </Grid>
         </MainCard>
-        {/* </MainCard> */}
       </Grid>
 
       {a === 2 ? (
@@ -94,37 +79,19 @@ function quan_ly_thiet_bi(props) {
       ) : (
         //Tách riêng từng cụm trắng
         <ComponentSkeleton>
-          <MainCard
-            title="Danh sách đấu nối"
-            // onAdd={true}
-            // addDisabled={true}
-            // onClickAdd={onClickAdd}
-            // titleAdd="Thêm mới"
-          >
+          <MainCard title="Danh sách đấu nối" content={true}>
             <Grid item xs={12} md={7} lg={8}>
               <DataTable
-                rows={rows}
+                rows={dataFake}
                 columns={columns}
                 isAction={false}
-                // checkBoxTable={false}
-                // onDelete={first}
-                // onEdit={onEdit}
-                // textAction="action"
-                // onView1={first}
-                // onDetail="ssssss"
+                size={5}
+                sizeAction={20}
               />
             </Grid>
           </MainCard>
         </ComponentSkeleton>
       )}
-      {/* <ConfirmDialog isOpen={open} setIsOpen={setOpen} /> */}
-      {/* <FormDialog
-        open={open}
-        title="Chi Tiết Người Dùng"
-        onClose={() => setOpen(false)}
-        onSave={() => setOpen(false)}
-      /> */}
-      {/* <CustomizedSnackbars /> */}
     </>
   );
 }

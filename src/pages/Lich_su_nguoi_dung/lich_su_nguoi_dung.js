@@ -8,69 +8,65 @@ import { memo, useCallback, useState } from 'react';
 import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
 import FormView from './FormView';
 import { TextField, Autocomplete } from '@mui/material';
-// import { Component} form '../'
-// 1: rows = Danh sách data
-// 2: checkBoxTable = checkBoxTable
+import { LS_NGUOI_DUNG } from 'utils/MockData';
+import { useSelector } from 'react-redux';
+import { useStylesComboBox } from 'utils/styles';
 
 function lich_su_nguoi_dung(props) {
+  const dataLogin = useSelector((state) => state.loginReducer);
+  const classes = useStylesComboBox();
+  let [open, setOpen] = useState(false);
   let [view, setView] = useState(false);
+  let [dataEdit, setDataEdit] = useState(null);
+  const [dataFake, setDataFake] = useState(LS_NGUOI_DUNG);
 
   const a = 3;
 
+  function getStatus(params) {
+    if (params.row.status == 1) {
+      return `Hoạt động`;
+    } else if (params.row.status == 2) {
+      return `Không hoạt động`;
+    } else {
+      return ``;
+    }
+  }
   const columns = [
-    { field: 'id', headerName: 'STT', width: 100, alignCenter: 'center' },
+    { field: 'id', headerName: 'STT', width: 50, alignCenter: 'center' },
     {
       field: 'wp_Agency_ID',
       headerName: 'Ứng Dụng',
       width: 250,
       alignCenter: 'center',
     },
-    { field: 'userID', headerName: 'User', width: 100 },
-    { field: 'time_Log', headerName: 'Thời Gian', width: 100 },
-    { field: 'ltt', headerName: 'Loại Thao Tác', width: 120 },
-    { field: 'document', headerName: 'Tài Liệu Ký', width: 100 },
+    { field: 'userID', headerName: 'User', width: 220 },
+    { field: 'timeLog', headerName: 'Thời Gian', width: 120 },
+    { field: 'ltt', headerName: 'Loại Thao Tác', width: 220 },
+    { field: 'document', headerName: 'Tài Liệu Ký', width: 220 },
     {
-      field: 'sign_status',
-      headerName: 'Trạng Thái',
+      field: 'status',
+      headerName: 'Trạng thái',
       sortable: false,
-      flex: 1,
-      width: 0,
+      flex: 0.3,
+      width: 100,
+      headerAlign: 'center',
+      align: 'center',
+      valueGetter: getStatus,
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      wp_Agency_ID: 'Snow',
-      userID: 'Jon',
-      time_Log: '09/02/2023',
-      ltt: 'Thao Tác Tay',
-      document: 'Phân Trang',
-      sign_status: 'Đang Kích Hoạt',
-    },
-    {
-      id: 2,
-      wp_Agency_ID: 'Snow',
-      userID: 'Jon',
-      time_Log: '09/02/2023',
-      ltt: 'Thao Tác Tay',
-      document: 'Phân Trang',
-      sign_status: 'Đang Kích Hoạt',
-    },
-  ];
-
-  const onView = useCallback((isClick) => {
-    console.log(isClick);
+  const onView = (second) => {
+    setDataEdit(second);
     setView(true);
-  }, []);
+  };
 
   return (
     <>
       <Grid item mb={1.5}>
         <MainCard title="Tìm kiếm lịch sử người dùng">
           {/* <MainCard title="Thông tin tìm kiếm"> */}
-          <Grid container xs={10} spacing={1}>
-            <Grid item xs={2} mt={1}>
+          <Grid container spacing={2}>
+            <Grid item xs={2.5} mt={1}>
               <TextField
                 fullWidth
                 size="small"
@@ -80,15 +76,15 @@ function lich_su_nguoi_dung(props) {
               />
             </Grid>
 
-            <Grid container item xs={2} mt={0.9}>
+            <Grid container item xs={2.5} ml={0.75} mt={0.9}>
               <CustomDatePicker label="Thời gian (từ ngày)" />
             </Grid>
 
-            <Grid container item xs={2} mt={0.9}>
+            <Grid container item xs={2} ml={-1} mt={0.9}>
               <CustomDatePicker label="Thời gian (đến ngày)" />
             </Grid>
 
-            <Grid item xs={2} mt={1}>
+            <Grid item xs={2.5} mt={1}>
               <Autocomplete
                 id="size-small-outlined"
                 size="small"
@@ -96,13 +92,12 @@ function lich_su_nguoi_dung(props) {
                 getOptionLabel={(option) => option.headerName}
                 defaultValue={columns[0]}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Trạng Thái" />
+                  <TextField {...params} placeholder="Trạng Thái Ký" />
                 )}
                 // classes={classes}
               />
             </Grid>
-
-            <Grid item xs={2} mt={1.05}>
+            <Grid item xs={2} mt={1}>
               <ContainedButtons />
             </Grid>
           </Grid>
@@ -116,42 +111,30 @@ function lich_su_nguoi_dung(props) {
       ) : (
         //Tách riêng từng cụm trắng
         <ComponentSkeleton>
-          <MainCard
-            title="Lịch sử người dùng ký tài liệu"
-            // onAdd={true}
-            // addDisabled={true}
-            // onClickAdd={onClickAdd}
-            // titleAdd="Thêm mới"
-          >
+          <MainCard title="Lịch sử người dùng ký tài liệu" content={true}>
             <Grid item xs={12} md={7} lg={8}>
               <DataTable
-                rows={rows}
+                rows={dataFake}
                 columns={columns}
                 checkBoxTable={false}
-                // onDelete={first}
                 onView={onView}
+                textAction="Hành động"
+                size={5}
                 isAction={true}
-                // onEdit={onEdit}
-                // textAction="action"
+                sizeAction={20}
               />
             </Grid>
           </MainCard>
         </ComponentSkeleton>
       )}
-      {/* <ConfirmDialog isOpen={open} setIsOpen={setOpen} /> */}
-      {/* <FormDialog
-        open={open}
-        title="Cập nhật thông tin người dùng"
-        onClose={() => setOpen(false)}
-        onSave={() => setOpen(false)}
-      /> */}
       <FormView
         open={view}
         title="Chi tiết ứng dụng ký"
         onClose={() => setView(false)}
-        onSave={() => setView(false)}
+        onView={onView}
+        view={view}
+        dataEdit={dataEdit}
       />
-      {/* <CustomizedSnackbars /> */}
     </>
   );
 }

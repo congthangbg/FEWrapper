@@ -1,202 +1,216 @@
 import { memo, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
-import { Grid, FormControl, TextField } from '@mui/material';
+import { Grid, TextField } from '@mui/material';
 import { CustomDialog } from './../../components/ConfirmDialog/CustomDialog';
 import CustomTextFieldNew from 'components/CustomTextFieldNew/index';
-import CustomTextField from 'components/CustomTextField/index';
-import AutocompleteCustomer from 'components/AutocompleteCustomer/index';
 import { Autocomplete } from '../../../node_modules/@mui/material/index';
+import { useStylesComboBox } from 'utils/styles';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { emailRegExp, NOTIFY, PHONE, phoneRegExp } from 'utils/MessageContants';
 
-const useStyles = styled((theme) => ({
-  formControl: {
-    width: '100%',
-    '$MuiInputBase-input': {
-      textAlign: 'center',
-    },
-  },
-}));
-
-export function FormView(props) {
-  const classes = useStyles();
-
-  const {
-    assignPermission,
-    open,
-    onClose,
-    onSave,
-    title,
-    dataSample,
-    //onGetGeneralCategory
-  } = props;
-
-  // const {
-  //   //generalCategory
-  // } = assignPermission;
-
-  const [data, setData] = useState({});
-  const [documentStatusCate, setDocumentStatusCate] = useState();
-
-  const [defaultStatus, setDefaultStatus] = useState();
-  const enumStatus = [
-    {
-      id: 1,
-      name: 'Kích hoạt',
-    },
-    {
-      id: 2,
-      name: 'Chưa kích hoạt',
-    },
-  ];
-  useEffect(() => {
-    if (dataSample) {
-      enumStatus.forEach((element) => {
-        if (element.id == dataSample.status) {
-          dataSample.status2 = element;
-        }
-      });
-
-      setData(dataSample);
-    } else {
-      setData();
-    }
-  }, [dataSample]);
-
-  // useEffect(() => {
-  //   onGetGeneralCategory();
-  // }, [])
-
-  // useEffect(() => {
-  //   if (generalCategory) {
-  //     setDocumentStatusCate(generalCategory.filter(x => x.code === 'DOC_BOOK_STATUS'));
-  //     setDefaultStatus(generalCategory.find(x => x.code === 'DOC_BOOK_STATUS').cCommons[0].id);
-  //     setData({
-  //       ...data, cateStatus: generalCategory.find(x => x.code === 'DOC_BOOK_STATUS').cCommons[0].id
-  //     })
-  //   }
-  // }, [generalCategory])
-
-  const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
-  const handleSave = () => {
-    onSave(data);
+function FormView(props) {
+  // const classes = useStylesComboBox();
+  const { title, onClose, open, dataEdit, setView } = props;
+  console.log(dataEdit);
+  const onCloseForm = () => {
+    onClose();
   };
 
-  useEffect(() => {
-    if (!open) setData({});
-  }, [open]);
-  const [items] = useState([
-    {
-      id: '1',
-      label: 'Hoạt động',
-      //  value :'Hoạt động'
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      id: dataEdit ? dataEdit.id : '',
+      userID: dataEdit ? dataEdit.userID : '',
+      appCode: dataEdit ? dataEdit.appCode : '',
+      createDate: dataEdit ? dataEdit.createDate : '',
+      createBy: dataEdit ? dataEdit.createBy : '',
+      document: dataEdit ? dataEdit.document : '',
+      signStatus: dataEdit ? dataEdit.signStatus : '',
+      certificateID: dataEdit ? dataEdit.certificateID : '',
+      timeLog: dataEdit ? dataEdit.timeLog : '',
+      wp_Agency_ID: dataEdit ? dataEdit.wp_Agency_ID : '',
+      ltt: dataEdit ? dataEdit.ltt : '',
     },
-    {
-      id: '2',
-      label: 'Không hoạt động',
-      //  value: 'Không hoạt động'
-    },
-  ]);
-  const handleChangeAuto = (name, value) => {
-    // setQuery({
-    //   ...query,
-    //   [name]: value !== null ? value.id : null
-    // });
-    // setData({
-    //   ...data,
-    //   [name]: value
-    // })
-    if (name == 'status') {
-      setData({
-        ...data,
-        [name]: value.id,
-        createdate: new Date(),
-        [name.concat(2)]: value,
-      });
-    }
-  };
+    validationSchema: Yup.object({
+      userID: Yup.string().max(255).trim().required(NOTIFY.NOT_USER),
+      appCode: Yup.string().max(255).trim().required(NOTIFY.NOT_NAME),
+      createDate: Yup.string().max(255).trim().required('Chưa Nhập Danh Sách'),
+      createBy: Yup.string().max(255).trim().required('Chưa Nhập Trạng Thái'),
+      document: Yup.object().nullable().required('NOTIFY.VILLAGE'),
+      signStatus: Yup.object().nullable().required('NOTIFY.VILLAGE'),
+      certificateID: Yup.string()
+        .max(255)
+        .trim()
+        .required('Chưa Click Ngày Tạo'),
+      timeLog: Yup.string().max(255).trim().required('Chưa Click Ngày Tạo'),
+    }),
+  });
 
   return (
     <CustomDialog
-      maxWidth="sm1"
+      maxWidth="sm"
       title={title}
       open={open}
-      onSave={handleSave}
-      onClose={onClose}
-      onCancel={onClose}
+      onView={setView}
+      onClose={onCloseForm}
+      onCancel={onCloseForm}
       // className={classes.formControl}
     >
-      <Grid container spacing={0.5} ml={-0.7}>
-        <Grid container xs={12} spacing={1}>
+      <form onSubmit={formik.handleSubmit}>
+        <Grid container spacing={1} mt={-4}>
           <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
-              label="Ứng Dụng Ký"
+            <TextField
+              error={Boolean(formik.touched.userID && formik.errors.userID)}
+              fullWidth
+              helperText={formik.touched.userID && formik.errors.userID}
+              label="Tài Khoản"
+              margin="normal"
+              name="userID"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.userID}
               variant="outlined"
+              id="outlined-basic"
+              size="small"
+              disabled
             />
           </Grid>
           <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
+            <TextField
+              error={Boolean(formik.touched.appCode && formik.errors.appCode)}
+              fullWidth
+              helperText={formik.touched.appCode && formik.errors.appCode}
               label="Người Dùng"
+              margin="normal"
+              name="appCode"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.appCode}
               variant="outlined"
-            />
-          </Grid>
-        </Grid>
-        <Grid container xs={12} spacing={1}>
-          <Grid item xs={6}>
-            <CustomTextFieldNew
               id="outlined-basic"
-              label="Thời Gian Tạo"
-              variant="outlined"
+              size="small"
+              disabled
             />
           </Grid>
-          <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
-              label="Người Tạo"
-              variant="outlined"
-            />
-          </Grid>
-        </Grid>
 
-        <Grid container xs={12} spacing={1}>
           <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
-              label="Tài Liệu"
+            <TextField
+              error={Boolean(
+                formik.touched.createDate && formik.errors.createDate
+              )}
+              fullWidth
+              helperText={formik.touched.createDate && formik.errors.createDate}
+              label="Thời gian tạo"
+              margin="normal"
+              name="createDate"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.createDate}
               variant="outlined"
+              id="outlined-basic"
+              size="small"
+              disabled
             />
           </Grid>
           <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
-              label="Trạng Thái Ký"
+            <TextField
+              error={Boolean(formik.touched.createBy && formik.errors.createBy)}
+              fullWidth
+              helperText={formik.touched.createBy && formik.errors.createBy}
+              label="Người tạo"
+              margin="normal"
+              name="createBy"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.createBy}
               variant="outlined"
+              id="outlined-basic"
+              size="small"
+              disabled
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              error={Boolean(formik.touched.document && formik.errors.document)}
+              fullWidth
+              helperText={formik.touched.document && formik.errors.document}
+              label="Tài liệu"
+              margin="normal"
+              name="document"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.document}
+              variant="outlined"
+              id="outlined-basic"
+              size="small"
+              disabled
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              error={Boolean(
+                formik.touched.signStatus && formik.errors.signStatus
+              )}
+              fullWidth
+              helperText={formik.touched.signStatus && formik.errors.signStatus}
+              label="Trạng thái ký"
+              margin="normal"
+              name="signStatus"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.signStatus}
+              variant="outlined"
+              id="outlined-basic"
+              size="small"
+              disabled
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              error={Boolean(
+                formik.touched.certificateID && formik.errors.certificateID
+              )}
+              fullWidth
+              helperText={
+                formik.touched.certificateID && formik.errors.certificateID
+              }
+              label="ID chữ ký"
+              margin="normal"
+              name="certificateID"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.certificateID}
+              variant="outlined"
+              id="outlined-basic"
+              size="small"
+              disabled
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <TextField
+              error={Boolean(formik.touched.timeLog && formik.errors.timeLog)}
+              fullWidth
+              helperText={formik.touched.timeLog && formik.errors.timeLog}
+              label="Thời gian ký"
+              margin="normal"
+              name="timeLog"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.timeLog}
+              variant="outlined"
+              id="outlined-basic"
+              size="small"
+              disabled
             />
           </Grid>
         </Grid>
-        <Grid container xs={12} spacing={1}>
-          <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
-              label="ID Chữ Ký"
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomTextFieldNew
-              id="outlined-basic"
-              label="Thời Gian Ký"
-              variant="outlined"
-            />
-          </Grid>
-        </Grid>
-      </Grid>
+      </form>
     </CustomDialog>
   );
 }
@@ -204,8 +218,6 @@ export function FormView(props) {
 // eslint-disable-next-line react/no-typos
 FormView.PropTypes = {
   onClose: PropTypes.func,
-  onSave: PropTypes.func,
-  open: PropTypes.bool,
   title: PropTypes.string,
   assignPermission: PropTypes.array,
 };

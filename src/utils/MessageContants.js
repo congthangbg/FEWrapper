@@ -104,6 +104,7 @@ export const DELETE_ERROR = "Xóa thất bại!"
 
 export const NOTIFY ={
    NOT_NAME : 'Bạn chưa nhập họ tên !',
+   NOT_USER : 'Bạn chưa nhập họ tên !',
    VILLAGE : 'Bạn chưa chọn thôn !',
    NOT_BLANK : 'Không được để trống !',
    VALID_PHONE:'Số điện thoại không đúng định dạng !',

@@ -10,30 +10,53 @@ import { useSelector } from 'react-redux';
 import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
 import FormView from './FormView';
 import { useStylesComboBox } from 'utils/styles';
-// import { Component} form '../'
-// 1: rows = Danh sách data
-// 2: checkBoxTable = checkBoxTable
+import { TT_NGUOI_DUNG } from 'utils/MockData';
+import toastifyAlert from 'components/SnackBar/toastifyAlert';
+import { ON_FAIL, ON_SUCCESS } from 'utils/MessageContants';
 
 function thong_tin_nguoi_dung(props) {
   const dataLogin = useSelector((state) => state.loginReducer);
-  console.log({ dataLogin });
   const classes = useStylesComboBox();
   let [open, setOpen] = useState(false);
   let [view, setView] = useState(false);
-
+  let [dataEdit, setDataEdit] = useState(null);
+  const [dataFake, setDataFake] = useState(TT_NGUOI_DUNG);
   const a = 3;
 
+  function getStatus(params) {
+    if (params.row.status == 1) {
+      return `Hoạt động`;
+    } else if (params.row.status == 2) {
+      return `Không hoạt động`;
+    } else {
+      return ``;
+    }
+  }
   const columns = [
-    { field: 'id', headerName: 'STT', width: 50, alignCenter: 'center' },
     {
-      field: 'serID',
+      field: 'id',
+      headerName: 'STT',
+      width: 50,
+      align: 'center',
+    },
+    {
+      field: 'userID',
       headerName: 'Tài Khoản',
       width: 150,
-      alignCenter: 'center',
+      align: 'center',
     },
     { field: 'userName', headerName: 'Tên Người Dùng', width: 150 },
-    { field: 'iDNo', headerName: 'CMND/Mã Số Thuế', width: 150 },
-    { field: 'status', headerName: 'Trạng Thái', width: 100 },
+    { field: 'idNo', headerName: 'CMND/Mã Số Thuế', width: 150 },
+    {
+      field: 'status',
+      headerName: 'Trạng thái',
+      sortable: false,
+      flex: 0.3,
+      width: 100,
+      headerAlign: 'center',
+      align: 'center',
+      valueGetter: getStatus,
+    },
     { field: 'phone', headerName: 'Số Điện Thoại', width: 120 },
     {
       field: 'email',
@@ -44,28 +67,41 @@ function thong_tin_nguoi_dung(props) {
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      serID: 'Snow',
-      userName: 'Jon',
-      iDNo: 35545,
-      status: 'Duyệt',
-      phone: '0384829738',
-      email: 'nttung.code@gmail.com',
-    },
-  ];
+  //
 
-  const onEdit = useCallback((isClick) => {
-    console.log(isClick);
-    setOpen(true);
-  }, []);
-
-  const onView = useCallback((isClick) => {
-    console.log(isClick);
+  const onView = (second) => {
+    setDataEdit(second);
     setView(true);
-  }, []);
+  };
 
+  const onEdit = (row) => {
+    setOpen(true);
+    setDataEdit(row);
+    // toastifyAlert.success('Success');
+  };
+  // const onView = useCallback((isClick) => {
+  //   console.log(isClick);
+  //   setView(true);
+  // }, []);
+  //const onEdit = useCallback((isClick) => {
+  //   console.log(isClick);
+  //   setOpen(true);
+  // }, []);
+
+  const onSave = useCallback((data) => {
+    setDataEdit(null);
+    const idx = dataFake.findIndex((x) => x.id == data.id);
+    const summerFruitsCopy = [...dataFake];
+    if (idx == -1) {
+      toastifyAlert.success(ON_FAIL);
+      return;
+    } else {
+      summerFruitsCopy[idx] = data;
+      setDataFake(summerFruitsCopy);
+      toastifyAlert.success(ON_SUCCESS);
+    }
+    setOpen(false);
+  }, []);
   return (
     <>
       <Grid item mb={1.5}>
@@ -130,33 +166,37 @@ function thong_tin_nguoi_dung(props) {
           >
             <Grid item xs={12} md={7} lg={8}>
               <DataTable
-                rows={rows}
+                rows={dataFake}
                 columns={columns}
                 checkBoxTable={false}
                 onView={onView}
-                isAction={true}
                 onEdit={onEdit}
                 textAction="Hành động"
                 size={5}
+                isAction={true}
+                sizeAction={20}
               />
             </Grid>
           </MainCard>
         </ComponentSkeleton>
       )}
-      {/* <ConfirmDialog isOpen={open} setIsOpen={setOpen} /> */}
-      <FormDialog
-        open={open}
-        title="Cập nhật thông tin người dùng"
-        onClose={() => setOpen(false)}
-        onSave={() => setOpen(false)}
-      />
+
       <FormView
         open={view}
         title="Chi Tiết Người Dùng"
         onClose={() => setView(false)}
-        // onSave={() => setView(false)}
+        onView={onView}
+        view={view}
+        dataEdit={dataEdit}
       />
-      {/* <CustomizedSnackbars /> */}
+      <FormDialog
+        open={open}
+        title="Cập nhật thông tin người dùng"
+        onClose={() => setOpen(false)}
+        onSave={onSave}
+        dataEdit={dataEdit}
+        setDataEdit={setDataEdit}
+      />
     </>
   );
 }

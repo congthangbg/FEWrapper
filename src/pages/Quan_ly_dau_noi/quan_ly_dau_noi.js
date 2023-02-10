@@ -6,6 +6,7 @@ import DataTable from 'components/TableCustom/DataTable';
 import ComponentSkeleton from 'pages/components-overview/ComponentSkeleton';
 import { memo, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { QL_DAU_NOI } from 'utils/MockData';
 import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
 // import { Component} form '../'
 // 1: rows = Danh sách data
@@ -14,6 +15,7 @@ import ContainedButtons from '../../components/ContainedButtons/ContainedButtons
 function quan_ly_dau_noi(props) {
   const dataLogin = useSelector((state) => state.loginReducer);
   console.log({ dataLogin });
+  const [dataFake, setDataFake] = useState(QL_DAU_NOI);
 
   // let [open, setOpen] = useState(false);
   // let [edit, setEdit] = useState(false);
@@ -22,10 +24,10 @@ function quan_ly_dau_noi(props) {
   const columns = [
     { field: 'id', headerName: 'STT', width: 100, alignCenter: 'center' },
 
-    { field: 'nameUser', headerName: 'Người dùng', width: 200 },
-    { field: 'type', headerName: 'Gói cước', width: 200 },
+    { field: 'nameUser', headerName: 'Người dùng', width: 400 },
+    { field: 'type', headerName: 'Gói cước', width: 400 },
     {
-      field: 'status',
+      field: 'list',
       headerName: 'Danh sách app ký',
       sortable: false,
       flex: 1,
@@ -33,9 +35,9 @@ function quan_ly_dau_noi(props) {
     },
   ];
 
-  const rows = [
-    { id: 1, nameUser: 'Snow', type: '3G', status: 'Lèo Tèo Test' },
-  ];
+  // const rows = [
+  //   { id: 1, nameUser: 'Snow', type: '3G', status: 'Lèo Tèo Test' },
+  // ];
   return (
     <>
       <Grid item mb={1.5}>
@@ -80,7 +82,7 @@ function quan_ly_dau_noi(props) {
           <MainCard title="Danh sách đầu  nối">
             <Grid item xs={12} md={7} lg={8}>
               <DataTable
-                rows={rows}
+                rows={dataFake}
                 columns={columns}
                 checkBoxTable={false}
                 isAction={false}

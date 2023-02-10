@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { memo } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -8,65 +9,58 @@ import { styled } from '@mui/material/styles';
 import { Grid, TextField } from '@mui/material';
 import { CustomDialog } from './../../components/ConfirmDialog/CustomDialog';
 import { Autocomplete } from '../../../node_modules/@mui/material/index';
+import { useStylesComboBox } from 'utils/styles';
+import { PHONE, NOTIFY, emailRegExp, phoneRegExp } from 'utils/MessageContants';
 
-const useStyles = styled((theme) => ({
-  formControl: {
-    width: '100%',
-    '$MuiInputBase-input': {
-      textAlign: 'center',
-    },
-  },
-}));
-
-export function FormEdit(props) {
-  const classes = useStyles();
-
-  const { open, onClose, dataEdit, title } = props;
-
-  const enumStatus = [
-    {
-      id: 1,
-      name: 'Kích hoạt',
-    },
-    {
-      id: 2,
-      name: 'Chưa kích hoạt',
-    },
+function FormEdit(props) {
+  const { title, onClose, open, dataEdit, setDataEdit, onSave } = props;
+  const classes = useStylesComboBox();
+  const status = [
+    { id: 1, name: 'Hoạt động' },
+    { id: 2, name: 'Không hoạt động' },
   ];
+
+  const onCloseForm = () => {
+    onClose();
+    setDataEdit(null);
+  };
+
+  React.useEffect(() => {
+    if (!open) setDataEdit(null);
+  }, [open]);
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      userID: dataEdit ? dataEdit.userID : '',
-      nameParameters: dataEdit ? dataEdit.nameParameters : '',
-      typeParameters: dataEdit ? dataEdit.typeParameters : '',
-      valueParameters: dataEdit ? dataEdit.valueParameters : '',
-      villageId: dataEdit && dataEdit.village ? dataEdit.village : undefined,
+      id: dataEdit ? dataEdit.id : '',
+      code: dataEdit ? dataEdit.code : '',
+      parameterName: dataEdit ? dataEdit.parameterName : '',
+      type: dataEdit ? dataEdit.type : '',
+      value: dataEdit ? dataEdit.value : '',
+      status: dataEdit ? status.find((x) => x.id == dataEdit.status): status[0],
     },
     validationSchema: Yup.object({
-      userID: Yup.string().max(255).trim().required('Chưa Nhập Tài Khoản'),
-      nameParameters: Yup.string()
-        .max(255)
-        .trim()
-        .required('Chưa Nhập Tên Người Dùng'),
-      typeParameters: Yup.string()
-        .max(255)
-        .trim()
-        .required('Chưa Nhập Danh Sách'),
-      valueParameters: Yup.string()
-        .max(255)
-        .trim()
-        .required('Chưa Nhập Trạng Thái'),
-      villageId: Yup.object().nullable().required('NOTIFY.VILLAGE'),
+      code: Yup.string().max(255).trim().required(NOTIFY.NOT_USER),
+      parameterName: Yup.string().max(255).trim().required(NOTIFY.NOT_NAME),
+      type: Yup.string().max(255).trim().required('Chưa Nhập Danh Sách'),
+      value: Yup.string().max(255).trim().required('Chưa Nhập Trạng Thái'),
+      status: Yup.object().nullable().required('NOTIFY.VILLAGE'),
     }),
     onSubmit: (values, { resetForm }) => {
       // onSave();
-      console.log(values);
+      const value = {
+        ...values,
+        status: values.status.id,
+        // createDate: new Date(values.createDate).getTime()
+      };
+      onSave(value);
+      formik.resetForm();
     },
   });
+
   const handleSave = () => {
-    console.log(formik.values);
-    formik.resetForm();
+    // console.log(formik.values);
+    formik.handleSubmit();
   };
 
   return (
@@ -75,116 +69,110 @@ export function FormEdit(props) {
       title={title}
       open={open}
       onSave={handleSave}
-      onClose={onClose}
-      onCancel={onClose}
+      onClose={onCloseForm}
+      onCancel={onCloseForm}
       // className={classes.formControl}
     >
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={1} mt={-4}>
           <Grid item xs={6}>
             <TextField
-              error={Boolean(formik.touched.userID && formik.errors.userID)}
+              error={Boolean(formik.touched.code && formik.errors.code)}
               fullWidth
-              helperText={formik.touched.userID && formik.errors.userID}
-              label="Mã Tham Số"
+              helperText={formik.touched.code && formik.errors.code}
+              label="Tài Khoản"
               margin="normal"
-              name="userID"
+              name="code"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              value={formik.values.userID}
+              value={formik.values.code}
               variant="outlined"
               id="outlined-basic"
+              size="small"
+              disabled
             />
           </Grid>
           <Grid item xs={6}>
             <TextField
               error={Boolean(
-                formik.touched.nameParameters && formik.errors.nameParameters
+                formik.touched.parameterName && formik.errors.parameterName
               )}
               fullWidth
               helperText={
-                formik.touched.nameParameters && formik.errors.nameParameters
+                formik.touched.parameterName && formik.errors.parameterName
               }
-              label="Tên Tham Số"
+              label="Tên Người Dùng"
               margin="normal"
-              name="nameParameters"
+              name="parameterName"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              value={formik.values.nameParameters}
+              value={formik.values.parameterName}
               variant="outlined"
               id="outlined-basic"
+              size="small"
+              disabled
             />
           </Grid>
 
-          <Grid item xs={6} mt={-2.8}>
+          <Grid item xs={6}>
             <TextField
-              error={Boolean(
-                formik.touched.typeParameters && formik.errors.typeParameters
-              )}
+              error={Boolean(formik.touched.type && formik.errors.type)}
               fullWidth
-              helperText={
-                formik.touched.typeParameters && formik.errors.typeParameters
-              }
-              label="Loại Tham Số"
+              helperText={formik.touched.type && formik.errors.type}
+              label="Mã Số Thuế"
               margin="normal"
-              name="typeParameters"
+              name="type"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              value={formik.values.typeParameters}
+              value={formik.values.type}
               variant="outlined"
               id="outlined-basic"
+              size="small"
+              disabled
             />
           </Grid>
-          <Grid item xs={6} mt={-2.8}>
+          <Grid item xs={6}>
             <TextField
-              error={Boolean(
-                formik.touched.valueParameters && formik.errors.valueParameters
-              )}
+              error={Boolean(formik.touched.value && formik.errors.value)}
               fullWidth
-              helperText={
-                formik.touched.valueParameters && formik.errors.valueParameters
-              }
-              label="Giá Trị Tham Số"
+              helperText={formik.touched.value && formik.errors.value}
+              label="CMND"
               margin="normal"
-              name="valueParameters"
+              name="value"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              value={formik.values.valueParameters}
+              value={formik.values.value}
               variant="outlined"
               id="outlined-basic"
+              size="small"
+              disabled
             />
           </Grid>
 
-          <Grid item xs={6} mt={-2.4}>
+          <Grid item xs={6}>
             <Autocomplete
-              id="villageId"
-              name="villageId"
-              options={enumStatus}
+              id="size-small-outlined"
+              size="small"
+              name="status"
+              options={status}
               getOptionLabel={(option) => option.name}
-              onChange={(event, value) =>
-                formik.setFieldValue('villageId', value)
-              }
-              value={
-                formik.values && formik.values.villageId
-                  ? formik.values.villageId
-                  : undefined
-              }
+              defaultValue={status[0]}
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  placeholder="Trạng thái tham số"
-                  onChange={formik.handleChange}
-                  margin="normal"
-                  id="size-small-outlined"
-                  size="small"
-                  error={Boolean(
-                    formik.touched.villageId && formik.errors.villageId
-                  )}
-                  helperText={
-                    formik.touched.villageId && formik.errors.villageId
-                  }
+                  placeholder="Trạng Thái"
+                  error={Boolean(formik.touched.status && formik.errors.status)}
+                  helperText={formik.touched.status && formik.errors.status}
                 />
               )}
+              // disabled ={isView ? true :false}
+              classes={classes}
+              onChange={(event, value) => formik.setFieldValue('status', value)}
+              value={
+                formik.values && formik.values.status
+                  ? status.find((x) => x.id == formik.values.status.id)
+                  : undefined
+              }
             />
           </Grid>
         </Grid>
