@@ -146,9 +146,9 @@ const Profile = () => {
                                                         <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
                                                         <Stack>
                                                             <Typography variant="h6">Admin</Typography>
-                                                            <Typography variant="body2" color="textSecondary">
+                                                            {/* <Typography variant="body2" color="textSecondary">
                                                                 UI/UX Designer
-                                                            </Typography>
+                                                            </Typography> */}
                                                         </Stack>
                                                     </Stack>
                                                 </Grid>
