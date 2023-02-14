@@ -23,9 +23,9 @@ function lich_su_nguoi_dung(props) {
   const a = 3;
 
   function getStatus(params) {
-    if (params.row.status == 1) {
+    if (params.row.signStatus == 1) {
       return `Hoạt động`;
-    } else if (params.row.status == 2) {
+    } else if (params.row.signStatus == 2) {
       return `Không hoạt động`;
     } else {
       return ``;
@@ -36,19 +36,19 @@ function lich_su_nguoi_dung(props) {
     {
       field: 'wp_Agency_ID',
       headerName: 'Ứng Dụng',
-      width: 250,
+      width: 100,
       alignCenter: 'center',
     },
-    { field: 'userID', headerName: 'User', width: 220 },
+    { field: 'userID', headerName: 'User', width: 180 },
     { field: 'timeLog', headerName: 'Thời Gian', width: 120 },
-    { field: 'ltt', headerName: 'Loại Thao Tác', width: 220 },
-    { field: 'document', headerName: 'Tài Liệu Ký', width: 220 },
+    { field: 'ltt', headerName: 'Loại Thao Tác', width: 150 },
+    { field: 'document', headerName: 'Tài Liệu Ký', width: 150 },
     {
-      field: 'status',
-      headerName: 'Trạng thái',
+      field: 'signStatus',
+      headerName: 'Trạng thái ký',
       sortable: false,
-      flex: 0.3,
-      width: 100,
+      flex: 0.5,
+      width: 160,
       headerAlign: 'center',
       align: 'center',
       valueGetter: getStatus,

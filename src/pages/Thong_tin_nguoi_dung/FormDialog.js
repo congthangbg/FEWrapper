@@ -21,7 +21,7 @@ function FormDialog(props) {
   ];
   const custType = [
     { id: 1, name: 'Thân thiết' },
-    { id: 2, name: 'Không thân thiết' },
+    { id: 0, name: 'Không thân thiết' },
   ];
 
   const onCloseForm = () => {

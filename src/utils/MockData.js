@@ -122,7 +122,7 @@ export const LS_NGUOI_DUNG = [
     createDate: '10/02/2023',
     createBy: 'Tùng Tạo',
     document: 'Fix ',
-    signStatus: 1,
+    signStatus: 2,
     certificateID: '123',
     timeLog: '10-9-2023',
     wp_Agency_ID: '022',
@@ -164,7 +164,7 @@ export const QL_DAU_NOI = [
   },
 ];
 
-export const TS_CAU_HINH = [
+export var TS_CAU_HINH = [
   {
     id: 1,
     code: '021',

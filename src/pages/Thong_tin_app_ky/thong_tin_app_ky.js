@@ -11,7 +11,6 @@ import { Autocomplete } from '@mui/material';
 import { useStylesComboBox } from 'utils/styles';
 import { TT_APP_KY } from 'utils/MockData';
 import toastifyAlert from 'components/SnackBar/toastifyAlert';
-import { MESSAGE } from 'utils/constants';
 import { ON_FAIL, ON_SUCCESS } from 'utils/MessageContants';
 
 function thong_tin_app_ky(props) {
@@ -158,13 +157,6 @@ function thong_tin_app_ky(props) {
           </MainCard>
         </ComponentSkeleton>
       )}
-      {/* <CustomDialog
-      <FormView
-        open={open}
-        title="Chi tiết ứng dụng ký"
-        onClose={() => setOpen(false)}
-        onSave={() => setOpen(false)}
-      /> */}
       <InfoApp
         open={open}
         title={!isView ? 'Cập nhật ứng dụng ký' : 'Chi tiết ứng dụng ký'}

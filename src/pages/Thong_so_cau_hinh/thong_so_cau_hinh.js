@@ -9,14 +9,17 @@ import { useSelector } from 'react-redux';
 import { TS_CAU_HINH } from 'utils/MockData';
 import ContainedButtons from '../../components/ContainedButtons/ContainedButtons';
 import FormAdd from './FormAdd';
-import FormEdit from './FormEdit';
+import FormEdit from './FormInfo';
 import { useStylesComboBox } from 'utils/styles';
 import toastifyAlert from 'components/SnackBar/toastifyAlert';
 import { ON_FAIL, ON_SUCCESS } from 'utils/MessageContants';
+import { TextField } from '../../../node_modules/@mui/material/index';
+import FormInfo from './FormInfo';
 
 function thong_so_cau_hinh(props) {
   const dataLogin = useSelector((state) => state.loginReducer);
   let [open, setOpen] = useState(false);
+  let [isSave, setIsSave] = useState(null);
   let [dataEdit, setDataEdit] = useState(null);
   const [dataFake, setDataFake] = useState(TS_CAU_HINH);
   const a = 3;
@@ -31,21 +34,21 @@ function thong_so_cau_hinh(props) {
     }
   }
   const columns = [
-    { field: 'id', headerName: 'STT', width: 100, alignCenter: 'center' },
+    { field: 'id', headerName: 'STT', width: 50, alignCenter: 'center' },
     {
       field: 'code',
       headerName: 'Mã tham số',
-      width: 150,
+      width: 100,
       alignCenter: 'center',
     },
-    { field: 'parameterName', headerName: 'Tên tham số', width: 300 },
-    { field: 'type', headerName: 'Loại tham số', width: 250 },
-    { field: 'value', headerName: 'Giá trị', width: 250 },
+    { field: 'parameterName', headerName: 'Tên tham số', width: 150 },
+    { field: 'type', headerName: 'Loại tham số', width: 200 },
+    { field: 'value', headerName: 'Giá trị', width: 200 },
     {
       ield: 'status',
       headerName: 'Trạng thái',
       sortable: false,
-      flex: 0.3,
+      flex: 0.8,
       width: 160,
       headerAlign: 'center',
       align: 'center',
@@ -53,10 +56,11 @@ function thong_so_cau_hinh(props) {
     },
   ];
 
-  const onClickAdd = useCallback((isClick) => {
-    console.log(isClick);
+  const onClickAdd = (row) => {
     setOpen(true);
-  }, []);
+    setIsSave(row);
+    // toastifyAlert.success('Success');
+  };
 
   const onEdit = (row) => {
     setOpen(true);
@@ -65,6 +69,7 @@ function thong_so_cau_hinh(props) {
   };
 
   const onSave = useCallback((data) => {
+    setIsSave(null);
     setDataEdit(null);
     const idx = dataFake.findIndex((x) => x.id == data.id);
     const summerFruitsCopy = [...dataFake];
@@ -85,22 +90,26 @@ function thong_so_cau_hinh(props) {
           {/* <MainCard title="Thông tin tìm kiếm"> */}
           <Grid container spacing={2}>
             <Grid container item xs={3}>
-              <CustomTextField
+              <TextField
+                fullWidth
+                size="small"
+                id="outlined-basic"
                 label="Mã tham số"
-                clearText
                 onChange={(e) => console.log(e)}
               />
             </Grid>
 
             <Grid container item xs={3}>
-              <CustomTextField
+              <TextField
+                fullWidth
+                size="small"
+                id="outlined-basic"
                 label="Tên tham số"
-                clearText
                 onChange={(e) => console.log(e)}
               />
             </Grid>
 
-            <Grid item xs={3} mt={1}>
+            <Grid item xs={3}>
               <ContainedButtons />
             </Grid>
           </Grid>
@@ -117,10 +126,9 @@ function thong_so_cau_hinh(props) {
         <ComponentSkeleton>
           <MainCard
             title="Danh sách cấu hình"
-            // onAdd={true}
-            // // addDisabled={true}
-            // onClickAdd={onClickAdd}
-            // titleAdd="Thêm mới"
+            onAdd={true}
+            onClickAdd={onClickAdd}
+            titleAdd="Thêm mới"
             content={true}
           >
             <Grid item xs={12} md={7} lg={8}>
@@ -139,13 +147,17 @@ function thong_so_cau_hinh(props) {
         </ComponentSkeleton>
       )}
       {/* <ConfirmDialog isOpen={open} setIsOpen={setOpen} /> */}
-      <FormEdit
+      <FormInfo
         open={open}
-        title="Cập nhật tham số cấu hình"
+        title={
+          !isSave ? 'Cập nhật thông số cấu hình' : 'Thêm mới thông số cấu hình'
+        }
         onClose={() => setOpen(false)}
         onSave={onSave}
         dataEdit={dataEdit}
         setDataEdit={setDataEdit}
+        isSave={isSave}
+        setIsSave={setIsSave}
       />
       {/* <FormAdd
         open={open}

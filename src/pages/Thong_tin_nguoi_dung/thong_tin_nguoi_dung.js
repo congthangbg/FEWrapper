@@ -52,7 +52,7 @@ function thong_tin_nguoi_dung(props) {
       headerName: 'Trạng thái',
       sortable: false,
       flex: 0.3,
-      width: 100,
+      width: 150,
       headerAlign: 'center',
       align: 'center',
       valueGetter: getStatus,
@@ -62,7 +62,7 @@ function thong_tin_nguoi_dung(props) {
       field: 'email',
       headerName: 'Email',
       sortable: false,
-      flex: 1,
+      flex: 0.4,
       width: 180,
     },
   ];

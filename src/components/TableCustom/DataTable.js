@@ -51,8 +51,17 @@ import { useEffect, useState } from 'react';
 // ];
 
 export default function DataTable(props) {
-  const { rows, columns, checkBoxTable, onEdit, onDelete, onView, textAction,isAction,sizeAction } =
-    props;
+  const {
+    rows,
+    columns,
+    checkBoxTable,
+    onEdit,
+    onDelete,
+    onView,
+    textAction,
+    isAction,
+    sizeAction,
+  } = props;
 
   const [action, setAction] = useState(columns);
   const styles = useStyles();
@@ -82,7 +91,7 @@ export default function DataTable(props) {
       field: 'action',
       headerName: textAction ? textAction : 'Hành Động',
       type: 'actions',
-      width: sizeAction ? sizeAction :150,
+      width: sizeAction ? sizeAction : 150,
       sortable: false,
       // disableClickEventBubbling: true,
       flex: 0.3,

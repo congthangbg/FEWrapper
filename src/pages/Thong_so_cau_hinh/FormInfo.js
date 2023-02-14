@@ -7,13 +7,23 @@ import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import { Grid, TextField } from '@mui/material';
-import { CustomDialog } from './../../components/ConfirmDialog/CustomDialog';
+import { CustomDialog } from '../../components/ConfirmDialog/CustomDialog';
 import { Autocomplete } from '../../../node_modules/@mui/material/index';
 import { useStylesComboBox } from 'utils/styles';
 import { PHONE, NOTIFY, emailRegExp, phoneRegExp } from 'utils/MessageContants';
+import { TS_CAU_HINH } from 'utils/MockData';
 
 function FormEdit(props) {
-  const { title, onClose, open, dataEdit, setDataEdit, onSave } = props;
+  const {
+    title,
+    onClose,
+    open,
+    dataEdit,
+    setDataEdit,
+    onSave,
+    isSave,
+    setIsSave,
+  } = props;
   const classes = useStylesComboBox();
   const status = [
     { id: 1, name: 'Hoạt động' },
@@ -23,6 +33,7 @@ function FormEdit(props) {
   const onCloseForm = () => {
     onClose();
     setDataEdit(null);
+    setIsSave(null);
   };
 
   React.useEffect(() => {
@@ -37,7 +48,9 @@ function FormEdit(props) {
       parameterName: dataEdit ? dataEdit.parameterName : '',
       type: dataEdit ? dataEdit.type : '',
       value: dataEdit ? dataEdit.value : '',
-      status: dataEdit ? status.find((x) => x.id == dataEdit.status): status[0],
+      status: dataEdit
+        ? status.find((x) => x.id == dataEdit.status)
+        : status[0],
     },
     validationSchema: Yup.object({
       code: Yup.string().max(255).trim().required(NOTIFY.NOT_USER),
@@ -47,14 +60,27 @@ function FormEdit(props) {
       status: Yup.object().nullable().required('NOTIFY.VILLAGE'),
     }),
     onSubmit: (values, { resetForm }) => {
+      const arr = JSON.parse(JSON.stringify(TS_CAU_HINH));
       // onSave();
-      const value = {
-        ...values,
-        status: values.status.id,
-        // createDate: new Date(values.createDate).getTime()
-      };
-      onSave(value);
+      var nextId = 0;
+      arr.forEach((element) => {
+        nextId = element.id + 1;
+      });
+      const value = JSON.parse(JSON.stringify(values));
+      // console.log(values);
+      value.status = values.status.id;
+      value.id = nextId;
+      // console.log(value);
+
+      var TS_CAU_HINH_NEW = [];
+      TS_CAU_HINH_NEW.push(...arr);
+      TS_CAU_HINH_NEW.push(value);
+      // console.log(TS_CAU_HINH_NEW);
+      // console.log(TS_CAU_HINH);
+      arr.push(value);
+      onSave(TS_CAU_HINH);
       formik.resetForm();
+      console.log(arr);
     },
   });
 
@@ -80,7 +106,7 @@ function FormEdit(props) {
               error={Boolean(formik.touched.code && formik.errors.code)}
               fullWidth
               helperText={formik.touched.code && formik.errors.code}
-              label="Tài Khoản"
+              label="Mã tham số"
               margin="normal"
               name="code"
               onBlur={formik.handleBlur}
@@ -89,7 +115,7 @@ function FormEdit(props) {
               variant="outlined"
               id="outlined-basic"
               size="small"
-              disabled
+              disabled={isSave ? false : true}
             />
           </Grid>
           <Grid item xs={6}>
@@ -101,7 +127,7 @@ function FormEdit(props) {
               helperText={
                 formik.touched.parameterName && formik.errors.parameterName
               }
-              label="Tên Người Dùng"
+              label="Tên tham số"
               margin="normal"
               name="parameterName"
               onBlur={formik.handleBlur}
@@ -110,7 +136,6 @@ function FormEdit(props) {
               variant="outlined"
               id="outlined-basic"
               size="small"
-              disabled
             />
           </Grid>
 
@@ -119,7 +144,7 @@ function FormEdit(props) {
               error={Boolean(formik.touched.type && formik.errors.type)}
               fullWidth
               helperText={formik.touched.type && formik.errors.type}
-              label="Mã Số Thuế"
+              label="Loại tham số"
               margin="normal"
               name="type"
               onBlur={formik.handleBlur}
@@ -128,7 +153,6 @@ function FormEdit(props) {
               variant="outlined"
               id="outlined-basic"
               size="small"
-              disabled
             />
           </Grid>
           <Grid item xs={6}>
@@ -136,7 +160,7 @@ function FormEdit(props) {
               error={Boolean(formik.touched.value && formik.errors.value)}
               fullWidth
               helperText={formik.touched.value && formik.errors.value}
-              label="CMND"
+              label="Giá trị tham số"
               margin="normal"
               name="value"
               onBlur={formik.handleBlur}
@@ -145,7 +169,6 @@ function FormEdit(props) {
               variant="outlined"
               id="outlined-basic"
               size="small"
-              disabled
             />
           </Grid>
 
@@ -160,7 +183,7 @@ function FormEdit(props) {
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  placeholder="Trạng Thái"
+                  placeholder="Trạng thái tham số"
                   error={Boolean(formik.touched.status && formik.errors.status)}
                   helperText={formik.touched.status && formik.errors.status}
                 />
