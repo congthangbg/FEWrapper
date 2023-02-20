@@ -16,6 +16,11 @@ import { emailRegExp, NOTIFY, PHONE, phoneRegExp } from 'utils/MessageContants';
 function FormView(props) {
   // const classes = useStylesComboBox();
   const { title, onClose, open, dataEdit, setView } = props;
+  const classes = useStylesComboBox();
+  const signStatus = [
+    { id: 1, name: 'Hoạt động' },
+    { id: 2, name: 'Không hoạt động' },
+  ];
   console.log(dataEdit);
   const onCloseForm = () => {
     onClose();
@@ -30,7 +35,10 @@ function FormView(props) {
       createDate: dataEdit ? dataEdit.createDate : '',
       createBy: dataEdit ? dataEdit.createBy : '',
       document: dataEdit ? dataEdit.document : '',
-      signStatus: dataEdit ? dataEdit.signStatus : '',
+      // signStatus: dataEdit ? dataEdit.signStatus : '',
+      signStatus: dataEdit
+        ? signStatus.find((x) => x.id == dataEdit.signStatus)
+        : signStatus[0],
       certificateID: dataEdit ? dataEdit.certificateID : '',
       timeLog: dataEdit ? dataEdit.timeLog : '',
       wp_Agency_ID: dataEdit ? dataEdit.wp_Agency_ID : '',
@@ -151,23 +159,36 @@ function FormView(props) {
               disabled
             />
           </Grid>
-          <Grid item xs={6}>
-            <TextField
-              error={Boolean(
-                formik.touched.signStatus && formik.errors.signStatus
-              )}
-              fullWidth
-              helperText={formik.touched.signStatus && formik.errors.signStatus}
-              label="Trạng thái ký"
-              margin="normal"
-              name="signStatus"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.signStatus}
-              variant="outlined"
-              id="outlined-basic"
+          <Grid item xs={6} mt={2}>
+            <Autocomplete
+              id="size-small-outlined"
               size="small"
+              name="status"
+              options={signStatus}
+              getOptionLabel={(option) => option.name}
+              defaultValue={signStatus[0]}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  placeholder="Trạng thái ký"
+                  error={Boolean(
+                    formik.touched.signStatus && formik.errors.signStatus
+                  )}
+                  helperText={
+                    formik.touched.signStatus && formik.errors.signStatus
+                  }
+                />
+              )}
               disabled
+              classes={classes}
+              onChange={(event, value) =>
+                formik.setFieldValue('signStatus', value)
+              }
+              value={
+                formik.values && formik.values.signStatus
+                  ? signStatus.find((x) => x.id == formik.values.signStatus.id)
+                  : undefined
+              }
             />
           </Grid>
           <Grid item xs={6}>

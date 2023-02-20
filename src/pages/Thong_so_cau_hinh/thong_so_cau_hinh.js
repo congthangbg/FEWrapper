@@ -15,6 +15,7 @@ import toastifyAlert from 'components/SnackBar/toastifyAlert';
 import { ON_FAIL, ON_SUCCESS } from 'utils/MessageContants';
 import { TextField } from '../../../node_modules/@mui/material/index';
 import FormInfo from './FormInfo';
+import { values } from 'lodash';
 
 function thong_so_cau_hinh(props) {
   const dataLogin = useSelector((state) => state.loginReducer);
@@ -68,13 +69,15 @@ function thong_so_cau_hinh(props) {
     // toastifyAlert.success('Success');
   };
 
+  //Lưu- đặt 1 điều kiện để hiển thị ra đc view
   const onSave = useCallback((data) => {
     setIsSave(null);
     setDataEdit(null);
     const idx = dataFake.findIndex((x) => x.id == data.id);
     const summerFruitsCopy = [...dataFake];
-    if (idx == -1) {
-      toastifyAlert.success(ON_FAIL);
+    if (data.id == null || data.id == undefined || data.id == '') {
+      data.id = dataFake.lastIndexOf() + 1;
+      setDataFake([...dataFake, data]);
       return;
     } else {
       summerFruitsCopy[idx] = data;
@@ -83,6 +86,7 @@ function thong_so_cau_hinh(props) {
     }
     setOpen(false);
   }, []);
+
   return (
     <>
       <Grid item mb={1.5}>

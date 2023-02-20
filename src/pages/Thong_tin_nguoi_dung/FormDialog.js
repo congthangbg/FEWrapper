@@ -52,22 +52,23 @@ function FormDialog(props) {
       address: dataEdit ? dataEdit.address : '',
     },
     validationSchema: Yup.object({
-      userID: Yup.string().max(255).trim().required(NOTIFY.NOT_USER),
-      userName: Yup.string().max(255).trim().required(NOTIFY.NOT_NAME),
-      codetin: Yup.string().max(255).trim().required('Chưa Nhập Danh Sách'),
-      idNo: Yup.string().max(255).trim().required('Chưa Nhập Trạng Thái'),
-      custType: Yup.object().nullable().required('NOTIFY.VILLAGE'),
-      status: Yup.object().nullable().required('NOTIFY.VILLAGE'),
+      userID: Yup.string().max(255).trim().required(NOTIFY.NOT_BLANK),
+      userName: Yup.string().max(255).trim().required(NOTIFY.NOT_BLANK),
+      codetin: Yup.string().max(255).trim().required(NOTIFY.NOT_BLANK),
+      idNo: Yup.string().max(255).trim().required(NOTIFY.NOT_BLANK),
+      custType: Yup.object().nullable().required(NOTIFY.NOT_BLANK),
+      status: Yup.object().nullable().required(NOTIFY.NOT_BLANK),
       phone: Yup.string()
         .min(8, PHONE.MIN)
         .max(10, PHONE.MAX)
-        .matches(phoneRegExp, PHONE.VALID_PHONE),
+        .matches(phoneRegExp, PHONE.VALID_PHONE)
+        .required(PHONE.NO_PHONE),
       email: Yup.string()
         .max(255)
         .trim()
         .matches(emailRegExp, NOTIFY.EMAIL_VALID)
         .required(NOTIFY.EMAIL),
-      address: Yup.string().max(255).trim().required('Chưa Click Ngày Tạo'),
+      address: Yup.string().max(255).trim().required(NOTIFY.NOT_BLANK),
     }),
     onSubmit: (values, { resetForm }) => {
       // onSave();
@@ -148,7 +149,7 @@ function FormDialog(props) {
               variant="outlined"
               id="outlined-basic"
               size="small"
-              disabled
+              // disabled
             />
           </Grid>
           <Grid item xs={6}>
@@ -165,7 +166,7 @@ function FormDialog(props) {
               variant="outlined"
               id="outlined-basic"
               size="small"
-              disabled
+              // disabled
             />
           </Grid>
 
@@ -240,7 +241,7 @@ function FormDialog(props) {
               variant="outlined"
               id="outlined-basic"
               size="small"
-              disabled
+              // disabled
             />
           </Grid>
 
@@ -258,7 +259,7 @@ function FormDialog(props) {
               variant="outlined"
               id="outlined-basic"
               size="small"
-              disabled
+              // disabled
             />
           </Grid>
 
@@ -266,7 +267,7 @@ function FormDialog(props) {
             <TextField
               error={Boolean(formik.touched.address && formik.errors.address)}
               fullWidth
-              helperText={formik.touched.idNo && formik.errors.address}
+              helperText={formik.touched.address && formik.errors.address}
               label="Địa Chỉ"
               margin="normal"
               name="address"
@@ -276,7 +277,7 @@ function FormDialog(props) {
               variant="outlined"
               id="outlined-basic"
               size="small"
-              disabled
+              // disabled
             />
           </Grid>
         </Grid>

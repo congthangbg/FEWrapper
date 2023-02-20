@@ -5,15 +5,14 @@ import { compose } from 'redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
-import { styled } from '@mui/material/styles';
 import { Grid, TextField } from '@mui/material';
 import { CustomDialog } from '../../components/ConfirmDialog/CustomDialog';
 import { Autocomplete } from '../../../node_modules/@mui/material/index';
 import { useStylesComboBox } from 'utils/styles';
-import { PHONE, NOTIFY, emailRegExp, phoneRegExp } from 'utils/MessageContants';
+import { NOTIFY } from 'utils/MessageContants';
 import { TS_CAU_HINH } from 'utils/MockData';
 
-function FormEdit(props) {
+function FormInfo(props) {
   const {
     title,
     onClose,
@@ -53,39 +52,24 @@ function FormEdit(props) {
         : status[0],
     },
     validationSchema: Yup.object({
-      code: Yup.string().max(255).trim().required(NOTIFY.NOT_USER),
-      parameterName: Yup.string().max(255).trim().required(NOTIFY.NOT_NAME),
-      type: Yup.string().max(255).trim().required('Chưa Nhập Danh Sách'),
-      value: Yup.string().max(255).trim().required('Chưa Nhập Trạng Thái'),
+      code: Yup.string().max(255).trim().required(NOTIFY.NOT_BLANK),
+      parameterName: Yup.string().max(255).trim().required(NOTIFY.NOT_BLANK),
+      type: Yup.string().max(255).trim().required(NOTIFY.NOT_BLANK),
+      value: Yup.string().max(255).trim().required(NOTIFY.NOT_BLANK),
       status: Yup.object().nullable().required('NOTIFY.VILLAGE'),
     }),
     onSubmit: (values, { resetForm }) => {
-      const arr = JSON.parse(JSON.stringify(TS_CAU_HINH));
+      console.log(typeof values);
       // onSave();
-      var nextId = 0;
-      arr.forEach((element) => {
-        nextId = element.id + 1;
-      });
-      const value = JSON.parse(JSON.stringify(values));
+      const value = values;
       // console.log(values);
       value.status = values.status.id;
-      value.id = nextId;
-      // console.log(value);
-
-      var TS_CAU_HINH_NEW = [];
-      TS_CAU_HINH_NEW.push(...arr);
-      TS_CAU_HINH_NEW.push(value);
-      // console.log(TS_CAU_HINH_NEW);
-      // console.log(TS_CAU_HINH);
-      arr.push(value);
-      onSave(TS_CAU_HINH);
+      onSave(value);
       formik.resetForm();
-      console.log(arr);
     },
   });
 
   const handleSave = () => {
-    // console.log(formik.values);
     formik.handleSubmit();
   };
 
@@ -205,7 +189,7 @@ function FormEdit(props) {
 }
 
 // eslint-disable-next-line react/no-typos
-FormEdit.PropTypes = {
+FormInfo.PropTypes = {
   onClose: PropTypes.func,
   onSave: PropTypes.func,
   open: PropTypes.bool,
@@ -221,4 +205,4 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(null, mapDispatchToProps);
 
-export default compose(withConnect, memo)(FormEdit);
+export default compose(withConnect, memo)(FormInfo);

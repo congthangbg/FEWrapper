@@ -17,9 +17,18 @@ function FormView(props) {
   // const classes = useStylesComboBox();
   const { title, onClose, open, dataEdit, setView } = props;
   console.log(dataEdit);
+  const classes = useStylesComboBox();
   const onCloseForm = () => {
     onClose();
   };
+  const status = [
+    { id: 1, name: 'Hoạt động' },
+    { id: 2, name: 'Không hoạt động' },
+  ];
+  const custType = [
+    { id: 1, name: 'Thân thiết' },
+    { id: 0, name: 'Không thân thiết' },
+  ];
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -29,14 +38,14 @@ function FormView(props) {
       userName: dataEdit ? dataEdit.userName : '',
       codetin: dataEdit ? dataEdit.codetin : '',
       idNo: dataEdit ? dataEdit.idNo : '',
-      custType: dataEdit ? dataEdit.custType : '',
-      status: dataEdit ? dataEdit.status : '',
-      // custType: dataEdit
-      //   ? custType.find((x) => x.id == dataEdit.custType)
-      //   : custType[0],
-      // status: dataEdit
-      //   ? status.find((x) => x.id == dataEdit.status)
-      //   : status[0],
+      // custType: dataEdit ? dataEdit.custType : '',
+      // status: dataEdit ? dataEdit.status : '',
+      custType: dataEdit
+        ? custType.find((x) => x.id == dataEdit.custType)
+        : custType[0],
+      status: dataEdit
+        ? status.find((x) => x.id == dataEdit.status)
+        : status[0],
       phone: dataEdit ? dataEdit.phone : '',
       email: dataEdit ? dataEdit.email : '',
       address: dataEdit ? dataEdit.address : '',
@@ -144,42 +153,8 @@ function FormView(props) {
               disabled
             />
           </Grid>
-          <Grid item xs={6}>
-            <TextField
-              error={Boolean(formik.touched.custType && formik.errors.custType)}
-              fullWidth
-              helperText={formik.touched.custType && formik.errors.custType}
-              label="Loại khách hàng"
-              margin="normal"
-              name="custType"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.custType}
-              variant="outlined"
-              id="outlined-basic"
-              size="small"
-              disabled
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              error={Boolean(formik.touched.idNo && formik.errors.idNo)}
-              fullWidth
-              helperText={formik.touched.idNo && formik.errors.idNo}
-              label="Trạng Thái"
-              margin="normal"
-              name="idNo"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.idNo}
-              variant="outlined"
-              id="outlined-basic"
-              size="small"
-              disabled
-            />
-          </Grid>
 
-          {/* <Grid item xs={6}>
+          <Grid item xs={6}>
             <Autocomplete
               id="size-small-outlined"
               size="small"
@@ -197,7 +172,7 @@ function FormView(props) {
                   helperText={formik.touched.custType && formik.errors.custType}
                 />
               )}
-              // disabled ={isView ? true :false}
+              disabled
               classes={classes}
               onChange={(event, value) =>
                 formik.setFieldValue('custType', value)
@@ -225,7 +200,7 @@ function FormView(props) {
                   helperText={formik.touched.status && formik.errors.status}
                 />
               )}
-              // disabled ={isView ? true :false}
+              disabled
               classes={classes}
               onChange={(event, value) => formik.setFieldValue('status', value)}
               value={
@@ -234,7 +209,7 @@ function FormView(props) {
                   : undefined
               }
             />
-          </Grid> */}
+          </Grid>
 
           <Grid item xs={6}>
             <TextField

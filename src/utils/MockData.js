@@ -175,7 +175,7 @@ export var TS_CAU_HINH = [
   },
   {
     id: 2,
-    code: '021',
+    code: '022',
     parameterName: 'Name',
     type: 'vContract, BCCS CA',
     value: 'vContract, BCCS CA',
@@ -183,7 +183,7 @@ export var TS_CAU_HINH = [
   },
   {
     id: 3,
-    code: '021',
+    code: '023',
     parameterName: 'Name',
     type: 'vContract, BCCS CA',
     value: 'vContract, BCCS CA',

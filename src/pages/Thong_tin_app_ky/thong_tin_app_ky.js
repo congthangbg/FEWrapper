@@ -106,13 +106,14 @@ function thong_tin_app_ky(props) {
 
             <Grid item xs={3}>
               <Autocomplete
+                disablePortal
                 id="size-small-outlined"
                 size="small"
                 options={columns}
                 getOptionLabel={(option) => option.headerName}
                 defaultValue={columns[0]}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Trạng Thái" />
+                  <TextField {...params} label="Trạng thái" />
                 )}
                 classes={classes}
               />

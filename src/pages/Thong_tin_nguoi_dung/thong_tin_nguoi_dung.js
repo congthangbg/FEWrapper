@@ -45,8 +45,18 @@ function thong_tin_nguoi_dung(props) {
       width: 150,
       align: 'center',
     },
-    { field: 'userName', headerName: 'Tên Người Dùng', width: 150 },
-    { field: 'idNo', headerName: 'CMND/Mã Số Thuế', width: 150 },
+    {
+      field: 'userName',
+      headerName: 'Tên Người Dùng',
+      width: 150,
+      align: 'center',
+    },
+    {
+      field: 'idNo',
+      headerName: 'CMND/Mã Số Thuế',
+      width: 150,
+      align: 'center',
+    },
     {
       field: 'status',
       headerName: 'Trạng thái',

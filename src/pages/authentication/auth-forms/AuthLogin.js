@@ -94,10 +94,10 @@ const AuthLogin = (props) => {
             //   name: "test",
             //   email: "customerPassword@gmail.com",
             // });
-            setTimeout(async() => {
+            setTimeout(async () => {
               await navigate('/dashboard/default');
-            },300)
-          
+            }, 300);
+
             // setStatus({success: true});
             // setSubmitting(true);
           } catch (err) {
