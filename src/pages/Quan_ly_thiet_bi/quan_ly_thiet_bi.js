@@ -15,21 +15,42 @@ function quan_ly_thiet_bi(props) {
   const a = 3;
 
   const columns = [
-    { field: 'id', headerName: 'STT', width: 50, alignCenter: 'center' },
+    {
+      field: 'id',
+      headerName: 'STT',
+      width: 50,
+      headerAlign: 'center',
+      align: 'center',
+    },
     {
       field: 'device_id',
       headerName: 'Mã thiết bị',
       width: 150,
-      alignCenter: 'center',
+      headerAlign: 'center',
+      align: 'center',
     },
-    { field: 'platform', headerName: 'Loại thiết bị', width: 300 },
-    { field: 'userName', headerName: 'Tên người dùng', width: 300 },
+    {
+      field: 'platform',
+      headerName: 'Loại thiết bị',
+      width: 300,
+      headerAlign: 'center',
+      align: 'center',
+    },
+    {
+      field: 'userName',
+      headerName: 'Tên người dùng',
+      width: 300,
+      headerAlign: 'center',
+      align: 'center',
+    },
     {
       field: 'registration_date',
       headerName: 'Ngày đăng ký',
       sortable: false,
       flex: 1,
       width: 200,
+      headerAlign: 'center',
+      align: 'center',
     },
   ];
 

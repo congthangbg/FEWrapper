@@ -110,7 +110,7 @@ const utilities = {
     },
     {
       id: 'lich_su_nguoi_dung',
-      title: 'Lịch Sử Người Dùng',
+      title: 'Lịch sử người dùng',
       type: 'item',
       url: '/lich_su_nguoi_dung',
       icon: icons.HistoryOutlined,
@@ -118,7 +118,7 @@ const utilities = {
     },
     {
       id: 'quan_ly_dau_noi',
-      title: 'Quản Lý Đầu Nối',
+      title: 'Quản lý đầu nối',
       type: 'item',
       url: '/quan_ly_dau_noi',
       icon: icons.DisconnectOutlined,
@@ -126,7 +126,7 @@ const utilities = {
     },
     {
       id: 'thong_so_cau_hinh',
-      title: 'Thông Số Cấu Hình',
+      title: 'Thông số cấu hình',
       type: 'item',
       url: '/thong_so_cau_hinh',
       icon: icons.SettingOutlined,
@@ -134,7 +134,7 @@ const utilities = {
     },
     {
       id: 'lich_su_thao_tac',
-      title: 'Lịch Sử Thao Tác',
+      title: 'Lịch sử thao tác',
       type: 'item',
       url: '/lich_su_thao_tac',
       icon: icons.HistoryOutlined,

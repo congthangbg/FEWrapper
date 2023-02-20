@@ -89,7 +89,7 @@ function FormView(props) {
               error={Boolean(formik.touched.userID && formik.errors.userID)}
               fullWidth
               helperText={formik.touched.userID && formik.errors.userID}
-              label="Tài Khoản"
+              label="Tài khoản"
               margin="normal"
               name="userID"
               onBlur={formik.handleBlur}
@@ -106,7 +106,7 @@ function FormView(props) {
               error={Boolean(formik.touched.userName && formik.errors.userName)}
               fullWidth
               helperText={formik.touched.userName && formik.errors.userName}
-              label="Tên Người Dùng"
+              label="Tên người dùng"
               margin="normal"
               name="userName"
               onBlur={formik.handleBlur}
@@ -124,7 +124,7 @@ function FormView(props) {
               error={Boolean(formik.touched.codetin && formik.errors.codetin)}
               fullWidth
               helperText={formik.touched.codetin && formik.errors.codetin}
-              label="Mã Số Thuế"
+              label="Mã số thuế"
               margin="normal"
               name="codetin"
               onBlur={formik.handleBlur}
@@ -165,7 +165,7 @@ function FormView(props) {
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  placeholder="Loại khách hàng"
+                  label="Loại khách hàng"
                   error={Boolean(
                     formik.touched.custType && formik.errors.custType
                   )}
@@ -195,7 +195,7 @@ function FormView(props) {
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  placeholder="Trạng Thái"
+                  label="Trạng thái"
                   error={Boolean(formik.touched.status && formik.errors.status)}
                   helperText={formik.touched.status && formik.errors.status}
                 />
@@ -216,7 +216,7 @@ function FormView(props) {
               error={Boolean(formik.touched.phone && formik.errors.phone)}
               fullWidth
               helperText={formik.touched.phone && formik.errors.phone}
-              label="Số Điện Thoại"
+              label="Số điện thoại"
               margin="normal"
               name="phone"
               onBlur={formik.handleBlur}
@@ -252,7 +252,7 @@ function FormView(props) {
               error={Boolean(formik.touched.address && formik.errors.address)}
               fullWidth
               helperText={formik.touched.address && formik.errors.address}
-              label="Địa Chỉ"
+              label="Địa chỉ"
               margin="normal"
               name="address"
               onBlur={formik.handleBlur}

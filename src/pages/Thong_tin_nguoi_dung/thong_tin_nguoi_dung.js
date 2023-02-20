@@ -37,24 +37,28 @@ function thong_tin_nguoi_dung(props) {
       field: 'id',
       headerName: 'STT',
       width: 50,
+      headerAlign: 'center',
       align: 'center',
     },
     {
       field: 'userID',
-      headerName: 'Tài Khoản',
+      headerName: 'Tài khoản',
       width: 150,
+      headerAlign: 'center',
       align: 'center',
     },
     {
       field: 'userName',
-      headerName: 'Tên Người Dùng',
+      headerName: 'Tên người dùng',
       width: 150,
+      headerAlign: 'center',
       align: 'center',
     },
     {
       field: 'idNo',
-      headerName: 'CMND/Mã Số Thuế',
+      headerName: 'CMND/Mã số thuế',
       width: 150,
+      headerAlign: 'center',
       align: 'center',
     },
     {
@@ -67,13 +71,15 @@ function thong_tin_nguoi_dung(props) {
       align: 'center',
       valueGetter: getStatus,
     },
-    { field: 'phone', headerName: 'Số Điện Thoại', width: 120 },
+    { field: 'phone', headerName: 'Số điện thoại', width: 120 },
     {
       field: 'email',
       headerName: 'Email',
       sortable: false,
       flex: 0.4,
       width: 180,
+      headerAlign: 'center',
+      align: 'center',
     },
   ];
 
@@ -123,7 +129,7 @@ function thong_tin_nguoi_dung(props) {
                 fullWidth
                 size="small"
                 id="outlined-basic"
-                label="Tài Khoản"
+                label="Tài khoản"
                 onChange={(e) => console.log(e)}
               />
             </Grid>
@@ -140,13 +146,14 @@ function thong_tin_nguoi_dung(props) {
 
             <Grid item xs={3}>
               <Autocomplete
+                disablePortal
                 id="size-small-outlined"
                 size="small"
                 options={columns}
                 getOptionLabel={(option) => option.headerName}
                 defaultValue={columns[0]}
                 renderInput={(params) => (
-                  <TextField {...params} placeholder="Trạng Thái" />
+                  <TextField {...params} label="Trạng Thái" />
                 )}
                 classes={classes}
               />
@@ -193,7 +200,7 @@ function thong_tin_nguoi_dung(props) {
 
       <FormView
         open={view}
-        title="Chi Tiết Người Dùng"
+        title="Chi tiết người dùng"
         onClose={() => setView(false)}
         onView={onView}
         view={view}

@@ -12,6 +12,7 @@ import { useStylesComboBox } from 'utils/styles';
 import { TT_APP_KY } from 'utils/MockData';
 import toastifyAlert from 'components/SnackBar/toastifyAlert';
 import { ON_FAIL, ON_SUCCESS } from 'utils/MessageContants';
+import CustomTextField from 'components/CustomTextField/index';
 
 function thong_tin_app_ky(props) {
   const dataLogin = useSelector((state) => state.loginReducer);
@@ -94,12 +95,21 @@ function thong_tin_app_ky(props) {
         <MainCard title="Tìm kiếm ứng dụng ký">
           {/* <MainCard title="Thông tin tìm kiếm"> */}
           <Grid container spacing={2}>
-            <Grid item xs={3}>
-              <TextField
+            <Grid item xs={3} mt={-1}>
+              {/* <TextField
                 fullWidth
                 size="small"
                 id="outlined-basic"
                 label="Mã/Tên app ký"
+                clearText
+                onChange={(e) => console.log(e)}
+              /> */}
+              <CustomTextField
+                fullWidth
+                size="small"
+                id="outlined-basic"
+                label="Mã thiết bị"
+                clearText
                 onChange={(e) => console.log(e)}
               />
             </Grid>

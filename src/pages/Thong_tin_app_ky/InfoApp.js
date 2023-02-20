@@ -112,7 +112,7 @@ function InfoApp(props) {
               error={Boolean(formik.touched.appCode && formik.errors.appCode)}
               fullWidth
               helperText={formik.touched.appCode && formik.errors.appCode}
-              label="Mã App Ký"
+              label="Mã app ký"
               margin="normal"
               name="appCode"
               onBlur={formik.handleBlur}
@@ -133,7 +133,7 @@ function InfoApp(props) {
               helperText={
                 formik.touched.ipWhitelist && formik.errors.ipWhitelist
               }
-              label="Danh dách IP"
+              label="Danh sách IP"
               margin="normal"
               name="ipWhitelist"
               onBlur={formik.handleBlur}
@@ -157,7 +157,7 @@ function InfoApp(props) {
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  placeholder="Trạng Thái"
+                  placeholder="Trạng thái"
                   error={Boolean(formik.touched.status && formik.errors.status)}
                   helperText={formik.touched.status && formik.errors.status}
                 />
@@ -181,7 +181,7 @@ function InfoApp(props) {
               helperText={
                 formik.touched.description && formik.errors.description
               }
-              label="Mô Tả"
+              label="Mô tả"
               margin="normal"
               name="description"
               onBlur={formik.handleBlur}
@@ -199,7 +199,7 @@ function InfoApp(props) {
               error={Boolean(formik.touched.phone && formik.errors.phone)}
               fullWidth
               helperText={formik.touched.phone && formik.errors.phone}
-              label="Số Điện Thoại"
+              label="Số điện thoại"
               margin="normal"
               name="phone"
               onBlur={formik.handleBlur}
@@ -256,7 +256,7 @@ function InfoApp(props) {
               error={Boolean(formik.touched.createBy && formik.errors.createBy)}
               fullWidth
               helperText={formik.touched.createBy && formik.errors.createBy}
-              label="Người Tạo"
+              label="Người tạo"
               margin="normal"
               name="createBy"
               onBlur={formik.handleBlur}
